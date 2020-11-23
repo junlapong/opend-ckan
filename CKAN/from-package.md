@@ -181,7 +181,7 @@ sudo apt-get install -y solr-jetty
 sudo vi /etc/default/jetty8
     NO_START=0            # (line 4)
     JETTY_HOST=127.0.0.1  # (line 16)
-    JETTY_PORT=8983       # (line 19)
+    JETTY_PORT=8984       # (line 19)
 
 sudo rm -rf /etc/solr/conf/schema.xml
 
