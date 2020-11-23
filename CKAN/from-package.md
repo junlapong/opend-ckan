@@ -61,7 +61,7 @@ sudo -u postgres createuser -S -D -R -P -l datastore_default
 
 sudo -u postgres createdb -O ckan_default datastore_default -E utf-8
 
-#ตรวจสอบ database list ให้ database ckan_default
+#ตรวจสอบ database list ให้ database ckan_default และ datastore_default
 sudo -u postgres psql -l
 ```
 
