@@ -66,12 +66,12 @@ sudo -u postgres psql -l
 #ตั้งค่า Apache
 wget https://gitlab.nectec.or.th/thepaeth/CKAN-installation/-/raw/master/config/apache/ckan_default.conf -P ./apache
 
-cp ./apache/ckan_default.conf /etc/apache2/sites-available/ckan_default.conf
+sudo cp ./apache/ckan_default.conf /etc/apache2/sites-available/ckan_default.conf
 
 #ตั้งค่า Nginx
 wget https://gitlab.nectec.or.th/thepaeth/CKAN-installation/-/raw/master/config/nginx/ckan_default.conf -P ./nginx
 
-cp ./nginx/ckan_default.conf /etc/nginx/conf.d/ckan_default.conf
+sudo cp ./nginx/ckan_default.conf /etc/nginx/conf.d/ckan_default.conf
 
 #เตรียม proxycache
 sudo mkdir -p /var/cache/nginx/proxycache
