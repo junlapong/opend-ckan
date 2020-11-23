@@ -57,11 +57,12 @@ cd ~
 ```sh
 sudo apt-get install -y postgresql
 
-# สร้าง postgres user และใส่ password
+# สร้าง postgres user สำหรับ ckan_default และใส่ password1
 sudo -u postgres createuser -S -D -R -P ckan_default
 
 sudo -u postgres createdb -O ckan_default ckan_default -E utf-8
 
+# สร้าง postgres user สำหรับ datastore_default และใส่ password2
 sudo -u postgres createuser -S -D -R -P -l datastore_default
 
 sudo -u postgres createdb -O ckan_default datastore_default -E utf-8
@@ -131,11 +132,11 @@ sudo cp ./apache/apache.wsgi /etc/ckan/default/apache.wsgi
 ```sh
 sudo vi /etc/ckan/default/production.ini
     - sqlalchemy.url
-        > sqlalchemy.url = postgresql://ckan_default:{password}@localhost/ckan_default
+        > sqlalchemy.url = postgresql://ckan_default:{password1}@localhost/ckan_default
     - ckan.datastore.write_url
-        > ckan.datastore.write_url = postgresql://ckan_default:{password}@localhost:5434/datastore_default
+        > ckan.datastore.write_url = postgresql://ckan_default:{password1}@localhost:5434/datastore_default
     - ckan.datastore.read_url
-        > ckan.datastore.read_url = postgresql://datastore_default:datastoremui133@localhost:5434/datastore_default
+        > ckan.datastore.read_url = postgresql://datastore_default:{password2}@localhost:5434/datastore_default
     - ckan.site_url
         > ckan.site_url = http://{domain name}
     - ckan.auth.user_delete_groups
