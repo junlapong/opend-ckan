@@ -104,7 +104,7 @@ sudo ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
 #ตั้งค่า apache.wsgi
 wget https://gitlab.nectec.or.th/thepaeth/CKAN-installation/-/raw/master/config/apache/apache.wsgi -P ./apache
 
-cp ./apache/apache.wsgi /etc/ckan/default/apache.wsgi
+sudo cp ./apache/apache.wsgi /etc/ckan/default/apache.wsgi
 ```
 
 2. แก้ไขไฟล์ config ของ CKAN ดังนี้:
