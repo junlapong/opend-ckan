@@ -64,7 +64,7 @@ sudo -u postgres psql -l
 ### 6. ตั้งค่า Apache และ Nginx:
 ```sh
 #ตั้งค่า Apache
-wget https://gitlab.nectec.or.th/thepaeth/CKAN-installation/-/raw/master/config/apache/ckan_default.conf -P ./apache
+wget https://gitlab.nectec.or.th/opend/ckan-for-gdc/-/raw/master/CKAN/config/apache/ckan_default.conf -P ./apache
 
 sudo cp ./apache/ckan_default.conf /etc/apache2/sites-available/ckan_default.conf
 
