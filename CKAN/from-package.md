@@ -34,7 +34,12 @@ sudo apt-get install -y nginx apache2 libapache2-mod-wsgi libpq5 redis-server gi
 ```
 
 ### 4. ดาวน์โหลด CKAN Package ตามเวอร์ชั่นของ Ubuntu:
-ตรวจสอบเวอร์ชั่นของ Ubuntu โดยใช้คำสั่ง cat /etc/os-release
+ตรวจสอบเวอร์ชั่นของ Ubuntu โดยใช้คำสั่ง 
+```sh
+cat /etc/os-release
+
+cd ~
+```
 - ดาวน์โหลด CKAN Package สำหรับ Ubuntu 20.04:
 ```sh
     wget http://packaging.ckan.org/python-ckan_2.9-py2-focal_amd64.deb
@@ -91,7 +96,7 @@ sudo chown -R :www-data ckan/
 
 sudo chmod -R 775 ckan/
 
-cd ../..
+cd ~
 ```
 
 ### 7. ติดตั้ง CKAN package:
