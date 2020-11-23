@@ -57,6 +57,10 @@ sudo -u postgres createuser -S -D -R -P ckan_default
 
 sudo -u postgres createdb -O ckan_default ckan_default -E utf-8
 
+sudo -u postgres createuser -S -D -R -P -l datastore_default
+
+sudo -u postgres createdb -O ckan_default datastore_default -E utf-8
+
 #ตรวจสอบ database list ให้ database ckan_default
 sudo -u postgres psql -l
 ```
@@ -77,6 +81,15 @@ sudo cp ./nginx/ckan_default.conf /etc/nginx/conf.d/ckan_default.conf
 sudo mkdir -p /var/cache/nginx/proxycache
 
 sudo chown www-data /var/cache/nginx/proxycache
+
+#เตรียม storage path
+sudo mkdir -p /var/lib/ckan/default
+
+cd /var/lib/
+
+sudo chown -R :www-data ckan/
+
+sudo chmod -R 775 ckan/
 ```
 
 ### 7. ติดตั้ง CKAN package:
@@ -102,7 +115,7 @@ sudo rm -rf /etc/ckan/default/who.ini
 sudo ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
 
 #ตั้งค่า apache.wsgi
-wget https://gitlab.nectec.or.th/thepaeth/CKAN-installation/-/raw/master/config/apache/apache.wsgi -P ./apache
+wget https://gitlab.nectec.or.th/opend/ckan-for-gdc/-/raw/master/CKAN/config/apache/apache.wsgi -P ./apache
 
 sudo cp ./apache/apache.wsgi /etc/ckan/default/apache.wsgi
 ```
@@ -112,8 +125,38 @@ sudo cp ./apache/apache.wsgi /etc/ckan/default/apache.wsgi
 sudo vi /etc/ckan/default/production.ini
     - sqlalchemy.url
         > sqlalchemy.url = postgresql://ckan_default:{password}@localhost/ckan_default
+    - ckan.datastore.write_url
+        > ckan.datastore.write_url = postgresql://ckan_default:{password}@localhost:5434/datastore_default
+    - ckan.datastore.read_url
+        > ckan.datastore.read_url = postgresql://datastore_default:datastoremui133@localhost:5434/datastore_default
     - ckan.site_url
         > ckan.site_url = http://{domain name}
+    - ckan.auth.user_delete_groups
+        > ckan.auth.user_delete_groups = false
+    - ckan.auth.user_delete_organizations
+        > ckan.auth.user_delete_organizations = false
+    - ckan.site_id
+        > ckan.site_id = default
+    - solr_url
+        > solr_url = http://127.0.0.1:8984/solr/ckan
+    - ckan.redis.url
+        > ckan.redis.url = redis://localhost:6380/0
+    - ckan.plugins
+        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher
+    - ckan.locale_default
+        > ckan.locale_default = th
+    - ckan.locale_order
+        > ckan.locale_order = en th pt_BR ...(ต่อจากนั้นเหมือนเดิม)
+    - ckan.storage_path
+        > ckan.storage_path = /var/lib/ckan/default
+    - ckan.datapusher.formats
+        > ckan.datapusher.formats = csv ...(ต่อจากนั้นเหมือนเดิม)
+    - ckan.datapusher.url
+        > ckan.datapusher.url = http://127.0.0.1:8811/
+    - ckan.datapusher.assume_task_stale_after
+        > ckan.datapusher.assume_task_stale_after = 3600
+    - ckan.activity_streams_enabled
+        > ckan.activity_streams_enabled = true
 
 sudo service apache2 restart
 ```
