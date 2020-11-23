@@ -90,6 +90,8 @@ cd /var/lib/
 sudo chown -R :www-data ckan/
 
 sudo chmod -R 775 ckan/
+
+cd ../..
 ```
 
 ### 7. ติดตั้ง CKAN package:
