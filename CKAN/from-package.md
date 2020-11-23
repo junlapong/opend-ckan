@@ -141,7 +141,7 @@ sudo service jetty8 restart
 
 ### 10. Restart Apache และ Nginx
 ```sh
-rm -rf /etc/nginx/sites-enabled/ckan
+sudo rm -rf /etc/nginx/sites-enabled/ckan
 
 sudo service apache2 restart
 
