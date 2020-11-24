@@ -162,7 +162,7 @@ sudo vi /etc/ckan/default/production.ini
     - ckan.datapusher.url
         > ckan.datapusher.url = http://127.0.0.1:8800/
     - ckan.datapusher.assume_task_stale_after
-        > ckan.datapusher.assume_task_stale_after = 3600
+        > ckan.datapusher.assume_task_stale_after = 60
     - ckan.activity_streams_enabled
         > ckan.activity_streams_enabled = true
 
@@ -206,6 +206,8 @@ cd /usr/lib/ckan/default/src/ckan
 . /usr/lib/ckan/default/bin/activate
 
 paster sysadmin add {username} -c /etc/ckan/default/production.ini
+
+paster --plugin=ckan datastore set-permissions -c /etc/ckan/default/production.ini | sudo -u postgres psql --set ON_ERROR_STOP=1
 ```
 
 ### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{domain name}
