@@ -134,9 +134,9 @@ sudo vi /etc/ckan/default/production.ini
     - sqlalchemy.url
         > sqlalchemy.url = postgresql://ckan_default:{password1}@localhost/ckan_default
     - ckan.datastore.write_url
-        > ckan.datastore.write_url = postgresql://ckan_default:{password1}@localhost:5434/datastore_default
+        > ckan.datastore.write_url = postgresql://ckan_default:{password1}@localhost/datastore_default
     - ckan.datastore.read_url
-        > ckan.datastore.read_url = postgresql://datastore_default:{password2}@localhost:5434/datastore_default
+        > ckan.datastore.read_url = postgresql://datastore_default:{password2}@localhost/datastore_default
     - ckan.site_url
         > ckan.site_url = http://{domain name}
     - ckan.auth.user_delete_groups
@@ -146,9 +146,9 @@ sudo vi /etc/ckan/default/production.ini
     - ckan.site_id
         > ckan.site_id = default
     - solr_url
-        > solr_url = http://127.0.0.1:8984/solr/ckan
+        > solr_url = http://127.0.0.1:8983/solr
     - ckan.redis.url
-        > ckan.redis.url = redis://localhost:6380/0
+        > ckan.redis.url = redis://localhost:6379/0
     - ckan.plugins
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher
     - ckan.locale_default
@@ -160,7 +160,7 @@ sudo vi /etc/ckan/default/production.ini
     - ckan.datapusher.formats
         > ckan.datapusher.formats = csv ...(ต่อจากนั้นเหมือนเดิม)
     - ckan.datapusher.url
-        > ckan.datapusher.url = http://127.0.0.1:8811/
+        > ckan.datapusher.url = http://127.0.0.1:8800/
     - ckan.datapusher.assume_task_stale_after
         > ckan.datapusher.assume_task_stale_after = 3600
     - ckan.activity_streams_enabled
@@ -181,7 +181,7 @@ sudo apt-get install -y solr-jetty
 sudo vi /etc/default/jetty8
     NO_START=0            # (line 4)
     JETTY_HOST=127.0.0.1  # (line 16)
-    JETTY_PORT=8984       # (line 19)
+    JETTY_PORT=8983       # (line 19)
 
 sudo rm -rf /etc/solr/conf/schema.xml
 
@@ -199,8 +199,17 @@ sudo service apache2 restart
 sudo service nginx restart
 ```
 
-### 11. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{domain name}
+### 11. สร้าง sysadmin
+```sh
+cd /usr/lib/ckan/default/src/ckan
 
-### 12. ติดตั้งและตั้งค่า >> [CKAN Extension](packages/) 
+. /usr/lib/ckan/default/bin/activate
+
+paster sysadmin add {username} -c /etc/ckan/default/production.ini
+```
+
+### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{domain name}
+
+### 13. ติดตั้งและตั้งค่า CKAN Extensions 
 
 
