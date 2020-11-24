@@ -200,6 +200,10 @@ sudo service jetty8 restart
 ```sh
 sudo rm -rf /etc/nginx/sites-enabled/ckan
 
+sudo chmod -R 775 /usr/lib/ckan/default/src/ckan/ckan/public
+
+sudo chown -R www-data:www-data /usr/lib/ckan/default/src/ckan/ckan/public
+
 sudo service apache2 restart
 
 sudo service nginx restart
