@@ -115,7 +115,7 @@ cd ~
 ```
 
 ### 8. ตั้งค่าและสร้างฐานข้อมูลสำหรับ CKAN
-1. ตั้งค่า who.ini และ apache.wsgi:
+#### 8.1 ตั้งค่า who.ini และ apache.wsgi:
 ```sh
 #ตั้งค่า who.ini
 sudo rm -rf /etc/ckan/default/who.ini
@@ -128,7 +128,7 @@ wget https://gitlab.nectec.or.th/opend/ckan-for-gdc/-/raw/master/CKAN/config/apa
 sudo cp ./apache/apache.wsgi /etc/ckan/default/apache.wsgi
 ```
 
-2. แก้ไขไฟล์ config ของ CKAN ดังนี้:
+#### 8.2 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
 sudo vi /etc/ckan/default/production.ini
     - เพิ่มค่า config ถัดจาก [app:main] (มีอยู่แล้ว)
@@ -175,7 +175,7 @@ sudo vi /etc/ckan/default/production.ini
 sudo service apache2 restart
 ```
 
-3. เริ่มต้นสร้างฐานข้อมูลสำหรับ CKAN:
+#### 8.3 เริ่มต้นสร้างฐานข้อมูลสำหรับ CKAN:
 ```sh
 sudo ckan db init
 ```
@@ -216,10 +216,10 @@ paster sysadmin add {username} -c /etc/ckan/default/production.ini
 paster --plugin=ckan datastore set-permissions -c /etc/ckan/default/production.ini | sudo -u postgres psql --set ON_ERROR_STOP=1
 ```
 
-### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{domain name}
+### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{domain name} และ login ด้วย sysadmin
 
 ### 13. ติดตั้งและตั้งค่า CKAN Extensions
-##### 13.1 ckanext-pdfview:
+#### 13.1 ckanext-pdfview:
 ```sh
 source /usr/lib/ckan/default/bin/activate
 
@@ -234,8 +234,50 @@ sudo pip install -e 'git+https://github.com/ckan/ckanext-pdfview.git#egg=ckanext
     - ckan.views.default_views
         > ckan.views.default_views = image_view text_view recline_view webpage_view pdf_view
 ```
-##### 13.2 ckanext-scheming:
 ```sh
+sudo service apache2 restart
+```
+#### 13.2 ckanext-scheming:
+```sh
+source /usr/lib/ckan/default/bin/activate
 
+cd /usr/lib/ckan/default
+
+sudo pip install -e 'git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming'
+
+sudo pip install -r src/ckanext-scheming/requirements.txt
+```
+แก้ไขไฟล์ config ของ CKAN ดังนี้:
+```sh
+    - ckan.plugins
+        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets
+```
+```sh
+sudo service apache2 restart
+```
+#### 13.3 ckanext-pages:
+```sh
+source /usr/lib/ckan/default/bin/activate
+
+cd /usr/lib/ckan/default
+
+sudo pip install -e 'git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages'
+
+sudo pip install -r src/ckanext-pages/dev-requirements.txt
+```
+แก้ไขไฟล์ config ของ CKAN ดังนี้:
+```sh
+    - เพิ่มค่า config ถัดจาก [app:main] (มีอยู่แล้ว)
+        [app:main]
+        ckan.auth.public_user_details = false
+        ckan.tracking_enabled = true
+        ckanext.pages.form = pages/base_form.html
+        ckanext.pages.allow_html = True
+        ckanext.pages.editor = ckeditor
+    - ckan.plugins
+        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages
+```
+```sh
+sudo service apache2 restart
 ```
 
