@@ -228,11 +228,12 @@ cd /usr/lib/ckan/default
 sudo pip install -e 'git+https://github.com/ckan/ckanext-pdfview.git#egg=ckanext-pdfview'
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
+```sh
     - ckan.plugins
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view
     - ckan.views.default_views
         > ckan.views.default_views = image_view text_view recline_view webpage_view pdf_view
-
+```
 2. ckanext-scheming:
 ```sh
 
