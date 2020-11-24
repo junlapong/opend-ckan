@@ -219,7 +219,7 @@ paster --plugin=ckan datastore set-permissions -c /etc/ckan/default/production.i
 ### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{domain name}
 
 ### 13. ติดตั้งและตั้งค่า CKAN Extensions
-1. ckanext-pdfview:
+##### 13.1 ckanext-pdfview:
 ```sh
 source /usr/lib/ckan/default/bin/activate
 
@@ -234,7 +234,7 @@ sudo pip install -e 'git+https://github.com/ckan/ckanext-pdfview.git#egg=ckanext
     - ckan.views.default_views
         > ckan.views.default_views = image_view text_view recline_view webpage_view pdf_view
 ```
-2. ckanext-scheming:
+##### 13.2 ckanext-scheming:
 ```sh
 
 ```
