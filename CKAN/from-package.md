@@ -154,7 +154,9 @@ sudo vi /etc/ckan/default/production.ini
     - ckan.redis.url
         > ckan.redis.url = redis://localhost:6379/0
     - ckan.plugins
-        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher
+        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view
+    - ckan.views.default_views
+        > ckan.views.default_views = image_view text_view recline_view webpage_view
     - ckan.locale_default
         > ckan.locale_default = th
     - ckan.locale_order
@@ -217,7 +219,7 @@ paster --plugin=ckan datastore set-permissions -c /etc/ckan/default/production.i
 ### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{domain name}
 
 ### 13. ติดตั้งและตั้งค่า CKAN Extensions
-1. ckanext-pdf_view:
+1. ckanext-pdfview:
 ```sh
 source /usr/lib/ckan/default/bin/activate
 
@@ -225,8 +227,14 @@ cd /usr/lib/ckan/default
 
 sudo pip install -e 'git+https://github.com/ckan/ckanext-pdfview.git#egg=ckanext-pdfview'
 ```
-1. ckanext-pdf_view:
+แก้ไขไฟล์ config ของ CKAN ดังนี้:
+    - ckan.plugins
+        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view
+    - ckan.views.default_views
+        > ckan.views.default_views = image_view text_view recline_view webpage_view pdf_view
+
+2. ckanext-scheming:
 ```sh
 
-
+```
 
