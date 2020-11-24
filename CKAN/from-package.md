@@ -131,6 +131,10 @@ sudo cp ./apache/apache.wsgi /etc/ckan/default/apache.wsgi
 2. แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
 sudo vi /etc/ckan/default/production.ini
+    - เพิ่มค่า config ถัดจาก [app:main] (มีอยู่แล้ว)
+        [app:main]
+        ckan.auth.public_user_details = false
+        ckan.tracking_enabled = true
     - sqlalchemy.url
         > sqlalchemy.url = postgresql://ckan_default:{password1}@localhost/ckan_default
     - ckan.datastore.write_url
@@ -212,6 +216,17 @@ paster --plugin=ckan datastore set-permissions -c /etc/ckan/default/production.i
 
 ### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{domain name}
 
-### 13. ติดตั้งและตั้งค่า CKAN Extensions 
+### 13. ติดตั้งและตั้งค่า CKAN Extensions
+1. ckanext-pdf_view:
+```sh
+source /usr/lib/ckan/default/bin/activate
+
+cd /usr/lib/ckan/default
+
+sudo pip install -e 'git+https://github.com/ckan/ckanext-pdfview.git#egg=ckanext-pdfview'
+```
+1. ckanext-pdf_view:
+```sh
+
 
 
