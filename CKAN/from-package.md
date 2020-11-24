@@ -93,7 +93,7 @@ sudo mkdir -p /var/lib/ckan/default
 
 cd /var/lib/
 
-sudo chown -R :www-data ckan/
+sudo chown -R www-data:www-data ckan/
 
 sudo chmod -R 775 ckan/
 
