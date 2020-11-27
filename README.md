@@ -5,7 +5,7 @@
    2. ติดตั้งจาก [source][insSource]
    3. ติดตั้งจาก [Docker Compose][insDocker]
 
-CKAN Extension ที่ใช้สำหรับการติดติดตั้ง ระบบบัญชีข้อมูลหน่วยงาน (Agency Data Catalog)
+CKAN Extension ที่ใช้สำหรับการติดตั้ง ระบบบัญชีข้อมูลหน่วยงาน (Agency Data Catalog)
 
 
 
