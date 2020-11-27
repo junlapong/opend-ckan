@@ -74,12 +74,12 @@ sudo -u postgres psql -l
 ### 6. ตั้งค่า Apache และ Nginx:
 ```sh
 #ตั้งค่า Apache
-wget https://gitlab.nectec.or.th/opend/ckan-for-gdc/-/raw/master/CKAN/config/apache/ckan_default.conf -P ./apache
+wget https://gitlab.nectec.or.th/opend/installing-ckan/-/raw/master/config/apache/ckan_default.conf -P ./apache
 
 sudo cp ./apache/ckan_default.conf /etc/apache2/sites-available/ckan_default.conf
 
 #ตั้งค่า Nginx
-wget https://gitlab.nectec.or.th/opend/ckan-for-gdc/-/raw/master/CKAN/config/nginx/ckan_default.conf -P ./nginx
+wget https://gitlab.nectec.or.th/opend/installing-ckan/-/raw/master/config/nginx/ckan_default.conf -P ./nginx
 
 sudo cp ./nginx/ckan_default.conf /etc/nginx/conf.d/ckan_default.conf
 
@@ -123,7 +123,7 @@ sudo rm -rf /etc/ckan/default/who.ini
 sudo ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
 
 #ตั้งค่า apache.wsgi
-wget https://gitlab.nectec.or.th/opend/ckan-for-gdc/-/raw/master/CKAN/config/apache/apache.wsgi -P ./apache
+wget https://gitlab.nectec.or.th/opend/installing-ckan/-/raw/master/config/apache/apache.wsgi -P ./apache
 
 sudo cp ./apache/apache.wsgi /etc/ckan/default/apache.wsgi
 ```
@@ -147,8 +147,6 @@ sudo vi /etc/ckan/default/production.ini
         > ckan.auth.user_delete_groups = false
     - ckan.auth.user_delete_organizations
         > ckan.auth.user_delete_organizations = false
-    - ckan.site_id
-        > ckan.site_id = default
     - solr_url
         > solr_url = http://127.0.0.1:8983/solr
     - ckan.redis.url
@@ -196,7 +194,15 @@ sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/
 sudo service jetty8 restart
 ```
 
-### 10. Restart Apache และ Nginx
+### 10. cronjob page view tracking
+```sh
+crontab -e
+```
+เพิ่มคำสั่งต่อไปนี้
+
+    @hourly /usr/lib/ckan/default/bin/paster --plugin=ckan tracking update -c /etc/ckan/default/production.ini && /usr/lib/ckan/default/bin/paster --plugin=ckan search-index rebuild -r -c /etc/ckan/default/production.ini
+
+### 11. Restart Apache และ Nginx
 ```sh
 sudo rm -rf /etc/nginx/sites-enabled/ckan
 
@@ -209,7 +215,7 @@ sudo service apache2 restart
 sudo service nginx restart
 ```
 
-### 11. สร้าง sysadmin
+### 12. สร้าง sysadmin
 ```sh
 cd /usr/lib/ckan/default/src/ckan
 
