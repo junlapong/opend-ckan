@@ -221,6 +221,8 @@ cd /usr/lib/ckan/default/src/ckan
 
 . /usr/lib/ckan/default/bin/activate
 
+sudo pip install --upgrade pip
+
 paster sysadmin add {username} -c /etc/ckan/default/production.ini
 
 paster --plugin=ckan datastore set-permissions -c /etc/ckan/default/production.ini | sudo -u postgres psql --set ON_ERROR_STOP=1
