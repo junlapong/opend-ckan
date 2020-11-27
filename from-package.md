@@ -222,5 +222,5 @@ paster --plugin=ckan datastore set-permissions -c /etc/ckan/default/production.i
 
 ### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{domain name} และ login ด้วย sysadmin
 
-### 13. ติดตั้งและตั้งค่า CKAN Extensions
+### 13. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
 
