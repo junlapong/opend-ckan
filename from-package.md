@@ -89,7 +89,7 @@ sudo mkdir -p /var/cache/nginx/proxycache
 sudo chown www-data /var/cache/nginx/proxycache
 
 #เตรียม storage path
-sudo mkdir -p /var/lib/ckan/default
+sudo mkdir -p /var/lib/ckan/default/storage
 
 cd /var/lib/
 
