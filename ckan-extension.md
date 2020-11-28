@@ -4,11 +4,11 @@
 
 cd /usr/lib/ckan/default/src
 
-sudo git clone https://github.com/ckan/ckanext-pdfview.git
+git clone https://github.com/ckan/ckanext-pdfview.git
 
 cd /usr/lib/ckan/default/src/ckanext-pdfview
 
-sudo python setup.py develop
+python setup.py develop
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
@@ -29,13 +29,13 @@ sudo service apache2 restart
 
 cd /usr/lib/ckan/default/src
 
-sudo git clone https://github.com/ckan/ckanext-scheming.git
+git clone https://github.com/ckan/ckanext-scheming.git
 
 cd /usr/lib/ckan/default/src/ckanext-scheming
 
-sudo python setup.py develop
+python setup.py develop
 
-sudo pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
@@ -54,13 +54,13 @@ sudo service apache2 restart
 
 cd /usr/lib/ckan/default/src
 
-sudo git clone https://github.com/ckan/ckanext-pages.git
+git clone https://github.com/ckan/ckanext-pages.git
 
 cd /usr/lib/ckan/default/src/ckanext-pages
 
-sudo python setup.py develop
+python setup.py develop
 
-sudo pip install -r dev-requirements.txt
+pip install -r dev-requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
@@ -86,13 +86,13 @@ sudo service apache2 restart
 
 cd /usr/lib/ckan/default/src
 
-sudo git clone https://github.com/davidread/ckanext-hierarchy.git
+git clone https://github.com/davidread/ckanext-hierarchy.git
 
 cd /usr/lib/ckan/default/src/ckanext-hierarchy
 
-sudo python setup.py develop
+python setup.py develop
 
-sudo pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
@@ -111,13 +111,13 @@ sudo service apache2 restart
 
 cd /usr/lib/ckan/default/src
 
-sudo git clone https://github.com/salsadigitalauorg/ckanext-package-group-permissions.git
+git clone https://github.com/salsadigitalauorg/ckanext-package-group-permissions.git
 
 cd /usr/lib/ckan/default/src/ckanext-package-group-permissions
 
-sudo python setup.py develop
+python setup.py develop
 
-sudo pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
@@ -136,13 +136,13 @@ sudo service apache2 restart
 
 cd /usr/lib/ckan/default/src
 
-sudo git clone https://github.com/ckan/ckanext-dcat.git
+git clone https://github.com/ckan/ckanext-dcat.git
 
 cd /usr/lib/ckan/default/src/ckanext-dcat
 
-sudo python setup.py develop
+python setup.py develop
 
-sudo pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
@@ -161,11 +161,11 @@ sudo service apache2 restart
 
 cd /usr/lib/ckan/default/src
 
-sudo git clone https://gitlab.nectec.or.th/opend/ckanext-thai_gdc.git
+git clone https://gitlab.nectec.or.th/opend/ckanext-thai_gdc.git
 
 cd /usr/lib/ckan/default/src/ckanext-thai_gdc
 
-sudo python setup.py develop
+python setup.py develop
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
