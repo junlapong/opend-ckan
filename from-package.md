@@ -100,7 +100,26 @@ sudo chmod -R 775 ckan/
 cd ~
 ```
 
-### 7. ติดตั้ง CKAN package:
+### 7. ติดตั้งและตั้งค่า Solr
+```sh
+sudo useradd --user-group --shell /bin/false --home-dir /opt/jetty/temp jetty
+
+sudo apt-get install -y solr-jetty
+
+sudo vi /etc/default/jetty8
+    NO_START=0            # (line 4)
+    JETTY_HOST=127.0.0.1  # (line 16)
+    JETTY_PORT=8983       # (line 19)
+
+sudo rm -rf /etc/solr/conf/schema.xml
+
+sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
+
+sudo service jetty8 restart
+```
+
+
+### 8. ติดตั้ง CKAN package:
 - สำหรับ Ubuntu 20.04:
 ```sh
     sudo dpkg -i python-ckan_2.9-py2-focal_amd64.deb
@@ -114,8 +133,8 @@ cd ~
     sudo dpkg -i python-ckan_2.8-xenial_amd64.deb
 ```
 
-### 8. ตั้งค่าและสร้างฐานข้อมูลสำหรับ CKAN
-#### 8.1 ตั้งค่า who.ini และ apache.wsgi:
+### 9. ตั้งค่าและสร้างฐานข้อมูลสำหรับ CKAN
+#### 9.1 ตั้งค่า who.ini และ apache.wsgi:
 ```sh
 #ตั้งค่า who.ini
 sudo rm -rf /etc/ckan/default/who.ini
@@ -128,7 +147,7 @@ wget https://gitlab.nectec.or.th/opend/installing-ckan/-/raw/master/config/apach
 sudo cp ./apache/apache.wsgi /etc/ckan/default/apache.wsgi
 ```
 
-#### 8.2 แก้ไขไฟล์ config ของ CKAN ดังนี้:
+#### 9.2 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
 sudo vi /etc/ckan/default/production.ini
     - เพิ่มค่า config ถัดจาก [app:main] (มีอยู่แล้ว)
@@ -173,25 +192,9 @@ sudo vi /etc/ckan/default/production.ini
 sudo service apache2 restart
 ```
 
-#### 8.3 เริ่มต้นสร้างฐานข้อมูลสำหรับ CKAN:
+#### 9.3 เริ่มต้นสร้างฐานข้อมูลสำหรับ CKAN:
 ```sh
 sudo ckan db init
-```
-
-### 9. ติดตั้งและตั้งค่า Solr
-```sh
-sudo apt-get install -y solr-jetty
-
-sudo vi /etc/default/jetty8
-    NO_START=0            # (line 4)
-    JETTY_HOST=127.0.0.1  # (line 16)
-    JETTY_PORT=8983       # (line 19)
-
-sudo rm -rf /etc/solr/conf/schema.xml
-
-sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
-
-sudo service jetty8 restart
 ```
 
 ### 10. cronjob page view tracking
@@ -215,6 +218,8 @@ sudo chown -R www-data:www-data /usr/lib/ckan/default/src/ckan/ckan/public
 sudo service apache2 restart
 
 sudo service nginx restart
+
+sudo service jetty8 restart
 ```
 
 ### 12. สร้าง sysadmin
