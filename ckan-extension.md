@@ -31,6 +31,9 @@ sudo pip install -r src/ckanext-scheming/requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
+sudo vi /etc/ckan/default/production.ini
+```
+```sh
     - ckan.plugins
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets
 ```
@@ -48,6 +51,9 @@ sudo pip install -e 'git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-p
 sudo pip install -r src/ckanext-pages/dev-requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
+```sh
+sudo vi /etc/ckan/default/production.ini
+```
 ```sh
     - เพิ่มค่า config ถัดจาก [app:main] (มีอยู่แล้ว)
         [app:main]
@@ -74,6 +80,9 @@ sudo pip install -r src/ckanext-hierarchy/requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
+sudo vi /etc/ckan/default/production.ini
+```
+```sh
     - ckan.plugins
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages hierarchy_display hierarchy_form
 ```
@@ -91,6 +100,9 @@ sudo pip install -e 'git+https://github.com/salsadigitalauorg/ckanext-package-gr
 sudo pip install -r src/ckanext-package-group-permissions/requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
+```sh
+sudo vi /etc/ckan/default/production.ini
+```
 ```sh
     - ckan.plugins
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages hierarchy_display hierarchy_form package_group_permissions
@@ -110,6 +122,9 @@ sudo pip install -r src/ckanext-dcat/requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
+sudo vi /etc/ckan/default/production.ini
+```
+```sh
     - ckan.plugins
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages hierarchy_display hierarchy_form package_group_permissions dcat dcat_json_interface structured_data
 ```
@@ -125,6 +140,9 @@ cd /usr/lib/ckan/default
 sudo pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-thai_gdc.git#egg=ckanext-thai_gdc'
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
+```sh
+sudo vi /etc/ckan/default/production.ini
+```
 ```sh
     - เพิ่มค่า config ถัดจาก [app:main] (มีอยู่แล้ว)
         [app:main]
