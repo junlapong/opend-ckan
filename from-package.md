@@ -206,6 +206,8 @@ crontab -e
 ```sh
 sudo rm -rf /etc/nginx/sites-enabled/ckan
 
+sudo chown -R `whoami` /usr/lib/ckan/default
+
 sudo chmod -R 775 /usr/lib/ckan/default/src/ckan/ckan/public
 
 sudo chown -R www-data:www-data /usr/lib/ckan/default/src/ckan/ckan/public
