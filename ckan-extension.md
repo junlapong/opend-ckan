@@ -1,10 +1,14 @@
 ### 1. ckanext-pdfview:
 ```sh
-source /usr/lib/ckan/default/bin/activate
+. /usr/lib/ckan/default/bin/activate
 
-cd /usr/lib/ckan/default
+cd /usr/lib/ckan/default/src
 
-sudo pip install -e 'git+https://github.com/ckan/ckanext-pdfview.git#egg=ckanext-pdfview'
+sudo git clone https://github.com/ckan/ckanext-pdfview.git
+
+cd /usr/lib/ckan/default/src/ckanext-pdfview
+
+sudo python setup.py develop
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
@@ -21,13 +25,17 @@ sudo service apache2 restart
 ```
 ### 2. ckanext-scheming:
 ```sh
-source /usr/lib/ckan/default/bin/activate
+. /usr/lib/ckan/default/bin/activate
 
-cd /usr/lib/ckan/default
+cd /usr/lib/ckan/default/src
 
-sudo pip install -e 'git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming'
+sudo git clone https://github.com/ckan/ckanext-scheming.git
 
-sudo pip install -r src/ckanext-scheming/requirements.txt
+cd /usr/lib/ckan/default/src/ckanext-scheming
+
+sudo python setup.py develop
+
+sudo pip install -r requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
@@ -42,13 +50,17 @@ sudo service apache2 restart
 ```
 ### 3. ckanext-pages:
 ```sh
-source /usr/lib/ckan/default/bin/activate
+. /usr/lib/ckan/default/bin/activate
 
-cd /usr/lib/ckan/default
+cd /usr/lib/ckan/default/src
 
-sudo pip install -e 'git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages'
+sudo git clone https://github.com/ckan/ckanext-pages.git
 
-sudo pip install -r src/ckanext-pages/dev-requirements.txt
+cd /usr/lib/ckan/default/src/ckanext-pages
+
+sudo python setup.py develop
+
+sudo pip install -r dev-requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
@@ -70,13 +82,17 @@ sudo service apache2 restart
 ```
 ### 4. ckanext-hierarchy:
 ```sh
-source /usr/lib/ckan/default/bin/activate
+. /usr/lib/ckan/default/bin/activate
 
-cd /usr/lib/ckan/default
+cd /usr/lib/ckan/default/src
 
-sudo pip install -e 'git+https://github.com/davidread/ckanext-hierarchy.git#egg=ckanext-hierarchy'
+sudo git clone https://github.com/davidread/ckanext-hierarchy.git
 
-sudo pip install -r src/ckanext-hierarchy/requirements.txt
+cd /usr/lib/ckan/default/src/ckanext-hierarchy
+
+sudo python setup.py develop
+
+sudo pip install -r requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
@@ -91,13 +107,17 @@ sudo service apache2 restart
 ```
 ### 5. ckanext-package-group-permissions:
 ```sh
-source /usr/lib/ckan/default/bin/activate
+. /usr/lib/ckan/default/bin/activate
 
-cd /usr/lib/ckan/default
+cd /usr/lib/ckan/default/src
 
-sudo pip install -e 'git+https://github.com/salsadigitalauorg/ckanext-package-group-permissions.git#egg=ckanext-package-group-permissions'
+sudo git clone https://github.com/salsadigitalauorg/ckanext-package-group-permissions.git
 
-sudo pip install -r src/ckanext-package-group-permissions/requirements.txt
+cd /usr/lib/ckan/default/src/ckanext-package-group-permissions
+
+sudo python setup.py develop
+
+sudo pip install -r requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
@@ -112,13 +132,17 @@ sudo service apache2 restart
 ```
 ### 6. ckanext-dcat:
 ```sh
-source /usr/lib/ckan/default/bin/activate
+. /usr/lib/ckan/default/bin/activate
 
-cd /usr/lib/ckan/default
+cd /usr/lib/ckan/default/src
 
-sudo pip install -e 'git+https://github.com/ckan/ckanext-dcat.git#egg=ckanext-dcat'
+sudo git clone https://github.com/ckan/ckanext-dcat.git
 
-sudo pip install -r src/ckanext-dcat/requirements.txt
+cd /usr/lib/ckan/default/src/ckanext-dcat
+
+sudo python setup.py develop
+
+sudo pip install -r requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
@@ -133,11 +157,15 @@ sudo service apache2 restart
 ```
 ### 7. ckanext-thai_gdc:
 ```sh
-source /usr/lib/ckan/default/bin/activate
+. /usr/lib/ckan/default/bin/activate
 
-cd /usr/lib/ckan/default
+cd /usr/lib/ckan/default/src
 
-sudo pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-thai_gdc.git#egg=ckanext-thai_gdc'
+sudo git clone https://gitlab.nectec.or.th/opend/ckanext-thai_gdc.git
+
+cd /usr/lib/ckan/default/src/ckanext-thai_gdc
+
+sudo python setup.py develop
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
