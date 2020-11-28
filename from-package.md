@@ -223,7 +223,7 @@ cd /usr/lib/ckan/default/src/ckan
 
 . /usr/lib/ckan/default/bin/activate
 
-sudo pip install --upgrade pip
+/usr/lib/ckan/default/bin/python -m pip install --upgrade pip
 
 paster sysadmin add {username} -c /etc/ckan/default/production.ini
 
