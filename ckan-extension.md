@@ -105,7 +105,7 @@ sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
     - ckan.plugins
-        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages hierarchy_display hierarchy_form package_group_permissions dcat dcat_json_interface structured_data
+        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages hierarchy_display hierarchy_form dcat dcat_json_interface structured_data
 ```
 ```sh
 sudo service apache2 restart
@@ -132,7 +132,7 @@ sudo vi /etc/ckan/default/production.ini
         ckanext.pages.editor = ckeditor
         scheming.dataset_schemas = ckanext.thai_gdc:ckan_dataset.json
     - ckan.plugins
-        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages hierarchy_display hierarchy_form package_group_permissions dcat dcat_json_interface structured_data thai_gdc
+        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages hierarchy_display hierarchy_form dcat dcat_json_interface structured_data thai_gdc
 ```
 ```sh
 sudo service apache2 restart
