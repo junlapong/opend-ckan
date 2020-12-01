@@ -1,6 +1,6 @@
 # วิธีการติดตั้ง CKAN จาก Package บน Ubuntu Linux
 
-การติดตั้ง CKAN จาก Package จะมี port และ service ที่ต้องใช้ดังนี้
+การติดตั้ง CKAN จาก Package จะมี Service และ Port ที่ต้องใช้ดังนี้
 
 | Service | Port | Used for |
 | ------- | ---- | -------- |
