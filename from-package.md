@@ -60,18 +60,20 @@ sudo apt-get install -y postgresql
 # สร้าง postgres user สำหรับ ckan_default และใส่ password1
 sudo -u postgres createuser -S -D -R -P ckan_default
 
+# สร้างฐานข้อมูล ckan_default
 sudo -u postgres createdb -O ckan_default ckan_default -E utf-8
 
 # สร้าง postgres user สำหรับ datastore_default และใส่ password2
 sudo -u postgres createuser -S -D -R -P -l datastore_default
 
+# สร้างฐานข้อมูล datastore_default
 sudo -u postgres createdb -O ckan_default datastore_default -E utf-8
 
 #ตรวจสอบ database list ให้ database ckan_default และ datastore_default
 sudo -u postgres psql -l
 ```
 
-### 6. ตั้งค่า Apache และ Nginx:
+### 6. ตั้งค่า Apache, Nginx และ Storage path:
 ```sh
 #ตั้งค่า Apache
 wget https://gitlab.nectec.or.th/opend/installing-ckan/-/raw/master/config/apache/ckan_default.conf -P ./apache
