@@ -89,28 +89,7 @@ sudo vi /etc/ckan/default/production.ini
 ```sh
 sudo service apache2 restart
 ```
-### 5. ckanext-package-group-permissions:
-```sh
-source /usr/lib/ckan/default/bin/activate
-
-cd /usr/lib/ckan/default
-
-pip install -e 'git+https://github.com/salsadigitalauorg/ckanext-package-group-permissions.git#egg=ckanext-package-group-permissions'
-
-pip install -r src/ckanext-package-group-permissions/requirements.txt
-```
-แก้ไขไฟล์ config ของ CKAN ดังนี้:
-```sh
-sudo vi /etc/ckan/default/production.ini
-```
-```sh
-    - ckan.plugins
-        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages hierarchy_display hierarchy_form package_group_permissions
-```
-```sh
-sudo service apache2 restart
-```
-### 6. ckanext-dcat:
+### 5. ckanext-dcat:
 ```sh
 source /usr/lib/ckan/default/bin/activate
 
@@ -131,7 +110,7 @@ sudo vi /etc/ckan/default/production.ini
 ```sh
 sudo service apache2 restart
 ```
-### 7. ckanext-thai_gdc:
+### 6. ckanext-thai_gdc:
 ```sh
 source /usr/lib/ckan/default/bin/activate
 
