@@ -1,8 +1,8 @@
 # วิธีการติดตั้ง CKAN
 
 จาก [คู่มือการติดตั้งและใช้งาน][docs] CKAN มีวิธีการติดตั้งแนะนำไว้ 3 วิธี คือ
-   1. ติดตั้งจาก [Package][insPackage]
-   2. ติดตั้งจาก [Source][insSource]
+   1. ติดตั้งจาก [Source][insSource]
+   2. ติดตั้งจาก [Package][insPackage]
    3. ติดตั้งจาก [Docker Compose][insDocker]
 
 CKAN Extension ที่ใช้สำหรับการติดตั้ง ระบบบัญชีข้อมูลหน่วยงาน (Agency Data Catalog)
