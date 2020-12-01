@@ -33,27 +33,7 @@ pip -V
 sudo apt-get install -y nginx apache2 libapache2-mod-wsgi libpq5 redis-server git-core
 ```
 
-### 4. ดาวน์โหลด CKAN Package ตามเวอร์ชั่นของ Ubuntu:
-ตรวจสอบเวอร์ชั่นของ Ubuntu โดยใช้คำสั่ง 
-```sh
-cat /etc/os-release
-
-cd ~
-```
-- ดาวน์โหลด CKAN Package สำหรับ Ubuntu 20.04:
-```sh
-    wget http://packaging.ckan.org/python-ckan_2.9-py2-focal_amd64.deb
-```
-- ดาวน์โหลด CKAN Package สำหรับ Ubuntu 18.04:
-```sh
-    wget http://packaging.ckan.org/python-ckan_2.9-bionic_amd64.deb
-```
-- ดาวน์โหลด CKAN Package สำหรับ Ubuntu 16.04:
-```sh
-    wget http://packaging.ckan.org/python-ckan_2.8-xenial_amd64.deb
-```
-
-### 5. ติดตั้งและตั้งค่า PostgreSQL
+### 4. ติดตั้งและตั้งค่า PostgreSQL
 ```sh
 sudo apt-get install -y postgresql
 
@@ -73,7 +53,7 @@ sudo -u postgres createdb -O ckan_default datastore_default -E utf-8
 sudo -u postgres psql -l
 ```
 
-### 6. ตั้งค่า Apache, Nginx และ Storage path:
+### 5. ตั้งค่า Apache, Nginx และ Storage path:
 ```sh
 #ตั้งค่า Apache
 wget https://gitlab.nectec.or.th/opend/installing-ckan/-/raw/master/config/apache/ckan_default.conf -P ./apache
@@ -102,7 +82,7 @@ sudo chmod -R 775 ckan/
 cd ~
 ```
 
-### 7. ติดตั้งและตั้งค่า Solr
+### 6. ติดตั้งและตั้งค่า Solr
 ```sh
 sudo useradd --user-group --shell /bin/false --home-dir /opt/jetty/temp jetty
 
@@ -120,23 +100,31 @@ sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/
 sudo service jetty8 restart
 ```
 
+### 7. ดาวน์โหลดและติดตั้ง CKAN package ตามเวอร์ชั่นของ Ubuntu:
+ตรวจสอบเวอร์ชั่นของ Ubuntu โดยใช้คำสั่ง 
+```sh
+cat /etc/os-release
 
-### 8. ติดตั้ง CKAN package:
+cd ~
+```
 - สำหรับ Ubuntu 20.04:
 ```sh
+    wget http://packaging.ckan.org/python-ckan_2.9-py2-focal_amd64.deb
     sudo dpkg -i python-ckan_2.9-py2-focal_amd64.deb
 ```
 - สำหรับ Ubuntu 18.04:
 ```sh
+    wget http://packaging.ckan.org/python-ckan_2.9-bionic_amd64.deb
     sudo dpkg -i python-ckan_2.9-bionic_amd64.deb
 ```
 - สำหรับ Ubuntu 16.04:
 ```sh
+    wget http://packaging.ckan.org/python-ckan_2.8-xenial_amd64.deb
     sudo dpkg -i python-ckan_2.8-xenial_amd64.deb
 ```
 
-### 9. ตั้งค่าและสร้างฐานข้อมูลสำหรับ CKAN
-#### 9.1 ตั้งค่า who.ini และ apache.wsgi:
+### 8. ตั้งค่าและสร้างฐานข้อมูลสำหรับ CKAN
+#### 8.1 ตั้งค่า who.ini และ apache.wsgi:
 ```sh
 #ตั้งค่า who.ini
 sudo rm -rf /etc/ckan/default/who.ini
@@ -149,57 +137,57 @@ wget https://gitlab.nectec.or.th/opend/installing-ckan/-/raw/master/config/apach
 sudo cp ./apache/apache.wsgi /etc/ckan/default/apache.wsgi
 ```
 
-#### 9.2 แก้ไขไฟล์ config ของ CKAN ดังนี้:
+#### 8.2 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
 sudo vi /etc/ckan/default/production.ini
     - เพิ่มค่า config ถัดจาก [app:main] (มีอยู่แล้ว)
         [app:main]
         ckan.auth.public_user_details = false
         ckan.tracking_enabled = true
-    - sqlalchemy.url
+    - แก้ไข password ของ sqlalchemy.url
         > sqlalchemy.url = postgresql://ckan_default:{password1}@localhost/ckan_default
-    - ckan.datastore.write_url
+    - เปิดการใช้งาน และแก้ไข password ของ ckan.datastore.write_url
         > ckan.datastore.write_url = postgresql://ckan_default:{password1}@localhost/datastore_default
-    - ckan.datastore.read_url
+    - เปิดการใช้งาน และแก้ไข password ของ ckan.datastore.read_url
         > ckan.datastore.read_url = postgresql://datastore_default:{password2}@localhost/datastore_default
-    - ckan.site_url
+    - กำหนด ip หรือ domain name ที่ ckan.site_url
         > ckan.site_url = http://{domain name}
-    - ckan.auth.user_delete_groups
+    - แก้ไข ckan.auth.user_delete_groups
         > ckan.auth.user_delete_groups = false
-    - ckan.auth.user_delete_organizations
+    - แก้ไข ckan.auth.user_delete_organizations
         > ckan.auth.user_delete_organizations = false
-    - solr_url
+    - เปิดการใช้งาน solr_url
         > solr_url = http://127.0.0.1:8983/solr
-    - ckan.redis.url
+    - เปิดการใช้งาน ckan.redis.url
         > ckan.redis.url = redis://localhost:6379/0
-    - ckan.plugins
+    - แก้ไข ckan.plugins (ให้เหมือนตามนี้)
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view
-    - ckan.views.default_views
+    - แก้ไข ckan.views.default_views (ให้เหมือนตามนี้)
         > ckan.views.default_views = image_view text_view recline_view webpage_view
-    - ckan.locale_default
+    - แก้ไข ckan.locale_default (ให้เหมือนตามนี้)
         > ckan.locale_default = th
-    - ckan.locale_order
+    - แก้ไข ckan.locale_order
         > ckan.locale_order = en th pt_BR ...(ต่อจากนั้นเหมือนเดิม)
-    - ckan.storage_path
+    - เปิดการใช้งานและแก้ไข ckan.storage_path
         > ckan.storage_path = /var/lib/ckan/default
-    - ckan.datapusher.formats
+    - เปิดการใช้งาน ckan.datapusher.formats
         > ckan.datapusher.formats = csv ...(ต่อจากนั้นเหมือนเดิม)
-    - ckan.datapusher.url
+    - เปิดการใช้งาน ckan.datapusher.url
         > ckan.datapusher.url = http://127.0.0.1:8800/
-    - ckan.datapusher.assume_task_stale_after
+    - เปิดการใช้งานและแก้ไข ckan.datapusher.assume_task_stale_after
         > ckan.datapusher.assume_task_stale_after = 60
-    - ckan.activity_streams_enabled
+    - เปิดการใช้งาน ckan.activity_streams_enabled
         > ckan.activity_streams_enabled = true
 
 sudo service apache2 restart
 ```
 
-#### 9.3 เริ่มต้นสร้างฐานข้อมูลสำหรับ CKAN:
+#### 8.3 เริ่มต้นสร้างฐานข้อมูลสำหรับ CKAN:
 ```sh
 sudo ckan db init
 ```
 
-### 10. cronjob page view tracking
+### 9. cronjob page view tracking
 ```sh
 crontab -e
 ```
@@ -207,7 +195,7 @@ crontab -e
 
     @hourly /usr/lib/ckan/default/bin/paster --plugin=ckan tracking update -c /etc/ckan/default/production.ini && /usr/lib/ckan/default/bin/paster --plugin=ckan search-index rebuild -r -c /etc/ckan/default/production.ini
 
-### 11. Restart Apache และ Nginx
+### 10. ปรับแต่งสิทธิ์ที่จำเป็น และ restart Apache Nginx และ Jetty
 ```sh
 sudo rm -rf /etc/nginx/sites-enabled/ckan
 
@@ -224,7 +212,8 @@ sudo service nginx restart
 sudo service jetty8 restart
 ```
 
-### 12. สร้าง sysadmin
+### 11. สร้าง CKAN SysAdmin และกำหนดสิทธิ์ DataStore
+
 ```sh
 cd /usr/lib/ckan/default/src/ckan
 
@@ -232,12 +221,13 @@ cd /usr/lib/ckan/default/src/ckan
 
 /usr/lib/ckan/default/bin/python -m pip install --upgrade pip
 
+#เปลี่ยน {username}
 paster sysadmin add {username} -c /etc/ckan/default/production.ini
 
 paster --plugin=ckan datastore set-permissions -c /etc/ckan/default/production.ini | sudo -u postgres psql --set ON_ERROR_STOP=1
 ```
 
-### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{domain name} และ login ด้วย sysadmin
+### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{domain name} และ login ด้วย SysAdmin
 
 ### 13. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
 
