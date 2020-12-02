@@ -66,20 +66,12 @@ wget https://gitlab.nectec.or.th/opend/installing-ckan/-/raw/master/config/nginx
 sudo cp ./nginx/ckan_default.conf /etc/nginx/conf.d/ckan_default.conf
 
 #เตรียม proxycache
-sudo mkdir -p /var/cache/nginx/proxycache
-
-sudo chown www-data /var/cache/nginx/proxycache
+sudo mkdir -p /var/cache/nginx/proxycache && sudo chown www-data /var/cache/nginx/proxycache
 
 #เตรียม storage path
 sudo mkdir -p /var/lib/ckan/default/storage
 
-cd /var/lib/
-
-sudo chown -R www-data:www-data ckan/
-
-sudo chmod -R 775 ckan/
-
-cd ~
+sudo chown -R www-data:www-data /var/lib/ckan && sudo chmod -R 775 /var/lib/ckan
 ```
 
 ### 6. ติดตั้งและตั้งค่า Solr
