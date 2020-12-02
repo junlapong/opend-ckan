@@ -76,7 +76,13 @@ sudo mkdir -p /var/lib/ckan/default/storage
 sudo chown -R www-data:www-data /var/lib/ckan && sudo chmod -R 775 /var/lib/ckan
 ```
 
-### 6. ติดตั้งและตั้งค่า Solr:
+### 6. ดาวน์โหลดและติดตั้ง CKAN package ตามเวอร์ชั่นของ Ubuntu:
+```sh
+#สำหรับ Ubuntu 16.04:
+wget http://packaging.ckan.org/python-ckan_2.8-xenial_amd64.deb
+sudo dpkg -i python-ckan_2.8-xenial_amd64.deb
+```
+### 7. ติดตั้งและตั้งค่า Solr:
 ```sh
 sudo useradd --user-group --shell /bin/false --home-dir /opt/jetty/temp jetty
 
@@ -92,13 +98,6 @@ sudo mv /etc/solr/conf/schema.xml /etc/solr/conf/schema.xml.bak
 sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
 
 sudo service jetty8 restart
-```
-
-### 7. ดาวน์โหลดและติดตั้ง CKAN package ตามเวอร์ชั่นของ Ubuntu:
-```sh
-#สำหรับ Ubuntu 16.04:
-wget http://packaging.ckan.org/python-ckan_2.8-xenial_amd64.deb
-sudo dpkg -i python-ckan_2.8-xenial_amd64.deb
 ```
 
 ### 8. ตั้งค่าและสร้างฐานข้อมูลสำหรับ CKAN:
