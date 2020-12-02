@@ -95,8 +95,8 @@ sudo service jetty8 restart
 ### 7. ดาวน์โหลดและติดตั้ง CKAN package ตามเวอร์ชั่นของ Ubuntu:
 ```sh
 #สำหรับ Ubuntu 16.04:
-    wget http://packaging.ckan.org/python-ckan_2.8-xenial_amd64.deb
-    sudo dpkg -i python-ckan_2.8-xenial_amd64.deb
+wget http://packaging.ckan.org/python-ckan_2.8-xenial_amd64.deb
+sudo dpkg -i python-ckan_2.8-xenial_amd64.deb
 ```
 
 ### 8. ตั้งค่าและสร้างฐานข้อมูลสำหรับ CKAN
