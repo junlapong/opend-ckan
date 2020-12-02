@@ -163,7 +163,7 @@ sudo service apache2 restart
 sudo ckan db init
 ```
 
-### 9. cronjob page view tracking:
+### 9. สร้าง cronjob page view tracking:
 ```sh
 crontab -e
 ```
