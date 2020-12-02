@@ -140,9 +140,9 @@ sudo vi /etc/ckan/default/production.ini
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view
     - แก้ไข ckan.views.default_views (ให้เหมือนตามนี้)
         > ckan.views.default_views = image_view text_view recline_view webpage_view
-    - แก้ไข ckan.locale_default (ให้เหมือนตามนี้)
+    - แก้ไข ckan.locale_default
         > ckan.locale_default = th
-    - แก้ไข ckan.locale_order
+    - แก้ไข ckan.locale_order (แทรก th)
         > ckan.locale_order = en th pt_BR ...(ต่อจากนั้นเหมือนเดิม)
     - เปิดการใช้งานและแก้ไข ckan.storage_path
         > ckan.storage_path = /var/lib/ckan/default
