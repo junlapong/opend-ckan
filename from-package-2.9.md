@@ -1,11 +1,12 @@
-# วิธีการติดตั้ง CKAN จาก Package บน Ubuntu Linux
+# วิธีการติดตั้ง CKAN 2.9 จาก Package บน Ubuntu 18.04 และ 20.04
 
-การติดตั้ง CKAN จาก Package จะมี Service และ Port ที่ต้องใช้ดังนี้
+การติดตั้ง CKAN 2.9 จาก Package จะมี Service และ Port ที่ต้องใช้ดังนี้
 
 | Service | Port | Used for |
 | ------- | ---- | -------- |
 | NGINX | 80 | Proxy |
-| Apache2 | 8080 | Web Server |
+| uWSGI | 8080 | Web Server |
+| uWSGI | 8800 | DataPusher |
 | Solr/Jetty | 8983 | Search |
 | PostgreSQL | 5432 | Database |
 | Redis | 6379 | Search |
@@ -15,22 +16,22 @@
 sudo apt-get update
 ```
 
-### 2. ตั้งค่า python2 และ pip2:
+### 2. ติดตั้ง Package ของ Ubuntu ที่ CKAN ต้องการ:
+```sh
+sudo apt-get install -y libpq5 redis-server nginx supervisor libpython2.7 git-core
+```
+
+### 3. ตั้งค่า python2 และ pip2:
 ```sh
 #ตรวจสอบเวอร์ชั่นของ python และตั้งค่า default python2
 python -V
     # หากยังไม่ใช่ version 2 ใช้คำสั่งนี้ และ select python2
     sudo update-alternatives --config python
 
-#ตรวจสอบเวอร์ชั่นของ pip และตั้งค่า default pip2
+#ตรวจสอบเวอร์ชั่นของ pip และตั้งค่า default pip for python 2
 pip -V
     # หากยังไม่ใช่ version 2 ใช้คำสั่งนี้
     sudo cp /usr/local/bin/pip2 /usr/local/bin/pip
-```
-
-### 3. ติดตั้ง Package ของ Ubuntu ที่ CKAN ต้องการ:
-```sh
-sudo apt-get install -y nginx apache2 libapache2-mod-wsgi libpq5 redis-server git-core
 ```
 
 ### 4. ติดตั้งและตั้งค่า PostgreSQL
@@ -55,6 +56,8 @@ sudo -u postgres psql -l
 
 ### 5. ตั้งค่า Apache, Nginx และ Storage path:
 ```sh
+cd ~
+
 #ตั้งค่า Apache
 wget https://gitlab.nectec.or.th/opend/installing-ckan/-/raw/master/config/apache/ckan_default.conf -P ./apache
 
@@ -80,24 +83,20 @@ sudo useradd --user-group --shell /bin/false --home-dir /opt/jetty/temp jetty
 
 sudo apt-get install -y solr-jetty
 
-sudo vi /etc/default/jetty8
-    NO_START=0            # (line 4)
-    JETTY_HOST=127.0.0.1  # (line 16)
-    JETTY_PORT=8983       # (line 19)
+sudo vi /etc/jetty9/start.ini
+    JETTY_PORT=8983
 
-sudo rm -rf /etc/solr/conf/schema.xml
+sudo mv /etc/solr/conf/schema.xml /etc/solr/conf/schema.xml.bak
 
 sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
 
-sudo service jetty8 restart
+sudo service jetty9 restart
 ```
 
 ### 7. ดาวน์โหลดและติดตั้ง CKAN package ตามเวอร์ชั่นของ Ubuntu:
 ตรวจสอบเวอร์ชั่นของ Ubuntu โดยใช้คำสั่ง 
 ```sh
 cat /etc/os-release
-
-cd ~
 ```
 - สำหรับ Ubuntu 20.04:
 ```sh
@@ -109,32 +108,13 @@ cd ~
     wget http://packaging.ckan.org/python-ckan_2.9-bionic_amd64.deb
     sudo dpkg -i python-ckan_2.9-bionic_amd64.deb
 ```
-- สำหรับ Ubuntu 16.04:
-```sh
-    wget http://packaging.ckan.org/python-ckan_2.8-xenial_amd64.deb
-    sudo dpkg -i python-ckan_2.8-xenial_amd64.deb
-```
 
 ### 8. ตั้งค่าและสร้างฐานข้อมูลสำหรับ CKAN
-#### 8.1 ตั้งค่า who.ini และ apache.wsgi:
+#### 8.1 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
-#ตั้งค่า who.ini
-sudo rm -rf /etc/ckan/default/who.ini
-
-sudo ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
-
-#ตั้งค่า apache.wsgi
-wget https://gitlab.nectec.or.th/opend/installing-ckan/-/raw/master/config/apache/apache.wsgi -P ./apache
-
-sudo cp ./apache/apache.wsgi /etc/ckan/default/apache.wsgi
-```
-
-#### 8.2 แก้ไขไฟล์ config ของ CKAN ดังนี้:
-```sh
-sudo vi /etc/ckan/default/production.ini
+sudo vi /etc/ckan/default/ckan.ini
     - เพิ่มค่า config ถัดจาก [app:main] (มีอยู่แล้ว)
         [app:main]
-        ckan.auth.public_user_details = false
         ckan.tracking_enabled = true
     - แก้ไข password ของ sqlalchemy.url
         > sqlalchemy.url = postgresql://ckan_default:{password1}@localhost/ckan_default
@@ -148,6 +128,8 @@ sudo vi /etc/ckan/default/production.ini
         > ckan.auth.user_delete_groups = false
     - แก้ไข ckan.auth.user_delete_organizations
         > ckan.auth.user_delete_organizations = false
+    - แก้ไข ckan.auth.public_user_details
+        > ckan.auth.public_user_details = false
     - เปิดการใช้งาน solr_url
         > solr_url = http://127.0.0.1:8983/solr
     - เปิดการใช้งาน ckan.redis.url
@@ -156,9 +138,9 @@ sudo vi /etc/ckan/default/production.ini
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view
     - แก้ไข ckan.views.default_views (ให้เหมือนตามนี้)
         > ckan.views.default_views = image_view text_view recline_view webpage_view
-    - แก้ไข ckan.locale_default (ให้เหมือนตามนี้)
+    - แก้ไข ckan.locale_default
         > ckan.locale_default = th
-    - แก้ไข ckan.locale_order
+    - แก้ไข ckan.locale_order (แทรก th)
         > ckan.locale_order = en th pt_BR ...(ต่อจากนั้นเหมือนเดิม)
     - เปิดการใช้งานและแก้ไข ckan.storage_path
         > ckan.storage_path = /var/lib/ckan/default
@@ -171,7 +153,7 @@ sudo vi /etc/ckan/default/production.ini
     - เปิดการใช้งาน ckan.activity_streams_enabled
         > ckan.activity_streams_enabled = true
 
-sudo service apache2 restart
+sudo supervisorctl reload
 ```
 
 #### 8.3 เริ่มต้นสร้างฐานข้อมูลสำหรับ CKAN:
@@ -185,7 +167,7 @@ crontab -e
 ```
 เพิ่มคำสั่งต่อไปนี้
 
-    @hourly /usr/lib/ckan/default/bin/paster --plugin=ckan tracking update -c /etc/ckan/default/production.ini && /usr/lib/ckan/default/bin/paster --plugin=ckan search-index rebuild -r -c /etc/ckan/default/production.ini
+    @hourly /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini tracking update && /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini search-index rebuild -r
 
 ### 10. ปรับแต่งสิทธิ์ที่จำเป็น และ restart Apache Nginx และ Jetty
 ```sh
@@ -197,11 +179,11 @@ sudo chmod -R 775 /usr/lib/ckan/default/src/ckan/ckan/public
 
 sudo chown -R www-data:www-data /usr/lib/ckan/default/src/ckan/ckan/public
 
-sudo service apache2 restart
+sudo supervisorctl reload
+
+
 
 sudo service nginx restart
-
-sudo service jetty8 restart
 ```
 
 ### 11. สร้าง CKAN SysAdmin และกำหนดสิทธิ์ DataStore
