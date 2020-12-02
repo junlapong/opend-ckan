@@ -33,7 +33,7 @@ pip -V
 sudo apt-get install -y nginx apache2 libapache2-mod-wsgi libpq5 redis-server git-core
 ```
 
-### 4. ติดตั้งและตั้งค่า PostgreSQL
+### 4. ติดตั้งและตั้งค่า PostgreSQL:
 ```sh
 sudo apt-get install -y postgresql
 
@@ -74,7 +74,7 @@ sudo mkdir -p /var/lib/ckan/default/storage
 sudo chown -R www-data:www-data /var/lib/ckan && sudo chmod -R 775 /var/lib/ckan
 ```
 
-### 6. ติดตั้งและตั้งค่า Solr
+### 6. ติดตั้งและตั้งค่า Solr:
 ```sh
 sudo useradd --user-group --shell /bin/false --home-dir /opt/jetty/temp jetty
 
@@ -99,7 +99,7 @@ wget http://packaging.ckan.org/python-ckan_2.8-xenial_amd64.deb
 sudo dpkg -i python-ckan_2.8-xenial_amd64.deb
 ```
 
-### 8. ตั้งค่าและสร้างฐานข้อมูลสำหรับ CKAN
+### 8. ตั้งค่าและสร้างฐานข้อมูลสำหรับ CKAN:
 #### 8.1 ตั้งค่า who.ini และ apache.wsgi:
 ```sh
 #ตั้งค่า who.ini
@@ -163,7 +163,7 @@ sudo service apache2 restart
 sudo ckan db init
 ```
 
-### 9. cronjob page view tracking
+### 9. cronjob page view tracking:
 ```sh
 crontab -e
 ```
@@ -171,7 +171,7 @@ crontab -e
 
     @hourly /usr/lib/ckan/default/bin/paster --plugin=ckan tracking update -c /etc/ckan/default/production.ini && /usr/lib/ckan/default/bin/paster --plugin=ckan search-index rebuild -r -c /etc/ckan/default/production.ini
 
-### 10. ปรับแต่งสิทธิ์ที่จำเป็น และ restart Apache Nginx และ Jetty
+### 10. ปรับแต่งสิทธิ์ที่จำเป็น และ restart Apache Nginx และ Jetty:
 ```sh
 sudo rm -rf /etc/nginx/sites-enabled/ckan
 
@@ -186,7 +186,7 @@ sudo service nginx restart
 sudo service jetty8 restart
 ```
 
-### 11. สร้าง CKAN SysAdmin และกำหนดสิทธิ์ DataStore
+### 11. สร้าง CKAN SysAdmin และกำหนดสิทธิ์ DataStore:
 
 ```sh
 cd /usr/lib/ckan/default/src/ckan
