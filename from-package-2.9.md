@@ -181,8 +181,6 @@ sudo chown -R www-data:www-data /usr/lib/ckan/default/src/ckan/ckan/public
 
 sudo supervisorctl reload
 
-
-
 sudo service nginx restart
 ```
 
