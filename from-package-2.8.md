@@ -105,7 +105,7 @@ sudo dpkg -i python-ckan_2.8-xenial_amd64.deb
 #### 8.1 ตั้งค่า who.ini และ apache.wsgi:
 ```sh
 #ตั้งค่า who.ini
-sudo rm -rf /etc/ckan/default/who.ini
+sudo mv /etc/ckan/default/who.ini /etc/ckan/default/who.ini.bak
 
 sudo ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
 
