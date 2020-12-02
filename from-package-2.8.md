@@ -178,12 +178,6 @@ sudo rm -rf /etc/nginx/sites-enabled/ckan
 sudo chown -R `whoami` /usr/lib/ckan/default
 
 sudo chmod -R 775 /usr/lib/ckan/default/src/ckan/ckan/public && sudo chown -R www-data:www-data /usr/lib/ckan/default/src/ckan/ckan/public
-
-sudo service apache2 restart
-
-sudo service nginx restart
-
-sudo service jetty8 restart
 ```
 
 ### 11. สร้าง CKAN SysAdmin และกำหนดสิทธิ์ DataStore:
@@ -199,6 +193,14 @@ cd /usr/lib/ckan/default/src/ckan
 paster sysadmin add {username} -c /etc/ckan/default/production.ini
 
 paster --plugin=ckan datastore set-permissions -c /etc/ckan/default/production.ini | sudo -u postgres psql --set ON_ERROR_STOP=1
+
+deactivate
+
+sudo service apache2 restart
+
+sudo service nginx restart
+
+sudo service jetty8 restart
 ```
 
 ### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{domain name} และ login ด้วย SysAdmin
