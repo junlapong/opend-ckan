@@ -15,7 +15,12 @@
 sudo apt-get update
 ```
 
-### 2. ตั้งค่า python2 และ pip2:
+### 2. ติดตั้ง Package ของ Ubuntu ที่ CKAN ต้องการ:
+```sh
+sudo apt-get install -y nginx apache2 libapache2-mod-wsgi libpq5 redis-server git-core
+```
+
+### 3. ตั้งค่า python2 และ pip2:
 ```sh
 #ตรวจสอบเวอร์ชั่นของ python และตั้งค่า default python2
 python -V
@@ -26,11 +31,6 @@ python -V
 pip -V
     # หากยังไม่ใช่ version 2 ใช้คำสั่งนี้
     sudo cp /usr/local/bin/pip2 /usr/local/bin/pip
-```
-
-### 3. ติดตั้ง Package ของ Ubuntu ที่ CKAN ต้องการ:
-```sh
-sudo apt-get install -y nginx apache2 libapache2-mod-wsgi libpq5 redis-server git-core
 ```
 
 ### 4. ติดตั้งและตั้งค่า PostgreSQL:
@@ -87,7 +87,7 @@ sudo vi /etc/default/jetty8
     JETTY_HOST=127.0.0.1  # (line 16)
     JETTY_PORT=8983       # (line 19)
 
-sudo rm -rf /etc/solr/conf/schema.xml
+sudo mv /etc/solr/conf/schema.xml /etc/solr/conf/schema.xml.bak
 
 sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
 
