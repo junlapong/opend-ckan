@@ -22,7 +22,7 @@ python -V
     # หากยังไม่ใช่ version 2 ใช้คำสั่งนี้ และ select python2
     sudo update-alternatives --config python
 
-#ตรวจสอบเวอร์ชั่นของ pip และตั้งค่า default pip2
+#ตรวจสอบเวอร์ชั่นของ pip และตั้งค่า default pip for python 2
 pip -V
     # หากยังไม่ใช่ version 2 ใช้คำสั่งนี้
     sudo cp /usr/local/bin/pip2 /usr/local/bin/pip
