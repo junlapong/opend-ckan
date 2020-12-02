@@ -10,7 +10,7 @@
 | PostgreSQL | 5432 | Database |
 | Redis | 6379 | Search |
 
-### 1. อัพเดท Package ของ Ubuntu:
+### 1. Update Package ของ Ubuntu:
 ```sh
 sudo apt-get update
 ```
