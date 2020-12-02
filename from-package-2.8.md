@@ -1,6 +1,6 @@
-# วิธีการติดตั้ง CKAN จาก Package บน Ubuntu Linux
+# วิธีการติดตั้ง CKAN 2.8 จาก Package บน Ubuntu 16.04
 
-การติดตั้ง CKAN จาก Package จะมี Service และ Port ที่ต้องใช้ดังนี้
+การติดตั้ง CKAN 2.8 จาก Package จะมี Service และ Port ที่ต้องใช้ดังนี้
 
 | Service | Port | Used for |
 | ------- | ---- | -------- |
@@ -93,22 +93,7 @@ sudo service jetty8 restart
 ```
 
 ### 7. ดาวน์โหลดและติดตั้ง CKAN package ตามเวอร์ชั่นของ Ubuntu:
-ตรวจสอบเวอร์ชั่นของ Ubuntu โดยใช้คำสั่ง 
-```sh
-cat /etc/os-release
-
-cd ~
-```
-- สำหรับ Ubuntu 20.04:
-```sh
-    wget http://packaging.ckan.org/python-ckan_2.9-py2-focal_amd64.deb
-    sudo dpkg -i python-ckan_2.9-py2-focal_amd64.deb
-```
-- สำหรับ Ubuntu 18.04:
-```sh
-    wget http://packaging.ckan.org/python-ckan_2.9-bionic_amd64.deb
-    sudo dpkg -i python-ckan_2.9-bionic_amd64.deb
-```
+ตรวจสอบเวอร์ชั่นของ Ubuntu โดยใช้คำสั่ง
 - สำหรับ Ubuntu 16.04:
 ```sh
     wget http://packaging.ckan.org/python-ckan_2.8-xenial_amd64.deb
