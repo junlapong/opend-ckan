@@ -107,29 +107,35 @@ sudo vi /etc/systemd/system/jetty9.service.d/solr.conf
 sudo vi /etc/jetty9/start.ini
     jetty.host=127.0.0.1
     jetty.port=8983
-
+```
+```sh
 sudo vi /etc/solr/solr-jetty.xml
-    <?xml version="1.0"  encoding="ISO-8859-1"?>
-    <!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
-    <!-- Context configuration file for the Solr web application in Jetty -->
-    <Configure class="org.eclipse.jetty.webapp.WebAppContext">
-    <Set name="contextPath">/solr</Set>
-    <Set name="war">/usr/share/solr/web</Set>
-    <!-- Set the solr.solr.home system property -->
-    <Call name="setProperty" class="java.lang.System">
-        <Arg type="String">solr.solr.home</Arg>
-        <Arg type="String">/usr/share/solr</Arg>
-    </Call>
-    <!-- Enable symlinks -->
-    <!-- Disabled due to being deprecated
-    <Call name="addAliasCheck">
-        <Arg>
-        <New class="org.eclipse.jetty.server.handler.ContextHandler$ApproveSameSuffixAliases"/>
-        </Arg>
-    </Call>
-    -->
-    </Configure>
+```
+```sh
+<?xml version="1.0"  encoding="ISO-8859-1"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
 
+<!-- Context configuration file for the Solr web application in Jetty -->
+
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+  <Set name="contextPath">/solr</Set>
+  <Set name="war">/usr/share/solr/web</Set>
+
+  <!-- Set the solr.solr.home system property -->
+  <Call name="setProperty" class="java.lang.System">
+    <Arg type="String">solr.solr.home</Arg>
+    <Arg type="String">/usr/share/solr</Arg>
+  </Call>
+
+  <!-- Enable symlinks -->
+  <Call name="addAliasCheck">
+    <Arg>
+      <New class="org.eclipse.jetty.server.handler.ContextHandler$ApproveSameSuffixAliases"/>
+    </Arg>
+  </Call>
+</Configure>
+```
+```
 sudo mv /etc/solr/conf/schema.xml /etc/solr/conf/schema.xml.bak
 
 sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
