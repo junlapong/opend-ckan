@@ -110,8 +110,9 @@ sudo vi /etc/jetty9/start.ini
 ```
 ```sh
 sudo vi /etc/solr/solr-jetty.xml
-```
-```sh
+
+#แก้ไข solr-jetty.xml ตามนี้
+
 <?xml version="1.0"  encoding="ISO-8859-1"?>
 <!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
 
@@ -134,8 +135,7 @@ sudo vi /etc/solr/solr-jetty.xml
     </Arg>
   </Call>-->
 </Configure>
-```
-```sh
+
 sudo mv /etc/solr/conf/schema.xml /etc/solr/conf/schema.xml.bak
 
 sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
