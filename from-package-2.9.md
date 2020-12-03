@@ -135,7 +135,8 @@ sudo vi /etc/solr/solr-jetty.xml
     </Arg>
   </Call>-->
 </Configure>
-
+```
+```sh
 sudo mv /etc/solr/conf/schema.xml /etc/solr/conf/schema.xml.bak
 
 sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
