@@ -128,11 +128,11 @@ sudo vi /etc/solr/solr-jetty.xml
   </Call>
 
   <!-- Enable symlinks -->
-  <Call name="addAliasCheck">
+  <!--<Call name="addAliasCheck">
     <Arg>
       <New class="org.eclipse.jetty.server.handler.ContextHandler$ApproveSameSuffixAliases"/>
     </Arg>
-  </Call>
+  </Call>-->
 </Configure>
 ```
 ```sh
@@ -230,14 +230,14 @@ sudo service nginx restart
 ### 11. สร้าง CKAN SysAdmin และกำหนดสิทธิ์ DataStore
 
 ```sh
-cd /usr/lib/ckan/default/src/ckan
+cd /usr/lib/ckan
 
 . /usr/lib/ckan/default/bin/activate
 
 /usr/lib/ckan/default/bin/python -m pip install --upgrade pip
 
 #เปลี่ยน {username}
-paster sysadmin add {username} -c /etc/ckan/default/production.ini
+ckan -c /etc/ckan/default/ckan.ini sysadmin add {username}
 
 paster --plugin=ckan datastore set-permissions -c /etc/ckan/default/production.ini | sudo -u postgres psql --set ON_ERROR_STOP=1
 ```
