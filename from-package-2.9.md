@@ -77,23 +77,7 @@ sudo mkdir -p /var/lib/ckan/default/storage
 sudo chown -R www-data:www-data /var/lib/ckan && sudo chmod -R 775 /var/lib/ckan
 ```
 
-### 6. ติดตั้งและตั้งค่า Solr
-```sh
-sudo useradd --user-group --shell /bin/false --home-dir /opt/jetty/temp jetty
-
-sudo apt-get install -y solr-jetty
-
-sudo vi /etc/jetty9/start.ini
-    JETTY_PORT=8983
-
-sudo mv /etc/solr/conf/schema.xml /etc/solr/conf/schema.xml.bak
-
-sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
-
-sudo service jetty9 restart
-```
-
-### 7. ดาวน์โหลดและติดตั้ง CKAN package ตามเวอร์ชั่นของ Ubuntu:
+### 6. ดาวน์โหลดและติดตั้ง CKAN package ตามเวอร์ชั่นของ Ubuntu:
 ตรวจสอบเวอร์ชั่นของ Ubuntu โดยใช้คำสั่ง 
 ```sh
 cat /etc/os-release
@@ -108,9 +92,62 @@ cat /etc/os-release
     wget http://packaging.ckan.org/python-ckan_2.9-bionic_amd64.deb
     sudo dpkg -i python-ckan_2.9-bionic_amd64.deb
 ```
+### 7. ติดตั้งและตั้งค่า Solr
+```sh
+sudo useradd --user-group --shell /bin/false --home-dir /opt/jetty/temp jetty
+
+sudo apt-get install -y solr-jetty
+
+sudo mkdir /etc/systemd/system/jetty9.service.d
+
+sudo vi /etc/systemd/system/jetty9.service.d/solr.conf
+    [Service]
+    ReadWritePaths=/var/lib/solr
+
+sudo vi /etc/jetty9/start.ini
+    jetty.host=127.0.0.1
+    jetty.port=8983
+
+sudo vi /etc/solr/solr-jetty.xml
+    <?xml version="1.0"  encoding="ISO-8859-1"?>
+    <!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+    <!-- Context configuration file for the Solr web application in Jetty -->
+    <Configure class="org.eclipse.jetty.webapp.WebAppContext">
+    <Set name="contextPath">/solr</Set>
+    <Set name="war">/usr/share/solr/web</Set>
+    <!-- Set the solr.solr.home system property -->
+    <Call name="setProperty" class="java.lang.System">
+        <Arg type="String">solr.solr.home</Arg>
+        <Arg type="String">/usr/share/solr</Arg>
+    </Call>
+    <!-- Enable symlinks -->
+    <!-- Disabled due to being deprecated
+    <Call name="addAliasCheck">
+        <Arg>
+        <New class="org.eclipse.jetty.server.handler.ContextHandler$ApproveSameSuffixAliases"/>
+        </Arg>
+    </Call>
+    -->
+    </Configure>
+
+sudo mv /etc/solr/conf/schema.xml /etc/solr/conf/schema.xml.bak
+
+sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
+
+sudo systemctl daemon-reload
+
+sudo service jetty9 restart
+```
 
 ### 8. ตั้งค่าและสร้างฐานข้อมูลสำหรับ CKAN
-#### 8.1 แก้ไขไฟล์ config ของ CKAN ดังนี้:
+#### 8.1 ตั้งค่า who.ini:
+```sh
+#ตั้งค่า who.ini
+sudo mv /etc/ckan/default/who.ini /etc/ckan/default/who.ini.bak
+
+sudo ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
+```
+#### 8.2 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
 sudo vi /etc/ckan/default/ckan.ini
     - เพิ่มค่า config ถัดจาก [app:main] (มีอยู่แล้ว)
