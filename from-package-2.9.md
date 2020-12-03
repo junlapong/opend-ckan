@@ -213,7 +213,7 @@ crontab -e
 
     @hourly /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini tracking update && /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini search-index rebuild -r
 
-### 10. ปรับแต่งสิทธิ์ที่จำเป็น และ restart Apache Nginx และ Jetty
+### 10. ปรับแก้ไขสิทธิ์ที่จำเป็น
 ```sh
 sudo rm -rf /etc/nginx/sites-enabled/ckan
 
