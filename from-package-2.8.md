@@ -17,7 +17,7 @@ sudo apt-get update
 
 ### 2. ติดตั้ง Package ของ Ubuntu ที่ CKAN ต้องการ:
 ```sh
-sudo apt-get install -y nginx apache2 libpython2.7 python-pip libapache2-mod-wsgi libpq5 redis-server git-core
+sudo apt-get install -y nginx apache2 libpython2.7 libapache2-mod-wsgi libpq5 redis-server git-core
 ```
 
 ### 3. ตั้งค่า python2 และ pip2:
