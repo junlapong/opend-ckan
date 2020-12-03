@@ -149,7 +149,6 @@ sudo service jetty9 restart
 ### 8. ตั้งค่าและสร้างฐานข้อมูลสำหรับ CKAN
 #### 8.1 ตั้งค่า who.ini:
 ```sh
-#ตั้งค่า who.ini
 sudo mv /etc/ckan/default/who.ini /etc/ckan/default/who.ini.bak
 
 sudo ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
