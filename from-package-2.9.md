@@ -34,7 +34,7 @@ pip -V
     sudo cp /usr/local/bin/pip2 /usr/local/bin/pip
 ```
 
-### 4. ติดตั้งและตั้งค่า PostgreSQL
+### 4. ติดตั้งและตั้งค่า PostgreSQL:
 ```sh
 sudo apt-get install -y postgresql
 
@@ -92,7 +92,7 @@ cat /etc/os-release
     wget http://packaging.ckan.org/python-ckan_2.9-bionic_amd64.deb
     sudo dpkg -i python-ckan_2.9-bionic_amd64.deb
 ```
-### 7. ติดตั้งและตั้งค่า Solr
+### 7. ติดตั้งและตั้งค่า Solr:
 ```sh
 sudo useradd --user-group --shell /bin/false --home-dir /opt/jetty/temp jetty
 
@@ -205,7 +205,7 @@ sudo supervisorctl reload
 sudo ckan db init
 ```
 
-### 9. cronjob page view tracking
+### 9. cronjob สำหรับ page view tracking:
 ```sh
 crontab -e
 ```
@@ -213,7 +213,7 @@ crontab -e
 
     @hourly /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini tracking update && /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini search-index rebuild -r
 
-### 10. ปรับแก้ไขสิทธิ์ที่จำเป็น
+### 10. ปรับแก้ไขสิทธิ์ที่จำเป็น:
 ```sh
 sudo rm -rf /etc/nginx/sites-enabled/ckan
 
@@ -224,7 +224,7 @@ sudo chmod -R 775 /usr/lib/ckan/default/src/ckan/ckan/public
 sudo chown -R www-data:www-data /usr/lib/ckan/default/src/ckan/ckan/public
 ```
 
-### 11. สร้าง CKAN SysAdmin และกำหนดสิทธิ์ DataStore
+### 11. สร้าง CKAN SysAdmin และกำหนดสิทธิ์ DataStore:
 
 ```sh
 cd /usr/lib/ckan
