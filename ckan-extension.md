@@ -36,12 +36,10 @@ pip install -e 'git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-sch
 pip install -r src/ckanext-scheming/requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
-- สำหรับ CKAN 2.9:
 ```sh
+#สำหรับ CKAN 2.9:
 sudo vi /etc/ckan/default/ckan.ini
-```
-- สำหรับ CKAN 2.8:
-```sh
+#สำหรับ CKAN 2.8:
 sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
@@ -62,12 +60,10 @@ pip install -e 'git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages'
 pip install -r src/ckanext-pages/dev-requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
-- สำหรับ CKAN 2.9:
 ```sh
+#สำหรับ CKAN 2.9:
 sudo vi /etc/ckan/default/ckan.ini
-```
-- สำหรับ CKAN 2.8:
-```sh
+#สำหรับ CKAN 2.8:
 sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
@@ -95,12 +91,10 @@ pip install -e 'git+https://github.com/davidread/ckanext-hierarchy.git#egg=ckane
 pip install -r src/ckanext-hierarchy/requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
-- สำหรับ CKAN 2.9:
 ```sh
+#สำหรับ CKAN 2.9:
 sudo vi /etc/ckan/default/ckan.ini
-```
-- สำหรับ CKAN 2.8:
-```sh
+#สำหรับ CKAN 2.8:
 sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
@@ -121,12 +115,10 @@ pip install -e 'git+https://github.com/ckan/ckanext-dcat.git#egg=ckanext-dcat'
 pip install -r src/ckanext-dcat/requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
-- สำหรับ CKAN 2.9:
 ```sh
+#สำหรับ CKAN 2.9:
 sudo vi /etc/ckan/default/ckan.ini
-```
-- สำหรับ CKAN 2.8:
-```sh
+#สำหรับ CKAN 2.8:
 sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
@@ -145,12 +137,10 @@ cd /usr/lib/ckan/default
 pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-thai_gdc.git#egg=ckanext-thai_gdc'
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
-- สำหรับ CKAN 2.9:
 ```sh
+#สำหรับ CKAN 2.9:
 sudo vi /etc/ckan/default/ckan.ini
-```
-- สำหรับ CKAN 2.8:
-```sh
+#สำหรับ CKAN 2.8:
 sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
