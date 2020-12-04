@@ -47,6 +47,9 @@ sudo vi /etc/ckan/default/production.ini
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets
 ```
 ```sh
+#สำหรับ CKAN 2.9:
+sudo supervisorctl restart
+#สำหรับ CKAN 2.8:
 sudo service apache2 restart
 ```
 ### 3. ckanext-pages:
@@ -78,6 +81,9 @@ sudo vi /etc/ckan/default/production.ini
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages
 ```
 ```sh
+#สำหรับ CKAN 2.9:
+sudo supervisorctl restart
+#สำหรับ CKAN 2.8:
 sudo service apache2 restart
 ```
 ### 4. ckanext-hierarchy:
@@ -102,6 +108,9 @@ sudo vi /etc/ckan/default/production.ini
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages hierarchy_display hierarchy_form
 ```
 ```sh
+#สำหรับ CKAN 2.9:
+sudo supervisorctl restart
+#สำหรับ CKAN 2.8:
 sudo service apache2 restart
 ```
 ### 5. ckanext-dcat:
@@ -126,6 +135,9 @@ sudo vi /etc/ckan/default/production.ini
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages hierarchy_display hierarchy_form dcat dcat_json_interface structured_data
 ```
 ```sh
+#สำหรับ CKAN 2.9:
+sudo supervisorctl restart
+#สำหรับ CKAN 2.8:
 sudo service apache2 restart
 ```
 ### 6. ckanext-thai_gdc:
@@ -156,5 +168,8 @@ sudo vi /etc/ckan/default/production.ini
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages hierarchy_display hierarchy_form dcat dcat_json_interface structured_data thai_gdc
 ```
 ```sh
+#สำหรับ CKAN 2.9:
+sudo supervisorctl restart
+#สำหรับ CKAN 2.8:
 sudo service apache2 restart
 ```
