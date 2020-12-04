@@ -21,7 +21,7 @@ sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
 #สำหรับ CKAN 2.9:
-sudo supervisorctl restart
+sudo supervisorctl reload
 #สำหรับ CKAN 2.8:
 sudo service apache2 restart
 ```
@@ -48,7 +48,7 @@ sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
 #สำหรับ CKAN 2.9:
-sudo supervisorctl restart
+sudo supervisorctl reload
 #สำหรับ CKAN 2.8:
 sudo service apache2 restart
 ```
@@ -82,7 +82,7 @@ sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
 #สำหรับ CKAN 2.9:
-sudo supervisorctl restart
+sudo supervisorctl reload
 #สำหรับ CKAN 2.8:
 sudo service apache2 restart
 ```
@@ -109,7 +109,7 @@ sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
 #สำหรับ CKAN 2.9:
-sudo supervisorctl restart
+sudo supervisorctl reload
 #สำหรับ CKAN 2.8:
 sudo service apache2 restart
 ```
@@ -136,7 +136,7 @@ sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
 #สำหรับ CKAN 2.9:
-sudo supervisorctl restart
+sudo supervisorctl reload
 #สำหรับ CKAN 2.8:
 sudo service apache2 restart
 ```
@@ -169,7 +169,7 @@ sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
 #สำหรับ CKAN 2.9:
-sudo supervisorctl restart
+sudo supervisorctl reload
 #สำหรับ CKAN 2.8:
 sudo service apache2 restart
 ```
