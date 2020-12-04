@@ -25,9 +25,6 @@ pip -V
 
 ### 4. ตั้งค่า CKAN path:
 ```sh
-#เตรียม proxycache
-sudo mkdir -p /var/cache/nginx/proxycache && sudo chown www-data /var/cache/nginx/proxycache
-
 #เตรียม ckan path
 sudo mkdir -p /usr/lib/ckan/default
 
