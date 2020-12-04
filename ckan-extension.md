@@ -72,8 +72,7 @@ sudo vi /etc/ckan/default/production.ini
 ```sh
     - เพิ่มค่า config ถัดจาก [app:main] (มีอยู่แล้ว)
         [app:main]
-        ckan.auth.public_user_details = false
-        ckan.tracking_enabled = true
+        ...
         ckanext.pages.form = pages/base_form.html
         ckanext.pages.allow_html = True
         ckanext.pages.editor = ckeditor
@@ -158,11 +157,7 @@ sudo vi /etc/ckan/default/production.ini
 ```sh
     - เพิ่มค่า config ถัดจาก [app:main] (มีอยู่แล้ว)
         [app:main]
-        ckan.auth.public_user_details = false
-        ckan.tracking_enabled = true
-        ckanext.pages.form = pages/base_form.html
-        ckanext.pages.allow_html = True
-        ckanext.pages.editor = ckeditor
+        ...
         scheming.dataset_schemas = ckanext.thai_gdc:ckan_dataset.json
     - ckan.plugins
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages hierarchy_display hierarchy_form dcat dcat_json_interface structured_data thai_gdc
