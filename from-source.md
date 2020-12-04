@@ -155,8 +155,8 @@ sudo vi /etc/ckan/default/ckan.ini
         > ckan.datastore.write_url = postgresql://ckan_default:{password1}@localhost/datastore_default
     - เปิดการใช้งาน และแก้ไข {password2} (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.read_url
         > ckan.datastore.read_url = postgresql://datastore_default:{password2}@localhost/datastore_default
-    - กำหนด ip หรือ domain name ที่ ckan.site_url
-        > ckan.site_url = http://{domain name}:5000
+    - กำหนด ip ที่ ckan.site_url
+        > ckan.site_url = http://{ip address}:5000
     - แก้ไข ckan.auth.user_delete_groups
         > ckan.auth.user_delete_groups = false
     - แก้ไข ckan.auth.user_delete_organizations
@@ -223,6 +223,6 @@ cd /usr/lib/ckan/default/src/ckan
 ckan -c /etc/ckan/default/ckan.ini run
 ```
 
-### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{domain name} และ login ด้วย SysAdmin
+### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{ip address}:5000 และ login ด้วย SysAdmin
 
 ### 13. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
