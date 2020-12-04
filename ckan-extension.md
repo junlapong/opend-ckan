@@ -20,6 +20,9 @@ sudo vi /etc/ckan/default/production.ini
         > ckan.views.default_views = image_view text_view recline_view webpage_view pdf_view
 ```
 ```sh
+#สำหรับ CKAN 2.9:
+sudo supervisorctl restart
+#สำหรับ CKAN 2.8:
 sudo service apache2 restart
 ```
 ### 2. ckanext-scheming:
