@@ -8,10 +8,10 @@ pip install -e 'git+https://github.com/ckan/ckanext-pdfview.git#egg=ckanext-pdfv
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
-    #สำหรับ CKAN 2.9:
-    sudo vi /etc/ckan/default/ckan.ini
-    #สำหรับ CKAN 2.8:
-    sudo vi /etc/ckan/default/production.ini
+#สำหรับ CKAN 2.9:
+sudo vi /etc/ckan/default/ckan.ini
+#สำหรับ CKAN 2.8:
+sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
     - ckan.plugins
