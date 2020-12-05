@@ -3,85 +3,84 @@
 - docker >= 19
 - docker-compose >= version 1.17
 
-### วิธีการตรวจสอบเวอร์ชั่น docker และ docker-compose
-
+วิธีการตรวจสอบเวอร์ชั่น docker และ docker-compose
 ```sh
-$ docker -v
-Docker version 19.03.13, build 4484c46d9d
-$ docker-compose -v
-docker-compose version 1.26.2, build unknown
+docker -v
+#Docker version 19.03.13, build 4484c46d9d
+
+docker-compose -v
+#docker-compose version 1.26.2, build unknown
 ```
 ## การติดตั้ง docker
-ติดตั้ง docker สำเครื่องที่ยังไม่ได้ติดตั้ง
+ติดตั้ง docker สำหรับเครื่องที่ยังไม่ได้ติดตั้ง โดยใช้คำสั่ง
 ```sh
-$ sudo curl https://get.docker.com | sh
-#รอจนกว่าการติดตั้งจะเสร็จเรียบร้อย
+sudo curl https://get.docker.com | sh
+#รอจนกว่าการติดตั้งเสร็จเรียบร้อย
 ```
-เมื่อติดตั้ง docker เรียบร้อยให้ทำการให้สิทธิการใช้งานสำหรับ user ตั้งนี้
+เมื่อติดตั้ง docker เรียบร้อยให้ทำการให้สิทธิ์การใช้งานสำหรับ user ตั้งนี้
 ```sh
-$ sudo newgrp docker
-$ sudo usermode -aG docker `whoami`
-# ตรวจสอบ image ที่มีอยู่ในเครื่อง
-$ docker images
-# ทดสอบ run docker 
-$ docker run hello-world
+sudo newgrp docker
+
+sudo usermode -aG docker `whoami`
+
+#ตรวจสอบ image ที่มีอยู่ในเครื่อง
+docker images
+
+#ทดสอบ run docker 
+docker run hello-world
 ```
 
 ## การติดตั้ง docker-compose
+ติดตั้ง docker-compose สำหรับเครื่องที่ยังไม่ได้ติดตั้ง โดยใช้คำสั่ง
 ```sh
-$ sudo apt install docker-compose
+sudo apt install docker-compose
+
 # ตรวจสอบ version ของ docker-compose
-$ docker-compose -v
+docker-compose -v
 ```
 
-## การติดตั้ง ckan docker สำหรับ thai gdc
-1. ทำการ ckan-docker-thai-gdc ที่เตรียมไว้ให้
+## การติดตั้ง ckan docker และ extension
+### 1. ทำการโหลด ckan-docker-thai-gdc
 ```sh
-$ git clone https://gitlab.nectec.or.th/opend/ckan-docker-thai-gdc.git ~/ckan-docker
+git clone https://gitlab.nectec.or.th/opend/ckan-docker-thai-gdc.git ~/ckan-docker
 ```
-2. ทำสร้างไฟล์ .env จากไฟล์ .env.template ที่เตรียมไว้ให้
-```sh
-$ cd ~/ckan-docker
-$ cp .env.tempate .env
-```
-3. แก้ไฟล์ .env
-```sh
-# DB image settings
-# POSTGRES_USER must be set to the database user used by CKAN, typically named ckan
-# Readwrite user/pass will be POSTGRES_USER:POSTGRES_PASSWORD
-# ตัวแปรที่ใช้สร้าง username password  สำหรับ database ของ ckan
-POSTGRES_USER=ckan
-POSTGRES_PASSWORD=ckan
-# Readonly user/pass will be DATASTORE_READONLY_USER:DATASTORE_READONLY_PASSWORD
-# ตัวแปรที่ใช้สร้าง username password สำหรับ datastore
-DATASTORE_READONLY_USER=datastore_ro
-DATASTORE_READONLY_PASSWORD=datastore
-# POSTGRES_HOST must be set to the host for the postgres server.
-# As a default 'db' will point to the postgres running in the docker container specified by the docker-compose.yml file.
-# ชื่อ host  สำหรับ databese postgres
-POSTGRES_HOST=db
-# เวอร์ชั่นของ CKAN 2.8
-# ยังสามารถใช้ได้เฉพาะ 2.8 อยู่ครับ
-CKAN_VERSION=2.8
-# ตัวเลขกำกับสำหรับรัน container หลายๆ site
-PROJECT_NUMBER=1
-# port สำหรับ nginx
-NGINX_PORT=8881
-# port สำหรับ datapusher
-DATAPUSHER_PORT=8800
-# เป็น url สำหับเว็บของเราอาจจะใช้เป็น domain name / ip assress ไปก่อน
-DEFAULT_URL=http://localhost
 
-# Basic
-CKAN_SITE_ID=default
-# CKAN_SITE_URL=http://host.docker.internal:8881
-# CKAN_SITE_URL=http://localhost:8881
-CKAN_PORT=5000
-# สำหรับสร้าง sysadmin ของระบบ
-CKAN_SYSADMIN_NAME=ckan_admin
-CKAN_SYSADMIN_PASSWORD=test1234
-CKAN_SYSADMIN_EMAIL=your_email@example.com
-TZ=Asia/Bangkok
+### 2. ทำสร้างไฟล์ .env จากไฟล์ .env.template ที่เตรียมไว้ให้
+```sh
+cd ~/ckan-docker
+
+cp .env.tempate .env
+```
+### 3. แก้ไขไฟล์ .env
+```sh
+    - กำหนด Username และ Password สำหรับ Database ของ CKAN
+        > POSTGRES_USER=ckan
+        > POSTGRES_PASSWORD={ckan_password}
+    - กำหนด Username และ Password สำหรับ Datastore
+        > DATASTORE_READONLY_USER=datastore_ro
+        > DATASTORE_READONLY_PASSWORD={datastore_password}
+    - กำหนดชื่อ Host สำหรับ Database Postgres
+        > POSTGRES_HOST=db
+    - กำหนด version ของ CKAN
+        > CKAN_VERSION=2.8
+    - ตัวเลขกำกับ container (default)
+        > PROJECT_NUMBER=1
+    - กำหนด port สำหรับ Nginx
+        > NGINX_PORT=8881
+    - กำหนด port สำหรับ Datapusher
+        > DATAPUSHER_PORT=8800
+    - กำหนด url สำหรับเว็บเป็น Domain/IP
+        > DEFAULT_URL=http://localhost
+    - กำหนด CKAN Site ID (default)
+        > CKAN_SITE_ID=default
+    - กำหนด CKAN Site URL
+        > CKAN_SITE_URL=http://{domain}:8881
+    - กำหนด CKAN Port
+        > CKAN_PORT=5000
+    - กำหนดรายละเอียด SysAdmin ของระบบ
+        > CKAN_SYSADMIN_NAME={admin_username}
+        > CKAN_SYSADMIN_PASSWORD={admin_password}
+        > CKAN_SYSADMIN_EMAIL={admin_email}
 
 # Database connections (TODO: avoid duplication)
 # การตั้งค่าเพื่อจัดการ database postgres สำหรับ CKAN
