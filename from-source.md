@@ -223,3 +223,245 @@ ckan -c /etc/ckan/default/ckan.ini run
 ### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{ip address}:5000 และ login ด้วย SysAdmin
 
 ### 13. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
+
+### 14. วิธีการ Deploy ckan 
+#### ckan 2.8 
+1. ติดตั้ง package ดังนี้
+```sh
+$ sudo apt-get install nginx apache2 libapache2-mod-wsgi libapache2-mod-rpaf
+```
+2. สร้างไฟล์ WSGI script
+สร้างไฟล์ apache.wsgi ที่ /etc/ckan/default/apache.wsgi แล้ววางคำสั่งตามนี้
+```sh
+import os
+activate_this = os.path.join('/usr/lib/ckan/default/bin/activate_this.py')
+execfile(activate_this, dict(__file__=activate_this))
+
+from paste.deploy import loadapp
+config_filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'production.ini')
+from paste.script.util.logging_config import fileConfig
+fileConfig(config_filepath)
+application = loadapp('config:%s' % config_filepath)
+```
+3. สร้างไฟล์ apache config เพื่อให้ wsgi script ทำงาน
+โดยสร้างไฟล์ config ขึ้นมาดังนี้ /etc/apache2/sites-available/ckan_default.conf แล้วนำคำสั่งด้านล่างไปใส่
+```sh
+<VirtualHost 127.0.0.1:8080>
+    ServerName default.ckanhosted.com
+    ServerAlias www.default.ckanhosted.com
+    WSGIScriptAlias / /etc/ckan/default/apache.wsgi
+
+    # Pass authorization info on (needed for rest api).
+    WSGIPassAuthorization On
+
+    # Deploy as a daemon (avoids conflicts between CKAN instances).
+    WSGIDaemonProcess ckan_default display-name=ckan_default processes=2 threads=15
+
+    WSGIProcessGroup ckan_default
+
+    ErrorLog /var/log/apache2/ckan_default.error.log
+    CustomLog /var/log/apache2/ckan_default.custom.log combined
+
+    <IfModule mod_rpaf.c>
+        RPAFenable On
+        RPAFsethostname On
+        RPAFproxy_ips 127.0.0.1
+    </IfModule>
+
+    <Directory />
+        Require all granted
+    </Directory>
+
+</VirtualHost>
+```
+4. เปลี่ยน port apache
+ให้ทำการแก้ไขไฟล์ /etc/apache2/ports.conf ให้แก้ไขจาก
+    > Listen 80
+
+    เป็น
+    > Listen 8080
+5. สร้างไฟล์ config สำหรับ nginx 
+ทำการสร้างไฟล์ config สำหรับ nginx ดังนี้ /etc/nginx/sites-available/ckan แล้ววางคำสั่งด้านล่างลงไป
+```sh
+proxy_cache_path /tmp/nginx_cache levels=1:2 keys_zone=cache:30m max_size=250m;
+proxy_temp_path /tmp/nginx_proxy 1 2;
+
+server {
+    client_max_body_size 100M;
+    location / {
+        proxy_pass http://127.0.0.1:8080/;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Host $host;
+        proxy_cache cache;
+        proxy_cache_bypass $cookie_auth_tkt;
+        proxy_no_cache $cookie_auth_tkt;
+        proxy_cache_valid 30m;
+        proxy_cache_key $host$scheme$proxy_host$request_uri;
+        # In emergency comment out line to force caching
+        # proxy_ignore_headers X-Accel-Expires Expires Cache-Control;
+    }
+
+}
+```
+6. เริ่มต้นใช้งาน CKAN
+ก่อนเริ่มต้นการใช้งาน CKAN บน server ให้ทำตามคำสั่งด้านล่างดังนี้
+```sh
+# เปิดใช้งานเว็บไซด์ ckan บน apache
+$ sudo a2ensite ckan_default
+# ปิดเว็บ default ของ apache
+$ sudo a2dissite 000-default
+# ลบไฟล์ default config ของ nginx ออก
+$ sudo rm /etc/nginx/sites-available/default
+# เปิดใช้งาน CKAN สำหรับ nginx
+$ sudo ln -s /etc/nginx/sites-available/ckan /etc/nginx/sites-enabled/ckan_default
+# รีสตาท apache  และ nginx
+$ sudo service apache2 restart
+$ sudo service nginx restart
+```
+7. ติดตั้ง worker ด้วย Supervisor
+    - ติดตั้ง supervisor
+    ```sh
+    $ sudo apt-get install supervisor
+    ```
+    - สร้าง config สำหรับ supervisor
+    ```sh
+    $ sudo cp /usr/lib/ckan/default/src/ckan/ckan/config/supervisor-ckan-worker.conf /etc/supervisor/
+    ```
+    - รีสตาท supervisor 
+    ```sh
+    $ sudo service supervisor restart
+    ```
+    - ตรวจสอบสถานะของ supervisor
+    ```sh
+    $ sudo supervisorctl status
+    ```
+    - รีสตาท supervisor เฉพาะของ CKAN
+    ```sh
+    $ sudo supervisorctl restart ckan-worker:*
+    ```
+##### อ้างอิง CKAN 2.8
+[Deploying a source install](https://docs.ckan.org/en/2.8/maintaining/installing/deployment.html)
+
+[Background jobs](https://docs.ckan.org/en/2.8/maintaining/background-tasks.html#using-supervisor)
+
+#### ckan 2.9
+1. ติดตั้ง nginx 
+```sh
+$ sudo apt-get install nginx
+```
+2. สร้างไฟล์ script wsgi
+```sh
+sudo cp /usr/lib/ckan/default/src/ckan/wsgi.py /etc/ckan/default/
+#####ตัวหย่างคำสั่งด้านในไฟล์ wsgi.py#####
+# -- coding: utf-8 --
+
+import os
+from ckan.config.middleware import make_app
+from ckan.cli import CKANConfigLoader
+from logging.config import fileConfig as loggingFileConfig
+config_filepath = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), 'ckan.ini')
+abspath = os.path.join(os.path.dirname(os.path.abspath(__file__)))
+loggingFileConfig(config_filepath)
+config = CKANConfigLoader(config_filepath).get_config()
+application = make_app(config)
+
+```
+3. สร้าง wsgi server 
+```sh
+# เปิดการทำงาน virtualenv
+/usr/lib/ckan/default/bin/activate
+(default)$ pip install uwsgi
+(default)$ sudo cp /usr/lib/ckan/default/src/ckan/ckan-uwsgi.ini /etc/ckan/default/
+#####ตัวอย่างคำสั่งของ ckan-uwsgi.ini#####
+[uwsgi]
+
+http            =  127.0.0.1:8080
+uid             =  www-data
+guid            =  www-data
+wsgi-file       =  /etc/ckan/default/wsgi.py
+virtualenv      =  /usr/lib/ckan/default
+module          =  wsgi:application
+master          =  true
+pidfile         =  /tmp/%n.pid
+harakiri        =  50
+max-requests    =  5000
+vacuum          =  true
+callable        =  application
+```
+4. ติดตั้ง supervisor สำหรับรัน uwsgi
+```sh
+sudo apt-get install supervisor
+sudo service supervisor restart
+```
+5. สร้างไฟล์ config supervisor สำหรับ uwsgi 
+สร้างไฟล์ /etc/supervisor/conf.d/ckan-uwsgi.conf นำคำสั่งด้านล่างไปวางในไฟล์ที่สร้าง
+```sh
+[program:ckan-uwsgi]
+
+command=/usr/lib/ckan/default/bin/uwsgi -i /etc/ckan/default/ckan-uwsgi.ini
+
+; Start just a single worker. Increase this number if you have many or
+; particularly long running background jobs.
+numprocs=1
+process_name=%(program_name)s-%(process_num)02d
+
+; Log files - change this to point to the existing CKAN log files
+stdout_logfile=/etc/ckan/default/uwsgi.OUT
+stderr_logfile=/etc/ckan/default/uwsgi.ERR
+
+; Make sure that the worker is started on system start and automatically
+; restarted if it crashes unexpectedly.
+autostart=true
+autorestart=true
+
+; Number of seconds the process has to run before it is considered to have
+; started successfully.
+startsecs=10
+
+; Need to wait for currently executing tasks to finish at shutdown.
+; Increase this if you have very long running tasks.
+stopwaitsecs = 600
+
+; Required for uWSGI as it does not obey SIGTERM.
+stopsignal=QUIT
+```
+6. สร้างไฟล์ config nginx
+สร้างไฟลใหม่ขึ้นมาดังนี้ /etc/nginx/sites-available/ckan นำคำสั่งด้านล่างไปวางในไฟล์ที่สร้างขึ้นมา
+```sh
+proxy_cache_path /tmp/nginx_cache levels=1:2 keys_zone=cache:30m max_size=250m;
+proxy_temp_path /tmp/nginx_proxy 1 2;
+
+server {
+    client_max_body_size 100M;
+    location / {
+        proxy_pass http://127.0.0.1:8080/;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Host $host;
+        proxy_cache cache;
+        proxy_cache_bypass $cookie_auth_tkt;
+        proxy_no_cache $cookie_auth_tkt;
+        proxy_cache_valid 30m;
+        proxy_cache_key $host$scheme$proxy_host$request_uri;
+        # In emergency comment out line to force caching
+        # proxy_ignore_headers X-Accel-Expires Expires Cache-Control;
+    }
+
+}
+```
+7. เริ่มการใช้งาน CKAN
+```sh
+# ลบไฟล์ default ของ nginx ออก
+$ sudo rm -vi /etc/nginx/sites-enabled/default
+# เปิดใช้งาน CKAN สำหรับ ngixn
+$ sudo ln -s /etc/nginx/sites-available/ckan /etc/nginx/sites-enabled/ckan
+# รีสตาท nginx
+$ sudo service nginx restart
+```
+##### อ้างอิง CKAN 2.9
+[Deploying a source install](https://docs.ckan.org/en/2.9/maintaining/installing/deployment.html)
+
+[Background jobs](https://docs.ckan.org/en/2.9/maintaining/background-tasks.html#background-jobs)
+
+
+
