@@ -164,6 +164,13 @@ sudo service apache2 restart
 sudo ckan db init
 ```
 
+#### 8.4 แก้ไข CKAN Datapusher ให้สามารถประมวลผลไฟล์ภาษาไทย:
+```sh
+sudo vi /usr/lib/ckan/datapusher/src/datapusher/datapusher/jobs.py
+    # Some headers might have been converted from strings to floats and such.
+    headers = [unicode(header) for header in headers]
+```
+
 ### 9. สร้าง cronjob สำหรับ page view tracking:
 ```sh
 crontab -e
