@@ -237,7 +237,7 @@ cd /usr/lib/ckan
 #เปลี่ยน {username}
 ckan -c /etc/ckan/default/ckan.ini sysadmin add {username}
 
-paster --plugin=ckan datastore set-permissions -c /etc/ckan/default/ckan.ini | sudo -u postgres psql --set ON_ERROR_STOP=1
+ckan -c /etc/ckan/default/ckan.ini datastore set-permissions | sudo -u postgres psql --set ON_ERROR_STOP=1
 
 deactivate
 
