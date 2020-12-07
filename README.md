@@ -11,8 +11,8 @@ CKAN Extension ที่ใช้สำหรับการติดตั้�
    2. [ckanext-scheming](ckan-extension.md#2-ckanext-scheming)
    3. [ckanext-pages](ckan-extension.md#3-ckanext-pages)
    4. [ckanext-hierarchy](ckan-extension.md#4-ckanext-hierarchy)
-   5. [ckanext-dcat](ckan-extension.md#6-ckanext-dcat)
-   6. [ckanext-thai_gdc](ckan-extension.md#7-ckanext-thai_gdc)
+   5. [ckanext-dcat](ckan-extension.md#5-ckanext-dcat)
+   6. [ckanext-thai_gdc](ckan-extension.md#6-ckanext-thai_gdc)
 
 
    [docs]: <https://docs.ckan.org/en/2.9/maintaining/installing/index.html>
