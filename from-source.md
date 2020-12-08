@@ -146,11 +146,11 @@ sudo vi /etc/ckan/default/ckan.ini
     - เพิ่มค่า config ถัดจาก [app:main] (มีอยู่แล้ว)
         [app:main]
         ckan.tracking_enabled = true
-    - แก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 4) ของ sqlalchemy.url
+    - แก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 6) ของ sqlalchemy.url
         > sqlalchemy.url = postgresql://ckan_default:{password1}@localhost/ckan_default
-    - เปิดการใช้งาน และแก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.write_url
+    - เปิดการใช้งาน และแก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 6) ของ ckan.datastore.write_url
         > ckan.datastore.write_url = postgresql://ckan_default:{password1}@localhost/datastore_default
-    - เปิดการใช้งาน และแก้ไข {password2} (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.read_url
+    - เปิดการใช้งาน และแก้ไข {password2} (จากการตั้งค่าในขั้นตอนที่ 6) ของ ckan.datastore.read_url
         > ckan.datastore.read_url = postgresql://datastore_default:{password2}@localhost/datastore_default
     - กำหนด ip ที่ ckan.site_url
         > ckan.site_url = http://{ip address}:5000
