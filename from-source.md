@@ -23,37 +23,7 @@ pip -V
     sudo cp /usr/local/bin/pip2 /usr/local/bin/pip
 ```
 
-### 4. ตั้งค่า CKAN path:
-```sh
-#เตรียม ckan path
-sudo mkdir -p /usr/lib/ckan/default
-
-sudo chown -R `whoami` /usr/lib/ckan/default
-
-#เตรียม storage path
-sudo mkdir -p /var/lib/ckan/default/storage
-
-sudo chown -R www-data:www-data /var/lib/ckan && sudo chmod -R 775 /var/lib/ckan
-```
-
-### 5. ติดตั้ง CKAN:
-```sh
-virtualenv --no-site-packages /usr/lib/ckan/default
-
-. /usr/lib/ckan/default/bin/activate
-
-pip install setuptools==44.1.0
-
-pip install --upgrade pip
-
-pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.9.1#egg=ckan[requirements-py2]'
-
-deactivate
-
-. /usr/lib/ckan/default/bin/activate
-```
-
-### 6. ตั้งค่า PostgreSQL:
+### 4. ตั้งค่า PostgreSQL:
 ```sh
 sudo apt-get install -y postgresql
 
@@ -71,6 +41,36 @@ sudo -u postgres createdb -O ckan_default datastore_default -E utf-8
 
 #ตรวจสอบ database list ให้มี database ckan_default และ datastore_default
 sudo -u postgres psql -l
+```
+
+### 5. ตั้งค่า CKAN path:
+```sh
+#เตรียม ckan path
+sudo mkdir -p /usr/lib/ckan/default
+
+sudo chown -R `whoami` /usr/lib/ckan/default
+
+#เตรียม storage path
+sudo mkdir -p /var/lib/ckan/default/storage
+
+sudo chown -R www-data:www-data /var/lib/ckan && sudo chmod -R 775 /var/lib/ckan
+```
+
+### 6. ติดตั้ง CKAN:
+```sh
+virtualenv --no-site-packages /usr/lib/ckan/default
+
+. /usr/lib/ckan/default/bin/activate
+
+pip install setuptools==44.1.0
+
+pip install --upgrade pip
+
+pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.9.1#egg=ckan[requirements-py2]'
+
+deactivate
+
+. /usr/lib/ckan/default/bin/activate
 ```
 
 ### 7. ติดตั้งและตั้งค่า Solr:
@@ -146,11 +146,11 @@ sudo vi /etc/ckan/default/ckan.ini
     - เพิ่มค่า config ถัดจาก [app:main] (มีอยู่แล้ว)
         [app:main]
         ckan.tracking_enabled = true
-    - แก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 6) ของ sqlalchemy.url
+    - แก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 4) ของ sqlalchemy.url
         > sqlalchemy.url = postgresql://ckan_default:{password1}@localhost/ckan_default
-    - เปิดการใช้งาน และแก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 6) ของ ckan.datastore.write_url
+    - เปิดการใช้งาน และแก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.write_url
         > ckan.datastore.write_url = postgresql://ckan_default:{password1}@localhost/datastore_default
-    - เปิดการใช้งาน และแก้ไข {password2} (จากการตั้งค่าในขั้นตอนที่ 6) ของ ckan.datastore.read_url
+    - เปิดการใช้งาน และแก้ไข {password2} (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.read_url
         > ckan.datastore.read_url = postgresql://datastore_default:{password2}@localhost/datastore_default
     - กำหนด ip ที่ ckan.site_url
         > ckan.site_url = http://{ip address}:5000
@@ -192,6 +192,13 @@ cd /usr/lib/ckan/default/src/ckan
 ckan -c /etc/ckan/default/ckan.ini db init
 ```
 
+#### 8.4 แก้ไข CKAN Datapusher ให้สามารถประมวลผลไฟล์ภาษาไทย:
+```sh
+sudo vi /usr/lib/ckan/datapusher/src/datapusher/datapusher/jobs.py
+    # Some headers might have been converted from strings to floats and such.
+    headers = [unicode(header) for header in headers]
+```
+
 ### 9. cronjob สำหรับ page view tracking:
 ```sh
 crontab -e
@@ -213,7 +220,7 @@ sudo chown -R www-data:www-data /usr/lib/ckan/default/src/ckan/ckan/public
 #เปลี่ยน {username}
 ckan -c /etc/ckan/default/ckan.ini sysadmin add {username}
 
-paster --plugin=ckan datastore set-permissions -c /etc/ckan/default/production.ini | sudo -u postgres psql --set ON_ERROR_STOP=1
+ckan -c /etc/ckan/default/ckan.ini datastore set-permissions | sudo -u postgres psql --set ON_ERROR_STOP=1
 
 cd /usr/lib/ckan/default/src/ckan
 
@@ -224,130 +231,10 @@ ckan -c /etc/ckan/default/ckan.ini run
 
 ### 13. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
 
-### 14. วิธีการ Deploy ckan 
-#### ckan 2.8 
-1. ติดตั้ง package ดังนี้
-```sh
-$ sudo apt-get install nginx apache2 libapache2-mod-wsgi libapache2-mod-rpaf
-```
-2. สร้างไฟล์ WSGI script
-สร้างไฟล์ apache.wsgi ที่ /etc/ckan/default/apache.wsgi แล้ววางคำสั่งตามนี้
-```sh
-import os
-activate_this = os.path.join('/usr/lib/ckan/default/bin/activate_this.py')
-execfile(activate_this, dict(__file__=activate_this))
-
-from paste.deploy import loadapp
-config_filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'production.ini')
-from paste.script.util.logging_config import fileConfig
-fileConfig(config_filepath)
-application = loadapp('config:%s' % config_filepath)
-```
-3. สร้างไฟล์ apache config เพื่อให้ wsgi script ทำงาน
-โดยสร้างไฟล์ config ขึ้นมาดังนี้ /etc/apache2/sites-available/ckan_default.conf แล้วนำคำสั่งด้านล่างไปใส่
-```sh
-<VirtualHost 127.0.0.1:8080>
-    ServerName default.ckanhosted.com
-    ServerAlias www.default.ckanhosted.com
-    WSGIScriptAlias / /etc/ckan/default/apache.wsgi
-
-    # Pass authorization info on (needed for rest api).
-    WSGIPassAuthorization On
-
-    # Deploy as a daemon (avoids conflicts between CKAN instances).
-    WSGIDaemonProcess ckan_default display-name=ckan_default processes=2 threads=15
-
-    WSGIProcessGroup ckan_default
-
-    ErrorLog /var/log/apache2/ckan_default.error.log
-    CustomLog /var/log/apache2/ckan_default.custom.log combined
-
-    <IfModule mod_rpaf.c>
-        RPAFenable On
-        RPAFsethostname On
-        RPAFproxy_ips 127.0.0.1
-    </IfModule>
-
-    <Directory />
-        Require all granted
-    </Directory>
-
-</VirtualHost>
-```
-4. เปลี่ยน port apache
-ให้ทำการแก้ไขไฟล์ /etc/apache2/ports.conf ให้แก้ไขจาก
-    > Listen 80
-
-    เป็น
-    > Listen 8080
-5. สร้างไฟล์ config สำหรับ nginx 
-ทำการสร้างไฟล์ config สำหรับ nginx ดังนี้ /etc/nginx/sites-available/ckan แล้ววางคำสั่งด้านล่างลงไป
-```sh
-proxy_cache_path /tmp/nginx_cache levels=1:2 keys_zone=cache:30m max_size=250m;
-proxy_temp_path /tmp/nginx_proxy 1 2;
-
-server {
-    client_max_body_size 100M;
-    location / {
-        proxy_pass http://127.0.0.1:8080/;
-        proxy_set_header X-Forwarded-For $remote_addr;
-        proxy_set_header Host $host;
-        proxy_cache cache;
-        proxy_cache_bypass $cookie_auth_tkt;
-        proxy_no_cache $cookie_auth_tkt;
-        proxy_cache_valid 30m;
-        proxy_cache_key $host$scheme$proxy_host$request_uri;
-        # In emergency comment out line to force caching
-        # proxy_ignore_headers X-Accel-Expires Expires Cache-Control;
-    }
-
-}
-```
-6. เริ่มต้นใช้งาน CKAN
-ก่อนเริ่มต้นการใช้งาน CKAN บน server ให้ทำตามคำสั่งด้านล่างดังนี้
-```sh
-# เปิดใช้งานเว็บไซด์ ckan บน apache
-$ sudo a2ensite ckan_default
-# ปิดเว็บ default ของ apache
-$ sudo a2dissite 000-default
-# ลบไฟล์ default config ของ nginx ออก
-$ sudo rm /etc/nginx/sites-available/default
-# เปิดใช้งาน CKAN สำหรับ nginx
-$ sudo ln -s /etc/nginx/sites-available/ckan /etc/nginx/sites-enabled/ckan_default
-# รีสตาท apache  และ nginx
-$ sudo service apache2 restart
-$ sudo service nginx restart
-```
-7. ติดตั้ง worker ด้วย Supervisor
-    - ติดตั้ง supervisor
-    ```sh
-    $ sudo apt-get install supervisor
-    ```
-    - สร้าง config สำหรับ supervisor
-    ```sh
-    $ sudo cp /usr/lib/ckan/default/src/ckan/ckan/config/supervisor-ckan-worker.conf /etc/supervisor/
-    ```
-    - รีสตาท supervisor 
-    ```sh
-    $ sudo service supervisor restart
-    ```
-    - ตรวจสอบสถานะของ supervisor
-    ```sh
-    $ sudo supervisorctl status
-    ```
-    - รีสตาท supervisor เฉพาะของ CKAN
-    ```sh
-    $ sudo supervisorctl restart ckan-worker:*
-    ```
-##### อ้างอิง CKAN 2.8
-[Deploying a source install](https://docs.ckan.org/en/2.8/maintaining/installing/deployment.html)
-
-[Background jobs](https://docs.ckan.org/en/2.8/maintaining/background-tasks.html#using-supervisor)
-
-#### ckan 2.9
+### 14. วิธีการ set CKAN Production 
 1. ติดตั้ง nginx 
 ```sh
-$ sudo apt-get install nginx
+sudo apt-get install nginx
 ```
 2. สร้างไฟล์ script wsgi
 ```sh
@@ -370,7 +257,7 @@ application = make_app(config)
 3. สร้าง wsgi server 
 ```sh
 # เปิดการทำงาน virtualenv
-/usr/lib/ckan/default/bin/activate
+. /usr/lib/ckan/default/bin/activate
 (default)$ pip install uwsgi
 (default)$ sudo cp /usr/lib/ckan/default/src/ckan/ckan-uwsgi.ini /etc/ckan/default/
 #####ตัวอย่างคำสั่งของ ckan-uwsgi.ini#####
