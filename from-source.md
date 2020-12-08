@@ -7,7 +7,7 @@ sudo apt-get update
 
 ### 2. ติดตั้ง Package ของ Ubuntu ที่ CKAN ต้องการ:
 ```sh
-sudo apt-get install python-dev libpq-dev python-pip python-virtualenv git-core solr-jetty openjdk-8-jdk redis-server
+sudo apt-get install libpython2.7 libpq5 python-pip python-virtualenv git-core solr-jetty openjdk-8-jdk redis-server
 ```
 
 ### 3. ตั้งค่า python2 และ pip2:
