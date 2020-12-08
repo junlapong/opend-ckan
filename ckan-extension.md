@@ -72,7 +72,7 @@ sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
     - ckan.plugins
-        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages hierarchy_display hierarchy_form
+        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets hierarchy_display hierarchy_form
 ```
 ```sh
 #สำหรับ CKAN 2.9:
@@ -99,7 +99,7 @@ sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
     - ckan.plugins
-        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages hierarchy_display hierarchy_form dcat dcat_json_interface structured_data
+        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets hierarchy_display hierarchy_form dcat dcat_json_interface structured_data
 ```
 ```sh
 #สำหรับ CKAN 2.9:
@@ -128,7 +128,7 @@ sudo vi /etc/ckan/default/production.ini
         ...
         scheming.dataset_schemas = ckanext.thai_gdc:ckan_dataset.json
     - ckan.plugins
-        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages hierarchy_display hierarchy_form dcat dcat_json_interface structured_data thai_gdc
+        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets hierarchy_display hierarchy_form dcat dcat_json_interface structured_data thai_gdc
 ```
 ```sh
 #สำหรับ CKAN 2.9:
