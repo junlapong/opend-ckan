@@ -52,40 +52,8 @@ sudo supervisorctl reload
 #สำหรับ CKAN 2.8:
 sudo service apache2 restart
 ```
-### 3. ckanext-pages:
-```sh
-source /usr/lib/ckan/default/bin/activate
 
-cd /usr/lib/ckan/default
-
-pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-pages.git#egg=ckanext-pages'
-
-pip install -r src/ckanext-pages/dev-requirements.txt
-```
-แก้ไขไฟล์ config ของ CKAN ดังนี้:
-```sh
-#สำหรับ CKAN 2.9:
-sudo vi /etc/ckan/default/ckan.ini
-#สำหรับ CKAN 2.8:
-sudo vi /etc/ckan/default/production.ini
-```
-```sh
-    - เพิ่มค่า config ถัดจาก [app:main] (มีอยู่แล้ว)
-        [app:main]
-        ...
-        ckanext.pages.form = pages/base_form.html
-        ckanext.pages.allow_html = True
-        ckanext.pages.editor = ckeditor
-    - ckan.plugins
-        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets pages
-```
-```sh
-#สำหรับ CKAN 2.9:
-sudo supervisorctl reload
-#สำหรับ CKAN 2.8:
-sudo service apache2 restart
-```
-### 4. ckanext-hierarchy:
+### 3. ckanext-hierarchy:
 ```sh
 source /usr/lib/ckan/default/bin/activate
 
@@ -112,7 +80,7 @@ sudo supervisorctl reload
 #สำหรับ CKAN 2.8:
 sudo service apache2 restart
 ```
-### 5. ckanext-dcat:
+### 4. ckanext-dcat:
 ```sh
 source /usr/lib/ckan/default/bin/activate
 
@@ -139,7 +107,7 @@ sudo supervisorctl reload
 #สำหรับ CKAN 2.8:
 sudo service apache2 restart
 ```
-### 6. ckanext-thai_gdc:
+### 5. ckanext-thai_gdc:
 ```sh
 source /usr/lib/ckan/default/bin/activate
 
