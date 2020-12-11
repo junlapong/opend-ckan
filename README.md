@@ -9,9 +9,9 @@
 CKAN Extension ที่ใช้สำหรับการติดตั้ง ระบบบัญชีข้อมูลหน่วยงาน (Agency Data Catalog)
    1. [ckanext-pdfview](ckan-extension.md#1-ckanext-pdfview)
    2. [ckanext-scheming](ckan-extension.md#2-ckanext-scheming)
-   3. [ckanext-hierarchy](ckan-extension.md#4-ckanext-hierarchy)
-   4. [ckanext-dcat](ckan-extension.md#5-ckanext-dcat)
-   5. [ckanext-thai_gdc](ckan-extension.md#6-ckanext-thai_gdc)
+   3. [ckanext-hierarchy](ckan-extension.md#3-ckanext-hierarchy)
+   4. [ckanext-dcat](ckan-extension.md#4-ckanext-dcat)
+   5. [ckanext-thai_gdc](ckan-extension.md#5-ckanext-thai_gdc)
 
 
    [docs]: <https://docs.ckan.org/en/2.9/maintaining/installing/index.html>
