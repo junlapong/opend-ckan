@@ -136,6 +136,8 @@ sudo mv /etc/solr/conf/schema.xml /etc/solr/conf/schema.xml.bak
 
 sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
 
+sudo ln -s /etc/solr/solr-jetty.xml /var/lib/jetty9/webapps/solr.xml
+
 sudo systemctl daemon-reload
 
 sudo service jetty9 restart
