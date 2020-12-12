@@ -82,6 +82,8 @@ sudo chown -R www-data:www-data /var/lib/ckan && sudo chmod -R 775 /var/lib/ckan
 ```sh
 #สำหรับ Ubuntu 16.04:
 wget http://packaging.ckan.org/python-ckan_2.8-xenial_amd64.deb
+
+# keep current version /etc/apache2/sites-available/ckan_default.conf กด enter
 sudo dpkg -i python-ckan_2.8-xenial_amd64.deb
 ```
 ### 7. ติดตั้งและตั้งค่า Solr:
