@@ -58,7 +58,7 @@ sudo chown -R www-data:www-data /var/lib/ckan && sudo chmod -R 775 /var/lib/ckan
 
 ### 6. ติดตั้ง CKAN:
 ```sh
-virtualenv --no-site-packages /usr/lib/ckan/default
+virtualenv --python=/usr/bin/python2.7 --no-site-packages /usr/lib/ckan/default
 
 . /usr/lib/ckan/default/bin/activate
 
