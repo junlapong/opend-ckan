@@ -53,7 +53,7 @@ sudo chown -R `whoami` /usr/lib/ckan/default
 #เตรียม storage path
 sudo mkdir -p /var/lib/ckan/default/storage
 
-sudo chown -R www-data:www-data /var/lib/ckan && sudo chmod -R 775 /var/lib/ckan
+sudo chown -R `whoami` /var/lib/ckan && sudo chmod -R 775 /var/lib/ckan
 ```
 
 ### 6. ติดตั้ง CKAN:
@@ -135,7 +135,7 @@ sudo vi /etc/ckan/default/ckan.ini
     - เปิดการใช้งาน และแก้ไข {password2} (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.read_url
         > ckan.datastore.read_url = postgresql://datastore_default:{password2}@localhost/datastore_default
     - กำหนด ip ที่ ckan.site_url
-        > ckan.site_url = http://{ip address}:5000
+        > ckan.site_url = http://localhost:5000
     - แก้ไข ckan.auth.user_delete_groups
         > ckan.auth.user_delete_groups = false
     - แก้ไข ckan.auth.user_delete_organizations
@@ -174,13 +174,6 @@ cd /usr/lib/ckan/default/src/ckan
 ckan -c /etc/ckan/default/ckan.ini db init
 ```
 
-#### 8.4 แก้ไข CKAN Datapusher ให้สามารถประมวลผลไฟล์ภาษาไทย:
-```sh
-sudo vi /usr/lib/ckan/datapusher/src/datapusher/datapusher/jobs.py
-    # Some headers might have been converted from strings to floats and such.
-    headers = [unicode(header) for header in headers]
-```
-
 ### 9. cronjob สำหรับ page view tracking:
 ```sh
 crontab -e
@@ -191,9 +184,9 @@ crontab -e
 
 ### 10. ปรับแก้ไขสิทธิ์ที่จำเป็น:
 ```sh
-sudo chmod -R 775 /usr/lib/ckan/default/src/ckan/ckan/public
+sudo chown -R `whoami` /usr/lib/ckan/default/src/ckan/ckan/public
 
-sudo chown -R www-data:www-data /usr/lib/ckan/default/src/ckan/ckan/public
+sudo chmod -R 775 /usr/lib/ckan/default/src/ckan/ckan/public
 ```
 
 ### 11. สร้าง CKAN SysAdmin และกำหนดสิทธิ์ DataStore:
