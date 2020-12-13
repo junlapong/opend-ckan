@@ -7,7 +7,7 @@ sudo apt-get update
 
 ### 2. ติดตั้ง Package ของ Ubuntu ที่ CKAN ต้องการ:
 ```sh
-sudo apt-get install libpq5 redis-server libpython2.7 python-pip git-core
+sudo apt-get install libpq5 redis-server libpython2.7 python-pip virtualenv git-core
 ```
 
 ### 3. ตั้งค่า python2 และ pip2:
