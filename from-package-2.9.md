@@ -91,7 +91,7 @@ cat /etc/os-release
 ```sh
 sudo apt-get install openjdk-8-jdk
 
-# Make sure java-8-openjdk is in use. Errors are given saying 11 is too old which is not accurate.
+# ใช้คำสั่งนี้เพื่อให้เปลี่ยนไปใช้ openjdk-8-jdk
 sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
 
 wget http://archive.apache.org/dist/lucene/solr/6.5.1/solr-6.5.1.tgz
