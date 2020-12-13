@@ -120,6 +120,8 @@ sudo chown -R `whoami` /etc/ckan/
 ```
 #### 8.2 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
+. /usr/lib/ckan/default/bin/activate
+
 ckan generate config /etc/ckan/default/ckan.ini
 
 sudo vi /etc/ckan/default/ckan.ini
