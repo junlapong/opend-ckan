@@ -150,8 +150,8 @@ sudo vi /etc/ckan/default/ckan.ini
         > ckan.auth.user_delete_organizations = false
     - แก้ไข ckan.auth.public_user_details
         > ckan.auth.public_user_details = false
-    - เปิดการใช้งาน solr_url
-        > solr_url = http://127.0.0.1:8983/solr
+    - เปิดการใช้งาน และแก้ไข solr_url
+        > solr_url = http://127.0.0.1:8983/solr/ckan
     - เปิดการใช้งาน ckan.redis.url
         > ckan.redis.url = redis://localhost:6379/0
     - แก้ไข ckan.plugins (ให้เหมือนตามนี้)
