@@ -202,11 +202,9 @@ cd /usr/lib/ckan/default/src/ckan
 ckan -c /etc/ckan/default/ckan.ini run
 ```
 
-### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{ip address}:5000 และ login ด้วย SysAdmin
+### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://localhost:5000 และ login ด้วย SysAdmin
 
-### 13. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
-
-### 14. วิธีการ set CKAN Production 
+### 13. วิธีการ set CKAN Production 
 1. ติดตั้ง nginx 
 ```sh
 sudo apt-get install nginx
@@ -320,10 +318,10 @@ $ sudo ln -s /etc/nginx/sites-available/ckan /etc/nginx/sites-enabled/ckan
 # รีสตาท nginx
 $ sudo service nginx restart
 ```
-##### อ้างอิง CKAN 2.9
-[Deploying a source install](https://docs.ckan.org/en/2.9/maintaining/installing/deployment.html)
 
-[Background jobs](https://docs.ckan.org/en/2.9/maintaining/background-tasks.html#background-jobs)
+### 14. ติดตั้งและตั้งค่า DataPusher
+
+### 15. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
 
 
 
