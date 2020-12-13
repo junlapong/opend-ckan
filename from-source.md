@@ -296,6 +296,14 @@ sudo rm -vi /etc/nginx/sites-enabled/default
 # เปิดใช้งาน CKAN สำหรับ ngixn
 sudo ln -s /etc/nginx/sites-available/ckan /etc/nginx/sites-enabled/ckan
 
+#เตรียม proxycache
+sudo mkdir -p /var/cache/nginx/proxycache && sudo chown www-data /var/cache/nginx/proxycache
+
+#ปรับแก้ไขสิทธิ์ที่จำเป็น
+sudo chown -R www-data:www-data /var/lib/ckan
+
+sudo chown -R www-data:www-data /usr/lib/ckan/default/src/ckan/ckan/public
+
 # รีสตาท nginx
 sudo service nginx restart
 
