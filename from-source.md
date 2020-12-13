@@ -134,7 +134,7 @@ sudo vi /etc/ckan/default/ckan.ini
         > ckan.datastore.write_url = postgresql://ckan_default:{password1}@localhost/datastore_default
     - เปิดการใช้งาน และแก้ไข {password2} (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.read_url
         > ckan.datastore.read_url = postgresql://datastore_default:{password2}@localhost/datastore_default
-    - กำหนด ip ที่ ckan.site_url
+    - กำหนด ckan.site_url
         > ckan.site_url = http://localhost:5000
     - แก้ไข ckan.auth.user_delete_groups
         > ckan.auth.user_delete_groups = false
@@ -205,44 +205,33 @@ ckan -c /etc/ckan/default/ckan.ini run
 ### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://localhost:5000 และ login ด้วย SysAdmin
 
 ### 13. วิธีการ set CKAN Production 
-1. ติดตั้ง nginx 
+#### 13.1 ติดตั้ง nginx 
 ```sh
 sudo apt-get install nginx
 ```
-2. สร้างไฟล์ script wsgi
+#### 13.2 สร้างไฟล์ script wsgi
 ```sh
 sudo cp /usr/lib/ckan/default/src/ckan/wsgi.py /etc/ckan/default/
-
 ```
-3. สร้าง wsgi server 
+#### 13.3 สร้าง wsgi server 
 ```sh
-# เปิดการทำงาน virtualenv
 . /usr/lib/ckan/default/bin/activate
-(default)$ pip install uwsgi
-(default)$ sudo cp /usr/lib/ckan/default/src/ckan/ckan-uwsgi.ini /etc/ckan/default/
-#####ตัวอย่างคำสั่งของ ckan-uwsgi.ini#####
-[uwsgi]
 
-http            =  127.0.0.1:8080
-uid             =  www-data
-guid            =  www-data
-wsgi-file       =  /etc/ckan/default/wsgi.py
-virtualenv      =  /usr/lib/ckan/default
-module          =  wsgi:application
-master          =  true
-pidfile         =  /tmp/%n.pid
-harakiri        =  50
-max-requests    =  5000
-vacuum          =  true
-callable        =  application
+pip install uwsgi
+
+sudo cp /usr/lib/ckan/default/src/ckan/ckan-uwsgi.ini /etc/ckan/default/
 ```
-4. ติดตั้ง supervisor สำหรับรัน uwsgi
+#### 13.4 ติดตั้ง supervisor สำหรับรัน uwsgi
 ```sh
 sudo apt-get install supervisor
+
 sudo service supervisor restart
 ```
-5. สร้างไฟล์ config supervisor สำหรับ uwsgi 
-สร้างไฟล์ /etc/supervisor/conf.d/ckan-uwsgi.conf นำคำสั่งด้านล่างไปวางในไฟล์ที่สร้าง
+#### 13.5 สร้างไฟล์ config supervisor สำหรับ uwsgi
+```sh
+sudo vi /etc/supervisor/conf.d/ckan-uwsgi.conf
+```
+เพิ่มคำสั่งต่อไปนี้
 ```sh
 [program:ckan-uwsgi]
 
@@ -273,8 +262,11 @@ stopwaitsecs = 600
 ; Required for uWSGI as it does not obey SIGTERM.
 stopsignal=QUIT
 ```
-6. สร้างไฟล์ config nginx
-สร้างไฟลใหม่ขึ้นมาดังนี้ /etc/nginx/sites-available/ckan นำคำสั่งด้านล่างไปวางในไฟล์ที่สร้างขึ้นมา
+#### 13.6 สร้างไฟล์ config nginx
+```sh
+sudo vi /etc/nginx/sites-available/ckan
+```
+เพิ่มคำสั่งต่อไปนี้
 ```sh
 proxy_cache_path /tmp/nginx_cache levels=1:2 keys_zone=cache:30m max_size=250m;
 proxy_temp_path /tmp/nginx_proxy 1 2;
@@ -296,19 +288,28 @@ server {
 
 }
 ```
-7. เริ่มการใช้งาน CKAN
+#### 13.7 เริ่มการใช้งาน CKAN
 ```sh
 # ลบไฟล์ default ของ nginx ออก
-$ sudo rm -vi /etc/nginx/sites-enabled/default
+sudo rm -vi /etc/nginx/sites-enabled/default
+
 # เปิดใช้งาน CKAN สำหรับ ngixn
-$ sudo ln -s /etc/nginx/sites-available/ckan /etc/nginx/sites-enabled/ckan
+sudo ln -s /etc/nginx/sites-available/ckan /etc/nginx/sites-enabled/ckan
+
 # รีสตาท nginx
-$ sudo service nginx restart
+sudo service nginx restart
+
+sudo vi /etc/ckan/default/ckan.ini
+    - กำหนด ip ที่ ckan.site_url
+        > ckan.site_url = http://{ip address}
+
 ```
 
-### 14. ติดตั้งและตั้งค่า DataPusher
+### 14. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{ip address}
 
-### 15. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
+### 15. ติดตั้งและตั้งค่า DataPusher
+
+### 16. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
 
 
 
