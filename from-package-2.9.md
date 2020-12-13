@@ -89,58 +89,38 @@ cat /etc/os-release
 ```
 ### 7. ติดตั้งและตั้งค่า Solr:
 ```sh
-sudo useradd --user-group --shell /bin/false --home-dir /opt/jetty/temp jetty
+sudo apt-get install openjdk-8-jdk
 
-sudo apt-get install -y solr-jetty
+# Make sure java-8-openjdk is in use. Errors are given saying 11 is too old which is not accurate.
+sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
 
-sudo mkdir /etc/systemd/system/jetty9.service.d
+wget http://archive.apache.org/dist/lucene/solr/6.5.1/solr-6.5.1.tgz
 
-sudo vi /etc/systemd/system/jetty9.service.d/solr.conf
-    [Service]
-    ReadWritePaths=/var/lib/solr
+tar xzf solr-6.5.1.tgz solr-6.5.1/bin/install_solr_service.sh --strip-components=2
 
-sudo vi /etc/jetty9/start.ini
-    jetty.host=127.0.0.1
-    jetty.port=8983
-```
-```sh
-sudo vi /etc/solr/solr-jetty.xml
+sudo bash ./install_solr_service.sh solr-6.5.1.tgz
 
-#แก้ไข solr-jetty.xml ตามนี้
+sudo su solr
 
-<?xml version="1.0"  encoding="ISO-8859-1"?>
-<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+cd /opt/solr/bin
 
-<!-- Context configuration file for the Solr web application in Jetty -->
+./solr create -c ckan
 
-<Configure class="org.eclipse.jetty.webapp.WebAppContext">
-  <Set name="contextPath">/solr</Set>
-  <Set name="war">/usr/share/solr/web</Set>
+cd /var/solr/data/ckan/conf
 
-  <!-- Set the solr.solr.home system property -->
-  <Call name="setProperty" class="java.lang.System">
-    <Arg type="String">solr.solr.home</Arg>
-    <Arg type="String">/usr/share/solr</Arg>
-  </Call>
+sed -i '/<config>/a <schemaFactory class="ClassicIndexSchemaFactory"/>' solrconfig.xml
 
-  <!-- Enable symlinks -->
-  <!--<Call name="addAliasCheck">
-    <Arg>
-      <New class="org.eclipse.jetty.server.handler.ContextHandler$ApproveSameSuffixAliases"/>
-    </Arg>
-  </Call>-->
-</Configure>
-```
-```sh
-sudo mv /etc/solr/conf/schema.xml /etc/solr/conf/schema.xml.bak
+sed -i '/<initParams path="\/update\/\*\*">/,/<\/initParams>/ s/.*/<!--&-->/' solrconfig.xml
 
-sudo ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
+sed -i '/<processor class="solr.AddSchemaFieldsUpdateProcessorFactory">/,/<\/processor>/ s/.*/<!--&-->/' solrconfig.xml
 
-sudo ln -s /etc/solr/solr-jetty.xml /var/lib/jetty9/webapps/solr.xml
+rm managed-schema
 
-sudo systemctl daemon-reload
+ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml schema.xml
 
-sudo service jetty9 restart
+exit
+
+sudo service solr restart
 ```
 
 ### 8. ตั้งค่าและสร้างฐานข้อมูลสำหรับ CKAN
