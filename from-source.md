@@ -311,6 +311,7 @@ sudo vi /etc/ckan/default/ckan.ini
     - กำหนด ip ที่ ckan.site_url
         > ckan.site_url = http://{ip address}
 
+sudo service supervisor restart
 ```
 
 ### 14. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{ip address}
