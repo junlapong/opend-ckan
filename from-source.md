@@ -58,7 +58,7 @@ sudo chown -R www-data:www-data /var/lib/ckan && sudo chmod -R 775 /var/lib/ckan
 
 ### 6. ติดตั้ง CKAN:
 ```sh
-virtualenv --python=/usr/bin/python2.7 --no-site-packages /usr/lib/ckan/default
+virtualenv --no-site-packages /usr/lib/ckan/default
 
 . /usr/lib/ckan/default/bin/activate
 
@@ -112,16 +112,14 @@ sudo service solr restart
 ### 8. ตั้งค่าและสร้างฐานข้อมูลสำหรับ CKAN
 #### 8.1 ตั้งค่า who.ini:
 ```sh
-sudo mv /etc/ckan/default/who.ini /etc/ckan/default/who.ini.bak
+sudo mkdir -p /etc/ckan/default
 
 sudo ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
+
+sudo chown -R `whoami` /etc/ckan/
 ```
 #### 8.2 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
-sudo mkdir -p /etc/ckan/default
-
-sudo chown -R `whoami` /etc/ckan/
-
 ckan generate config /etc/ckan/default/ckan.ini
 
 sudo vi /etc/ckan/default/ckan.ini
