@@ -268,7 +268,7 @@ sudo vi /etc/nginx/sites-available/ckan
 ```
 เพิ่มคำสั่งต่อไปนี้
 ```sh
-proxy_cache_path /tmp/nginx_cache levels=1:2 keys_zone=cache:30m max_size=250m;
+proxy_cache_path /var/cache/nginx/proxycache levels=1:2 keys_zone=cache:30m max_size=250m;
 proxy_temp_path /tmp/nginx_proxy 1 2;
 
 server {
