@@ -319,7 +319,36 @@ sudo supervisorctl reload
 ### 14. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{ip address}
 
 ### 15. ติดตั้งและตั้งค่า DataPusher
+```sh
+[program:ckan-datapusher]
 
+command=/usr/lib/ckan/default/bin/uwsgi -i /etc/ckan/datapusher/datapusher-uwsgi.ini
+
+; Start just a single worker. Increase this number if you have many or
+; particularly long running background jobs.
+numprocs=1
+process_name=%(program_name)s-%(process_num)02d
+
+; Log files
+stdout_logfile=/var/log/ckan/ckan-datapusher.stdout.log
+stderr_logfile=/var/log/ckan/ckan-datapusher.stderr.log
+
+; Make sure that the worker is started on system start and automatically
+; restarted if it crashes unexpectedly.
+autostart=true
+autorestart=true
+
+; Number of seconds the process has to run before it is considered to have
+; started successfully.
+startsecs=10
+
+; Need to wait for currently executing tasks to finish at shutdown.
+; Increase this if you have very long running tasks.
+stopwaitsecs = 600
+
+; Required for uWSGI as it does not obey SIGTERM.
+stopsignal=QUIT
+```
 ### 16. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
 
 
