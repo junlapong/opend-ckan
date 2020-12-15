@@ -304,6 +304,8 @@ sudo chown -R www-data:www-data /var/lib/ckan
 
 sudo chown -R www-data:www-data /usr/lib/ckan/default/src/ckan/ckan/public
 
+sudo chown -R www-data /tmp/default/
+
 # รีสตาท nginx
 sudo service nginx restart
 
