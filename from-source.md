@@ -320,6 +320,15 @@ sudo supervisorctl reload
 
 ### 15. ติดตั้งและตั้งค่า DataPusher
 ```sh
+sudo apt-get install python-dev python-virtualenv build-essential libxslt1-dev libxml2-dev zlib1g-dev git libffi-dev
+
+sudo mkdir -p /usr/lib/ckan/datapusher
+
+sudo chown `whoami` /usr/lib/ckan/datapusher
+
+sudo python3 -m venv /usr/lib/ckan/datapusher
+```
+```sh
 [program:ckan-datapusher]
 
 command=/usr/lib/ckan/default/bin/uwsgi -i /etc/ckan/datapusher/datapusher-uwsgi.ini
