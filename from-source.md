@@ -227,6 +227,10 @@ sudo apt-get install supervisor
 ```
 #### 13.5 สร้างไฟล์ config supervisor สำหรับ uwsgi
 ```sh
+# สร้าง log โฟร์เดอร์สำหรับ CKAN
+sudo mkdir -p /var/log/ckan
+
+# สร้าง supervisor config สำหรับ ckan-uwsgi
 sudo vi /etc/supervisor/conf.d/ckan-uwsgi.conf
 ```
 เพิ่มคำสั่งต่อไปนี้
@@ -241,8 +245,8 @@ numprocs=1
 process_name=%(program_name)s-%(process_num)02d
 
 ; Log files - change this to point to the existing CKAN log files
-stdout_logfile=/etc/ckan/default/uwsgi.OUT
-stderr_logfile=/etc/ckan/default/uwsgi.ERR
+stdout_logfile=/var/log/ckan/ckan-uwsgi.stdout.log
+stderr_logfile=/var/log/ckan/ckan-uwsgi.stderr.log
 
 ; Make sure that the worker is started on system start and automatically
 ; restarted if it crashes unexpectedly.
@@ -320,14 +324,40 @@ sudo supervisorctl reload
 
 ### 15. ติดตั้งและตั้งค่า DataPusher
 ```sh
-sudo apt-get install python-dev python3-venv build-essential libxslt1-dev libxml2-dev zlib1g-dev git libffi-dev
+# Install requirements for the DataPusher
+ sudo apt-get install python-dev python-virtualenv build-essential libxslt1-dev libxml2-dev git libffi-dev
 
-sudo mkdir -p /usr/lib/ckan/datapusher
+ # Create a virtualenv for datapusher
+ sudo virtualenv /usr/lib/ckan/datapusher
 
-sudo chown `whoami` /usr/lib/ckan/datapusher
+ # Create a source directory and switch to it
+ sudo mkdir /usr/lib/ckan/datapusher/src
+ cd /usr/lib/ckan/datapusher/src
 
-sudo python3 -m venv /usr/lib/ckan/datapusher
+ # Clone the source (you should target the latest tagged version)
+ sudo git clone https://gitlab.nectec.or.th/opend/datapusher.git
+
+ # Install the DataPusher and its requirements
+ cd datapusher
+ sudo /usr/lib/ckan/datapusher/bin/pip install --use-feature=2020-resolver -r requirements.txt
+ sudo /usr/lib/ckan/datapusher/bin/python setup.py develop
+
+ # Install uWSGI
+ sudo /usr/lib/ckan/datapusher/bin/pip install uwsgi
+
+ # copy deployment to /etc/ckan/datapusher
+ sudo cp -r /usr/lib/ckan/datapusher/src/datapusher/deployment /etc/ckan/datapusher
+sudo chown `whoami` /etc/ckan/datapusher
+
+# Create CKAN log folder
+sudo mkdir -p /var/log/ckan
 ```
+
+สร้างไฟล์ supervisor config สำหรับ datapusher 
+```sh
+sudo vi /etc/supervisor/conf.d/ckan-datapusher.conf
+```
+เพิ่มคำสั่งต่อไปนี้
 ```sh
 [program:ckan-datapusher]
 
@@ -357,6 +387,11 @@ stopwaitsecs = 600
 
 ; Required for uWSGI as it does not obey SIGTERM.
 stopsignal=QUIT
+```
+ทำการ reload supervisor
+
+```sh
+sudo supervisorctl reload
 ```
 ### 16. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
 
