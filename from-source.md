@@ -224,8 +224,6 @@ sudo cp /usr/lib/ckan/default/src/ckan/ckan-uwsgi.ini /etc/ckan/default/
 #### 13.4 ติดตั้ง supervisor สำหรับรัน uwsgi
 ```sh
 sudo apt-get install supervisor
-
-sudo service supervisor restart
 ```
 #### 13.5 สร้างไฟล์ config supervisor สำหรับ uwsgi
 ```sh
@@ -306,14 +304,16 @@ sudo chown -R www-data:www-data /usr/lib/ckan/default/src/ckan/ckan/public
 
 sudo chown -R www-data /tmp/default/
 
-# รีสตาท nginx
-sudo service nginx restart
-
+#แก้ไข CKAN config
 sudo vi /etc/ckan/default/ckan.ini
     - กำหนด ip ที่ ckan.site_url
         > ckan.site_url = http://{ip address}
 
-sudo service supervisor restart
+
+# รีสตาท Service
+sudo service nginx restart
+
+sudo supervisorctl reload
 ```
 
 ### 14. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{ip address}
