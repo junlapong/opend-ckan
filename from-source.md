@@ -291,7 +291,7 @@ server {
 #### 13.7 เริ่มการใช้งาน CKAN
 ```sh
 # ลบไฟล์ default ของ nginx ออก
-sudo rm -vi /etc/nginx/sites-enabled/default
+sudo rm -r /etc/nginx/sites-enabled/default
 
 # เปิดใช้งาน CKAN สำหรับ ngixn
 sudo ln -s /etc/nginx/sites-available/ckan /etc/nginx/sites-enabled/ckan
