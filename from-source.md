@@ -320,7 +320,7 @@ sudo supervisorctl reload
 
 ### 15. ติดตั้งและตั้งค่า DataPusher
 ```sh
-sudo apt-get install python-dev python-virtualenv build-essential libxslt1-dev libxml2-dev zlib1g-dev git libffi-dev
+sudo apt-get install python-dev python3-venv build-essential libxslt1-dev libxml2-dev zlib1g-dev git libffi-dev
 
 sudo mkdir -p /usr/lib/ckan/datapusher
 
