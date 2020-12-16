@@ -81,8 +81,6 @@ cp .env.tempate .env
         > CKAN_SYSADMIN_NAME={admin_username}
         > CKAN_SYSADMIN_PASSWORD={admin_password}
         > CKAN_SYSADMIN_EMAIL={admin_email}
-
-
     - การตั้งค่าเพื่อจัดการ database postgres สำหรับ CKAN
         > CKAN_SQLALCHEMY_URL=postgresql://ckan:ckan@db/ckan
     - การตั้งค่าเพื่อเขียนข้อมูลลง datastore สำหรับ plugin dataphser
@@ -95,7 +93,6 @@ cp .env.tempate .env
         > CKAN_REDIS_URL=redis://redis:6379/0
     - path สำหรับ storage ของ CKAN
         > CKAN__STORAGE_PATH=/var/lib/ckan
-
     - plugin ทั้งหมดที่เปิดใช้งาน
         > CKAN__PLUGINS=envvars stats image_view text_view recline_view resource_proxy webpage_view datastore datapusher scheming_datasets pdf_view hierarchy_display hierarchy_form dcat dcat_json_interface structured_data thai_gdc
     - defualt view
@@ -104,7 +101,7 @@ cp .env.tempate .env
         > CKAN___SCHEMING__DATASET_SCHEMAS=ckanext.thai_gdc:ckan_dataset.json
 ```
 
-4. เริ่มการทำงานของ CKAN ด้วย docker-compose
+### 4. เริ่มการทำงานของ CKAN ด้วย docker-compose
 ```sh
 $ docker-compose up -d --build
 # ตรวจการทำงานของ docker-compose ที่เรารัน
@@ -113,7 +110,7 @@ $ docker ps
 ทดสอบการงานของ CKAN ด้วยเข้าไปใช้งานเว็บบราวเซอร์ url: http://localhost:8881
 ```
 
-5. ยกเลิกการทำงานของ CKAN docker และ clear ข้อมูล 
+### 5. ยกเลิกการทำงานของ CKAN docker และ clear ข้อมูล 
 ```sh
 $ docker-compose down
 $ docker volume prune
