@@ -104,7 +104,7 @@ vi .env
 docker-compose up -d --build
 
 # ตรวจการทำงานของ docker-compose ที่เรารัน
-$ docker ps 
+$ docker ps
 ```
 
 ### 5. ทดสอบการงานของ CKAN ด้วยเข้าไปใช้งานเว็บบราวเซอร์ url: http://localhost:8881
