@@ -324,33 +324,27 @@ sudo supervisorctl reload
 
 ### 15. ติดตั้งและตั้งค่า DataPusher
 ```sh
-# Install requirements for the DataPusher
- sudo apt-get install python-dev python-virtualenv build-essential libxslt1-dev libxml2-dev git libffi-dev
+sudo apt-get install python-dev python-virtualenv build-essential libxslt1-dev libxml2-dev git libffi-dev
 
- # Create a virtualenv for datapusher
- sudo virtualenv /usr/lib/ckan/datapusher
+sudo virtualenv /usr/lib/ckan/datapusher
 
- # Create a source directory and switch to it
- sudo mkdir /usr/lib/ckan/datapusher/src
- cd /usr/lib/ckan/datapusher/src
+sudo mkdir /usr/lib/ckan/datapusher/src
 
- # Clone the source (you should target the latest tagged version)
- sudo git clone https://gitlab.nectec.or.th/opend/datapusher.git
+cd /usr/lib/ckan/datapusher/src
 
- # Install the DataPusher and its requirements
- cd datapusher
- sudo /usr/lib/ckan/datapusher/bin/pip install --use-feature=2020-resolver -r requirements.txt
- sudo /usr/lib/ckan/datapusher/bin/python setup.py develop
+sudo git clone https://gitlab.nectec.or.th/opend/datapusher.git
 
- # Install uWSGI
- sudo /usr/lib/ckan/datapusher/bin/pip install uwsgi
+cd datapusher
 
- # copy deployment to /etc/ckan/datapusher
- sudo cp -r /usr/lib/ckan/datapusher/src/datapusher/deployment /etc/ckan/datapusher
+sudo /usr/lib/ckan/datapusher/bin/pip install --use-feature=2020-resolver -r requirements.txt
+
+sudo /usr/lib/ckan/datapusher/bin/python setup.py develop
+
+sudo /usr/lib/ckan/datapusher/bin/pip install uwsgi
+
+sudo cp -r /usr/lib/ckan/datapusher/src/datapusher/deployment /etc/ckan/datapusher
+
 sudo chown `whoami` /etc/ckan/datapusher
-
-# Create CKAN log folder
-sudo mkdir -p /var/log/ckan
 ```
 
 สร้างไฟล์ supervisor config สำหรับ datapusher 
@@ -388,8 +382,8 @@ stopwaitsecs = 600
 ; Required for uWSGI as it does not obey SIGTERM.
 stopsignal=QUIT
 ```
-ทำการ reload supervisor
 
+ทำการ reload supervisor
 ```sh
 sudo supervisorctl reload
 ```
