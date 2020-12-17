@@ -25,9 +25,6 @@ sudo usermod -aG docker `whoami`
 
 #ตรวจสอบ image ที่มีอยู่ในเครื่อง
 docker images
-
-#ทดสอบ run docker 
-docker run hello-world
 ```
 
 ## การติดตั้ง docker-compose
@@ -49,7 +46,7 @@ git clone https://gitlab.nectec.or.th/opend/ckan-docker-thai-gdc.git ~/ckan-dock
 ```sh
 cd ~/ckan-docker
 
-cp .env.tempate .env
+cp .env.template .env
 ```
 ### 3. แก้ไขไฟล์ .env
 ```sh
