@@ -50,6 +50,7 @@ cp .env.template .env
 ```
 ### 3. แก้ไขไฟล์ .env
 ```sh
+vi .env
     - กำหนด Username และ Password สำหรับ Database ของ CKAN
         > POSTGRES_USER=ckan
         > POSTGRES_PASSWORD={ckan_password}
@@ -59,7 +60,7 @@ cp .env.template .env
     - กำหนดชื่อ Host สำหรับ Database Postgres
         > POSTGRES_HOST=db
     - กำหนด version ของ CKAN
-        > CKAN_VERSION=2.8
+        > CKAN_VERSION=2.9
     - ตัวเลขกำกับ container (default)
         > PROJECT_NUMBER=1
     - กำหนด port สำหรับ Nginx
@@ -100,14 +101,16 @@ cp .env.template .env
 
 ### 4. เริ่มการทำงานของ CKAN ด้วย docker-compose
 ```sh
-$ docker-compose up -d --build
+docker-compose up -d --build
+
 # ตรวจการทำงานของ docker-compose ที่เรารัน
 $ docker ps 
-###########
-ทดสอบการงานของ CKAN ด้วยเข้าไปใช้งานเว็บบราวเซอร์ url: http://localhost:8881
 ```
 
-### 5. ยกเลิกการทำงานของ CKAN docker และ clear ข้อมูล 
+### 5. ทดสอบการงานของ CKAN ด้วยเข้าไปใช้งานเว็บบราวเซอร์ url: http://localhost:8881
+
+
+### การยกเลิกการทำงานของ CKAN docker และ clear ข้อมูล 
 ```sh
 $ docker-compose down
 $ docker volume prune
