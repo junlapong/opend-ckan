@@ -334,7 +334,7 @@ cd /usr/lib/ckan/datapusher/src
 
 sudo git clone https://gitlab.nectec.or.th/opend/datapusher.git
 
-cd datapusher
+cd /usr/lib/ckan/datapusher/src/datapusher
 
 sudo /usr/lib/ckan/datapusher/bin/pip install --use-feature=2020-resolver -r requirements.txt
 
