@@ -3,7 +3,7 @@
 - docker >= 19
 - docker-compose >= version 1.13
 
-วิธีการตรวจสอบเวอร์ชั่น docker และ docker-compose
+วิธีการตรวจสอบเวอร์ชั่นของ docker และ docker-compose
 ```sh
 docker -v
 #Docker version 19.03.13, build 4484c46d9d
@@ -23,8 +23,8 @@ sudo newgrp docker
 
 sudo usermod -aG docker `whoami`
 
-#ตรวจสอบ image ที่มีอยู่ในเครื่อง
-docker images
+#ตรวจสอบ version ของ docker
+docker -v
 ```
 
 ## การติดตั้ง docker-compose
@@ -36,7 +36,7 @@ sudo apt install docker-compose
 docker-compose -v
 ```
 
-## การติดตั้ง ckan docker และ extension
+## การติดตั้ง CKAN Docker และ Extension
 ### 1. ทำการโหลด ckan-docker-thai-gdc
 ```sh
 git clone https://gitlab.nectec.or.th/opend/ckan-docker-thai-gdc.git ~/ckan-docker
