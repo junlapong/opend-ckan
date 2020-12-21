@@ -383,6 +383,11 @@ stopwaitsecs = 600
 stopsignal=QUIT
 ```
 
+สร้าง background jobs config
+```sh
+sudo cp /usr/lib/ckan/default/src/ckan/ckan/config/supervisor-ckan-worker.conf /etc/supervisor/conf.d/ckan-worker.conf
+```
+
 ทำการ reload supervisor
 ```sh
 sudo supervisorctl reload
