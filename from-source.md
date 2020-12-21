@@ -196,6 +196,8 @@ sudo cp /usr/lib/ckan/default/src/ckan/wsgi.py /etc/ckan/default/
 
 pip install uwsgi
 
+deactivate
+
 sudo cp /usr/lib/ckan/default/src/ckan/ckan-uwsgi.ini /etc/ckan/default/
 ```
 #### 13.4 ติดตั้ง supervisor สำหรับรัน uwsgi
@@ -292,9 +294,9 @@ sudo vi /etc/ckan/default/ckan.ini
 
 
 # รีสตาท Service
-sudo service nginx restart
-
 sudo supervisorctl reload
+
+sudo service nginx restart
 ```
 
 ### 14. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{ip address}
