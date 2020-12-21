@@ -116,7 +116,7 @@ sudo ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
 
 sudo chown -R `whoami` /etc/ckan/
 ```
-#### 8.2 แก้ไขไฟล์ config ของ CKAN ดังนี้:
+#### 8.2 แก้ไขไฟล์ config และสร้างฐานข้อมูล CKAN ดังนี้:
 ```sh
 . /usr/lib/ckan/default/bin/activate
 
@@ -144,15 +144,9 @@ sudo vi /etc/ckan/default/ckan.ini
     - เปิดการใช้งาน ckan.datapusher.url
         > ckan.datapusher.url = http://127.0.0.1:8800/
 
-```
-
-#### 8.3 เริ่มต้นสร้างฐานข้อมูลสำหรับ CKAN:
-```sh
-. /usr/lib/ckan/default/bin/activate
-
-cd /usr/lib/ckan/default/src/ckan
-
 ckan -c /etc/ckan/default/ckan.ini db init
+
+deactivate
 ```
 
 ### 9. cronjob สำหรับ page view tracking:
@@ -175,14 +169,14 @@ sudo chmod -R 775 /usr/lib/ckan/default/src/ckan/ckan/public
 ```sh
 . /usr/lib/ckan/default/bin/activate
 
-cd /usr/lib/ckan/default/src/ckan
-
 #เปลี่ยน {username}
 ckan -c /etc/ckan/default/ckan.ini sysadmin add {username}
 
 ckan -c /etc/ckan/default/ckan.ini datastore set-permissions | sudo -u postgres psql --set ON_ERROR_STOP=1
 
 ckan -c /etc/ckan/default/ckan.ini run
+
+deactivate
 ```
 
 ### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://localhost:5000 และ login ด้วย SysAdmin
