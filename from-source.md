@@ -149,22 +149,7 @@ ckan -c /etc/ckan/default/ckan.ini db init
 deactivate
 ```
 
-### 9. cronjob สำหรับ page view tracking:
-```sh
-crontab -e
-```
-เพิ่มคำสั่งต่อไปนี้
-
-    @hourly /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini tracking update && /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini search-index rebuild -r
-
-### 10. ปรับแก้ไขสิทธิ์ที่จำเป็น:
-```sh
-sudo chown -R `whoami` /usr/lib/ckan/default/src/ckan/ckan/public
-
-sudo chmod -R 775 /usr/lib/ckan/default/src/ckan/ckan/public
-```
-
-### 11. สร้าง CKAN SysAdmin และกำหนดสิทธิ์ DataStore:
+### 9. สร้าง CKAN SysAdmin และกำหนดสิทธิ์ DataStore:
 
 ```sh
 . /usr/lib/ckan/default/bin/activate
@@ -179,18 +164,18 @@ ckan -c /etc/ckan/default/ckan.ini run
 deactivate
 ```
 
-### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://localhost:5000 และ login ด้วย SysAdmin
+### 10. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://localhost:5000 และ login ด้วย SysAdmin
 
-### 13. วิธีการ set CKAN Production 
-#### 13.1 ติดตั้ง nginx 
+### 11. วิธีการ set CKAN Production 
+#### 11.1 ติดตั้ง nginx 
 ```sh
 sudo apt-get install nginx
 ```
-#### 13.2 สร้างไฟล์ script wsgi
+#### 11.2 สร้างไฟล์ script wsgi
 ```sh
 sudo cp /usr/lib/ckan/default/src/ckan/wsgi.py /etc/ckan/default/
 ```
-#### 13.3 สร้าง wsgi server 
+#### 11.3 สร้าง wsgi server 
 ```sh
 . /usr/lib/ckan/default/bin/activate
 
@@ -200,11 +185,11 @@ deactivate
 
 sudo cp /usr/lib/ckan/default/src/ckan/ckan-uwsgi.ini /etc/ckan/default/
 ```
-#### 13.4 ติดตั้ง supervisor สำหรับรัน uwsgi
+#### 11.4 ติดตั้ง supervisor สำหรับรัน uwsgi
 ```sh
 sudo apt-get install supervisor
 ```
-#### 13.5 สร้างไฟล์ config supervisor สำหรับ uwsgi
+#### 11.5 สร้างไฟล์ config supervisor สำหรับ uwsgi
 ```sh
 # สร้าง log โฟร์เดอร์สำหรับ CKAN
 sudo mkdir -p /var/log/ckan
@@ -243,7 +228,7 @@ stopwaitsecs = 600
 ; Required for uWSGI as it does not obey SIGTERM.
 stopsignal=QUIT
 ```
-#### 13.6 สร้างไฟล์ config nginx
+#### 11.6 สร้างไฟล์ config nginx
 ```sh
 sudo vi /etc/nginx/sites-available/ckan
 ```
@@ -269,7 +254,7 @@ server {
 
 }
 ```
-#### 13.7 เริ่มการใช้งาน CKAN
+#### 11.7 เริ่มการใช้งาน CKAN
 ```sh
 # ลบไฟล์ default ของ nginx ออก
 sudo rm -r /etc/nginx/sites-enabled/default
@@ -299,9 +284,9 @@ sudo supervisorctl reload
 sudo service nginx restart
 ```
 
-### 14. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{ip address}
+### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{ip address}
 
-### 15. ติดตั้งและตั้งค่า DataPusher
+### 13. ติดตั้งและตั้งค่า DataPusher
 ```sh
 sudo apt-get install python-dev python-virtualenv build-essential libxslt1-dev libxml2-dev git libffi-dev
 
@@ -371,7 +356,16 @@ sudo cp /usr/lib/ckan/default/src/ckan/ckan/config/supervisor-ckan-worker.conf /
 ```sh
 sudo supervisorctl reload
 ```
-### 16. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
+
+### 14. cronjob สำหรับ page view tracking:
+```sh
+crontab -e
+```
+เพิ่มคำสั่งต่อไปนี้
+
+    @hourly /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini tracking update && /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini search-index rebuild -r
+
+### 15. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
 
 
 
