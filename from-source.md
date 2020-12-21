@@ -5,23 +5,7 @@
 sudo apt-get update
 ```
 
-### 2. ติดตั้ง Package ของ Ubuntu ที่ CKAN ต้องการ:
-```sh
-sudo apt-get install python-dev libpq-dev redis-server python-pip python-virtualenv git-core
-```
-
-### 3. ตั้งค่า python2 และ pip2:
-```sh
-#ตรวจสอบเวอร์ชั่นของ python และกำหนดให้เป็นเวอร์ชัน 2.7
-python -V
-# Python 2.7.x
-
-#ตรวจสอบเวอร์ชั่นของ pip และกำหนดให้เป็นการรันจาก ... (python 2.7)
-pip -V
-# pip x.x.x from /usr/local/lib/python2.7/dist-packages/pip (python 2.7)
-```
-
-### 4. ตั้งค่า PostgreSQL:
+### 2. ตั้งค่า PostgreSQL:
 ```sh
 sudo apt-get install -y postgresql
 
@@ -43,35 +27,7 @@ sudo -u postgres createuser -S -D -R -P -l datastore_default
 sudo -u postgres psql -l
 ```
 
-### 5. ตั้งค่า CKAN path:
-```sh
-#เตรียม ckan path
-sudo mkdir -p /usr/lib/ckan/default
-
-sudo chown -R `whoami` /usr/lib/ckan/default
-
-#เตรียม storage path
-sudo mkdir -p /var/lib/ckan/default
-
-sudo chown -R `whoami` /var/lib/ckan && sudo chmod -R 775 /var/lib/ckan
-```
-
-### 6. ติดตั้ง CKAN:
-```sh
-virtualenv --no-site-packages /usr/lib/ckan/default
-
-. /usr/lib/ckan/default/bin/activate
-
-pip install --upgrade pip
-
-pip install setuptools==44.1.0
-
-pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.9.1#egg=ckan[requirements-py2]'
-
-deactivate
-```
-
-### 7. ติดตั้งและตั้งค่า Solr:
+### 3. ติดตั้งและตั้งค่า Solr:
 ```sh
 sudo apt-get install openjdk-8-jdk
 
@@ -105,6 +61,50 @@ ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml schema.xml
 exit
 
 sudo service solr restart
+```
+
+### 4. ติดตั้ง Package ของ Ubuntu ที่ CKAN ต้องการ:
+```sh
+sudo apt-get install python-dev libpq-dev redis-server python-pip python-virtualenv git-core
+```
+
+### 5. ตั้งค่า python2 และ pip2:
+```sh
+#ตรวจสอบเวอร์ชั่นของ python และกำหนดให้เป็นเวอร์ชัน 2.7
+python -V
+# Python 2.7.x
+
+#ตรวจสอบเวอร์ชั่นของ pip และกำหนดให้เป็นการรันจาก ... (python 2.7)
+pip -V
+# pip x.x.x from /usr/local/lib/python2.7/dist-packages/pip (python 2.7)
+```
+
+### 6. ตั้งค่า CKAN path:
+```sh
+#เตรียม ckan path
+sudo mkdir -p /usr/lib/ckan/default
+
+sudo chown -R `whoami` /usr/lib/ckan/default
+
+#เตรียม storage path
+sudo mkdir -p /var/lib/ckan/default
+
+sudo chown -R `whoami` /var/lib/ckan && sudo chmod -R 775 /var/lib/ckan
+```
+
+### 7. ติดตั้ง CKAN:
+```sh
+virtualenv --no-site-packages /usr/lib/ckan/default
+
+. /usr/lib/ckan/default/bin/activate
+
+pip install --upgrade pip
+
+pip install setuptools==44.1.0
+
+pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.9.1#egg=ckan[requirements-py2]'
+
+deactivate
 ```
 
 ### 8. ตั้งค่าและสร้างฐานข้อมูลสำหรับ CKAN
