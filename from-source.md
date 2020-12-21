@@ -12,32 +12,32 @@ sudo apt-get install python-dev libpq-dev redis-server python-pip python-virtual
 
 ### 3. ตั้งค่า python2 และ pip2:
 ```sh
-#ตรวจสอบเวอร์ชั่นของ python และตั้งค่า default python2
+#ตรวจสอบเวอร์ชั่นของ python และกำหนดให้เป็นเวอร์ชัน 2.7
 python -V
-    # หากยังไม่ใช่ version 2 ใช้คำสั่งนี้ และ select python2
-    sudo update-alternatives --config python
+# Python 2.7.x
 
-#ตรวจสอบเวอร์ชั่นของ pip และตั้งค่า default pip for python 2
+#ตรวจสอบเวอร์ชั่นของ pip และกำหนดให้เป็นการรันจาก ... (python 2.7)
 pip -V
-    # หากยังไม่ใช่ version 2 ใช้คำสั่งนี้
-    sudo cp /usr/local/bin/pip2 /usr/local/bin/pip
+# pip x.x.x from /usr/local/lib/python2.7/dist-packages/pip (python 2.7)
 ```
 
 ### 4. ตั้งค่า PostgreSQL:
 ```sh
 sudo apt-get install -y postgresql
 
-# สร้าง postgres user สำหรับ ckan_default และใส่ ***{password1}***
+# สร้าง postgres user สำหรับเขียน ckan_default, datastore_default 
+# และใส่ ***{password1}***
 sudo -u postgres createuser -S -D -R -P ckan_default
 
 # สร้างฐานข้อมูล ckan_default
 sudo -u postgres createdb -O ckan_default ckan_default -E utf-8
 
-# สร้าง postgres user สำหรับ datastore_default และใส่ ***{password2}***
-sudo -u postgres createuser -S -D -R -P -l datastore_default
-
 # สร้างฐานข้อมูล datastore_default
 sudo -u postgres createdb -O ckan_default datastore_default -E utf-8
+
+# สร้าง postgres user สำหรับอ่าน datastore_default 
+# และใส่ ***{password2}***
+sudo -u postgres createuser -S -D -R -P -l datastore_default
 
 #ตรวจสอบ database list ให้มี database ckan_default และ datastore_default
 sudo -u postgres psql -l
@@ -51,7 +51,7 @@ sudo mkdir -p /usr/lib/ckan/default
 sudo chown -R `whoami` /usr/lib/ckan/default
 
 #เตรียม storage path
-sudo mkdir -p /var/lib/ckan/default/storage
+sudo mkdir -p /var/lib/ckan/default
 
 sudo chown -R `whoami` /var/lib/ckan && sudo chmod -R 775 /var/lib/ckan
 ```
@@ -62,15 +62,13 @@ virtualenv --no-site-packages /usr/lib/ckan/default
 
 . /usr/lib/ckan/default/bin/activate
 
-pip install setuptools==44.1.0
-
 pip install --upgrade pip
+
+pip install setuptools==44.1.0
 
 pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.9.1#egg=ckan[requirements-py2]'
 
 deactivate
-
-. /usr/lib/ckan/default/bin/activate
 ```
 
 ### 7. ติดตั้งและตั้งค่า Solr:
@@ -125,9 +123,6 @@ sudo chown -R `whoami` /etc/ckan/
 ckan generate config /etc/ckan/default/ckan.ini
 
 sudo vi /etc/ckan/default/ckan.ini
-    - เพิ่มค่า config ถัดจาก [app:main] (มีอยู่แล้ว)
-        [app:main]
-        ckan.tracking_enabled = true
     - แก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 4) ของ sqlalchemy.url
         > sqlalchemy.url = postgresql://ckan_default:{password1}@localhost/ckan_default
     - เปิดการใช้งาน และแก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.write_url
@@ -136,12 +131,6 @@ sudo vi /etc/ckan/default/ckan.ini
         > ckan.datastore.read_url = postgresql://datastore_default:{password2}@localhost/datastore_default
     - กำหนด ckan.site_url
         > ckan.site_url = http://localhost:5000
-    - แก้ไข ckan.auth.user_delete_groups
-        > ckan.auth.user_delete_groups = false
-    - แก้ไข ckan.auth.user_delete_organizations
-        > ckan.auth.user_delete_organizations = false
-    - แก้ไข ckan.auth.public_user_details
-        > ckan.auth.public_user_details = false
     - เปิดการใช้งาน และแก้ไข solr_url
         > solr_url = http://127.0.0.1:8983/solr/ckan
     - เปิดการใช้งาน ckan.redis.url
@@ -150,25 +139,17 @@ sudo vi /etc/ckan/default/ckan.ini
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view
     - แก้ไข ckan.views.default_views (ให้เหมือนตามนี้)
         > ckan.views.default_views = image_view text_view recline_view webpage_view
-    - แก้ไข ckan.locale_default
-        > ckan.locale_default = th
-    - แก้ไข ckan.locale_order (แทรก th)
-        > ckan.locale_order = en th pt_BR ...(ต่อจากนั้นเหมือนเดิม)
     - เปิดการใช้งานและแก้ไข ckan.storage_path
         > ckan.storage_path = /var/lib/ckan/default
-    - เปิดการใช้งาน ckan.datapusher.formats
-        > ckan.datapusher.formats = csv ...(ต่อจากนั้นเหมือนเดิม)
     - เปิดการใช้งาน ckan.datapusher.url
         > ckan.datapusher.url = http://127.0.0.1:8800/
-    - เปิดการใช้งานและแก้ไข ckan.datapusher.assume_task_stale_after
-        > ckan.datapusher.assume_task_stale_after = 60
-    - เปิดการใช้งาน ckan.activity_streams_enabled
-        > ckan.activity_streams_enabled = true
 
 ```
 
 #### 8.3 เริ่มต้นสร้างฐานข้อมูลสำหรับ CKAN:
 ```sh
+. /usr/lib/ckan/default/bin/activate
+
 cd /usr/lib/ckan/default/src/ckan
 
 ckan -c /etc/ckan/default/ckan.ini db init
@@ -192,12 +173,14 @@ sudo chmod -R 775 /usr/lib/ckan/default/src/ckan/ckan/public
 ### 11. สร้าง CKAN SysAdmin และกำหนดสิทธิ์ DataStore:
 
 ```sh
+. /usr/lib/ckan/default/bin/activate
+
+cd /usr/lib/ckan/default/src/ckan
+
 #เปลี่ยน {username}
 ckan -c /etc/ckan/default/ckan.ini sysadmin add {username}
 
 ckan -c /etc/ckan/default/ckan.ini datastore set-permissions | sudo -u postgres psql --set ON_ERROR_STOP=1
-
-cd /usr/lib/ckan/default/src/ckan
 
 ckan -c /etc/ckan/default/ckan.ini run
 ```
