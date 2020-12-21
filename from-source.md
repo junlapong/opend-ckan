@@ -171,11 +171,8 @@ deactivate
 ```sh
 sudo apt-get install nginx
 ```
-#### 11.2 สร้างไฟล์ script wsgi
-```sh
-sudo cp /usr/lib/ckan/default/src/ckan/wsgi.py /etc/ckan/default/
-```
-#### 11.3 สร้าง wsgi server 
+
+#### 11.2 สร้าง wsgi server 
 ```sh
 . /usr/lib/ckan/default/bin/activate
 
@@ -184,13 +181,13 @@ pip install uwsgi
 deactivate
 
 sudo cp /usr/lib/ckan/default/src/ckan/ckan-uwsgi.ini /etc/ckan/default/
+
+sudo cp /usr/lib/ckan/default/src/ckan/wsgi.py /etc/ckan/default/
 ```
-#### 11.4 ติดตั้ง supervisor สำหรับรัน uwsgi
+#### 11.3 ติดตั้งและตั้งค่า supervisor สำหรับรัน uwsgi
 ```sh
 sudo apt-get install supervisor
-```
-#### 11.5 สร้างไฟล์ config supervisor สำหรับ uwsgi
-```sh
+
 # สร้าง log โฟร์เดอร์สำหรับ CKAN
 sudo mkdir -p /var/log/ckan
 
@@ -228,7 +225,7 @@ stopwaitsecs = 600
 ; Required for uWSGI as it does not obey SIGTERM.
 stopsignal=QUIT
 ```
-#### 11.6 สร้างไฟล์ config nginx
+#### 11.4 สร้างไฟล์ config nginx
 ```sh
 sudo vi /etc/nginx/sites-available/ckan
 ```
@@ -254,7 +251,7 @@ server {
 
 }
 ```
-#### 11.7 เริ่มการใช้งาน CKAN
+#### 11.5 เริ่มการใช้งาน CKAN
 ```sh
 # ลบไฟล์ default ของ nginx ออก
 sudo rm -r /etc/nginx/sites-enabled/default
