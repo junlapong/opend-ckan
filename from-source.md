@@ -167,12 +167,8 @@ deactivate
 ### 10. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://localhost:5000 และ login ด้วย SysAdmin
 
 ### 11. วิธีการ set CKAN Production 
-#### 11.1 ติดตั้ง nginx 
-```sh
-sudo apt-get install nginx
-```
 
-#### 11.2 สร้าง wsgi server 
+#### 11.1 สร้าง wsgi server 
 ```sh
 . /usr/lib/ckan/default/bin/activate
 
@@ -184,7 +180,7 @@ sudo cp /usr/lib/ckan/default/src/ckan/ckan-uwsgi.ini /etc/ckan/default/
 
 sudo cp /usr/lib/ckan/default/src/ckan/wsgi.py /etc/ckan/default/
 ```
-#### 11.3 ติดตั้งและตั้งค่า supervisor สำหรับรัน uwsgi
+#### 11.2 ติดตั้งและตั้งค่า supervisor สำหรับรัน uwsgi
 ```sh
 sudo apt-get install supervisor
 
@@ -225,8 +221,10 @@ stopwaitsecs = 600
 ; Required for uWSGI as it does not obey SIGTERM.
 stopsignal=QUIT
 ```
-#### 11.4 สร้างไฟล์ config nginx
+#### 11.3 ติดตั้งและตั้งค่า nginx
 ```sh
+sudo apt-get install nginx
+
 sudo vi /etc/nginx/sites-available/ckan
 ```
 เพิ่มคำสั่งต่อไปนี้
@@ -251,7 +249,7 @@ server {
 
 }
 ```
-#### 11.5 เริ่มการใช้งาน CKAN
+#### 11.4 เริ่มการใช้งาน CKAN
 ```sh
 # ลบไฟล์ default ของ nginx ออก
 sudo rm -r /etc/nginx/sites-enabled/default
