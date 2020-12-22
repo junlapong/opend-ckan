@@ -166,13 +166,12 @@ sudo chown -R www-data:www-data /usr/lib/ckan/default/src/ckan/ckan/public
 ```
 
 ### 10. สร้าง CKAN SysAdmin และกำหนดสิทธิ์ DataStore:
-
 ```sh
-cd /usr/lib/ckan
-
 . /usr/lib/ckan/default/bin/activate
 
-/usr/lib/ckan/default/bin/python -m pip install --upgrade pip
+cd /usr/lib/ckan
+
+pip install --upgrade pip
 
 #เปลี่ยน {username}
 ckan -c /etc/ckan/default/ckan.ini sysadmin add {username}
@@ -187,7 +186,7 @@ sudo supervisorctl reload
 sudo service nginx restart
 ```
 
-### 11. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{domain name} และ login ด้วย SysAdmin
+### 11. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{ip address} และ login ด้วย SysAdmin
 
 
 ### 12. cronjob สำหรับ page view tracking:
