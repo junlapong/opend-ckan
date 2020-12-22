@@ -17,7 +17,7 @@ docker-compose -v
 curl https://get.docker.com | sh
 #รอจนกว่าการติดตั้งเสร็จเรียบร้อย
 ```
-ทำการให้สิทธิ์การใช้งานสำหรับ user ตั้งนี้
+ทำการให้สิทธิ์การใช้งานสำหรับ user
 ```sh
 sudo newgrp docker
 
