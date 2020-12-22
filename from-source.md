@@ -357,7 +357,7 @@ sudo supervisorctl reload
 
 ### 14. cronjob สำหรับ page view tracking:
 ```sh
-sudo crontab -e
+crontab -e
 ```
 เพิ่มคำสั่งต่อไปนี้
 
