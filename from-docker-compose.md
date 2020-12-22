@@ -70,11 +70,11 @@ vi .env
     - กำหนด port สำหรับ Datapusher
         > DATAPUSHER_PORT=8800
     - กำหนด url สำหรับเว็บเป็น Domain/IP
-        > DEFAULT_URL=http://localhost
+        > DEFAULT_URL=http://{Domain/IP}
     - กำหนด CKAN Site ID (default)
         > CKAN_SITE_ID=default
     - กำหนด CKAN Site URL
-        > CKAN_SITE_URL=http://{domain/IP}:8881
+        > CKAN_SITE_URL=http://localhost:8881
     - กำหนด CKAN Port
         > CKAN_PORT=5000
     - กำหนดรายละเอียด SysAdmin ของระบบ
@@ -107,7 +107,7 @@ docker-compose up -d --build
 $ docker ps
 ```
 
-### 5. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://localhost:8881
+### 5. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{Domain/IP}
 
 #### การยกเลิกการทำงานของ CKAN docker และ clear ข้อมูล 
 ```sh
