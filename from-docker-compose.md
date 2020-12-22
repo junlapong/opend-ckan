@@ -1,5 +1,5 @@
 # วิธีการติดตั้ง CKAN ด้วย Docker Compose
-สำหรับการติดตั้ง CKAN ด้วย Docker Compose แนะนำให้มีการติดตั้ง docker และ docker-compose ก่อน โดยใช้เวอร์ชั่น ดังนี้ 
+สำหรับการติดตั้ง CKAN ด้วย Docker Compose แนะนำให้ติดตั้ง docker และ docker-compose ก่อน โดยใช้เวอร์ชั่น ดังนี้ 
 - docker >= 19
 - docker-compose >= version 1.13
 
@@ -11,28 +11,30 @@ docker -v
 docker-compose -v
 #docker-compose version 1.26.2, build unknown
 ```
-## การติดตั้ง docker
-ติดตั้ง docker สำหรับเครื่องที่ยังไม่ได้ติดตั้ง โดยใช้คำสั่ง
+## [เตรียม] การติดตั้ง docker
+ติดตั้ง docker โดยใช้คำสั่ง
 ```sh
 curl https://get.docker.com | sh
 #รอจนกว่าการติดตั้งเสร็จเรียบร้อย
 ```
-เมื่อติดตั้ง docker เรียบร้อยให้ทำการให้สิทธิ์การใช้งานสำหรับ user ตั้งนี้
+ทำการให้สิทธิ์การใช้งานสำหรับ user ตั้งนี้
 ```sh
 sudo newgrp docker
 
 sudo usermod -aG docker `whoami`
-
-#ตรวจสอบ version ของ docker
+```
+ตรวจสอบ version ของ docker
+```sh
 docker -v
 ```
 
-## การติดตั้ง docker-compose
-ติดตั้ง docker-compose สำหรับเครื่องที่ยังไม่ได้ติดตั้ง โดยใช้คำสั่ง
+## [เตรียม] การติดตั้ง docker-compose
+ติดตั้ง docker-compose โดยใช้คำสั่ง
 ```sh
 sudo apt install docker-compose
-
-# ตรวจสอบ version ของ docker-compose
+```
+ตรวจสอบ version ของ docker-compose
+```sh
 docker-compose -v
 ```
 
@@ -72,7 +74,7 @@ vi .env
     - กำหนด CKAN Site ID (default)
         > CKAN_SITE_ID=default
     - กำหนด CKAN Site URL
-        > CKAN_SITE_URL=http://{domain}:8881
+        > CKAN_SITE_URL=http://{domain/IP}:8881
     - กำหนด CKAN Port
         > CKAN_PORT=5000
     - กำหนดรายละเอียด SysAdmin ของระบบ
@@ -80,11 +82,11 @@ vi .env
         > CKAN_SYSADMIN_PASSWORD={admin_password}
         > CKAN_SYSADMIN_EMAIL={admin_email}
     - การตั้งค่าเพื่อจัดการ database postgres สำหรับ CKAN
-        > CKAN_SQLALCHEMY_URL=postgresql://ckan:ckan@db/ckan
+        > CKAN_SQLALCHEMY_URL=postgresql://ckan:{ckan_password}@db/ckan
     - การตั้งค่าเพื่อเขียนข้อมูลลง datastore สำหรับ plugin dataphser
-        > CKAN_DATASTORE_WRITE_URL=postgresql://ckan:ckan@db/datastore
+        > CKAN_DATASTORE_WRITE_URL=postgresql://ckan:{ckan_password}@db/datastore
     - การตั้งค่าเพื่ออ่านข้อมูลจาก datastore สำหรับ plugin dataphser
-        > CKAN_DATASTORE_READ_URL=postgresql://datastore_ro:datastore@db/datastore
+        > CKAN_DATASTORE_READ_URL=postgresql://datastore_ro:{datastore_password}@db/datastore
     - url สำหรับเชื่อมต่อกับ solr
         > CKAN_SOLR_URL=http://solr:8983/solr/ckan
     - url สำหรับเชื่อมต่อกับ redis
@@ -95,8 +97,6 @@ vi .env
         > CKAN__PLUGINS=envvars stats image_view text_view recline_view resource_proxy webpage_view datastore datapusher scheming_datasets pdf_view hierarchy_display hierarchy_form dcat dcat_json_interface structured_data thai_gdc
     - defualt view
         > CKAN__VIEWS__DEFAULT_VIEWS=image_view text_view recline_view webpage_view pdf_view
-    - default dataset schema
-        > CKAN___SCHEMING__DATASET_SCHEMAS=ckanext.thai_gdc:ckan_dataset.json
 ```
 
 ### 4. เริ่มการทำงานของ CKAN ด้วย docker-compose
@@ -107,8 +107,7 @@ docker-compose up -d --build
 $ docker ps
 ```
 
-### 5. ทดสอบการงานของ CKAN ด้วยเข้าไปใช้งานเว็บบราวเซอร์ url: http://localhost:8881
-
+### 5. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://localhost:8881
 
 ### การยกเลิกการทำงานของ CKAN docker และ clear ข้อมูล 
 ```sh
