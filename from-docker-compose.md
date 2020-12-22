@@ -39,12 +39,12 @@ docker-compose -v
 ```
 
 ## การติดตั้ง CKAN Docker และ Extension
-### 1. ทำการโหลด ckan-docker-thai-gdc
+### 1. ดาวน์โหลด ckan-docker-thai-gdc
 ```sh
 git clone https://gitlab.nectec.or.th/opend/ckan-docker-thai-gdc.git ~/ckan-docker
 ```
 
-### 2. ทำสร้างไฟล์ .env จากไฟล์ .env.template ที่เตรียมไว้ให้
+### 2. สร้างไฟล์ .env จากไฟล์ .env.template ที่เตรียมไว้ให้
 ```sh
 cd ~/ckan-docker
 
