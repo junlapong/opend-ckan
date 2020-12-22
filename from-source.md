@@ -165,8 +165,6 @@ ckan -c /etc/ckan/default/ckan.ini sysadmin add {username}
 ckan -c /etc/ckan/default/ckan.ini datastore set-permissions | sudo -u postgres psql --set ON_ERROR_STOP=1
 
 ckan -c /etc/ckan/default/ckan.ini run
-
-deactivate
 ```
 
 ### 10. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://localhost:5000 และ login ด้วย SysAdmin
