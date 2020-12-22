@@ -92,8 +92,6 @@ pip -V
 
 ### 6. ตั้งค่า Nginx และ Storage path:
 ```sh
-cd ~
-
 #ตั้งค่า Nginx
 wget https://gitlab.nectec.or.th/opend/installing-ckan/-/raw/master/config/nginx/ckan_default.conf -P ./nginx
 
