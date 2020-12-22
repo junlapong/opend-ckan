@@ -14,10 +14,10 @@ sudo vi /etc/ckan/default/ckan.ini
 sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
-    - ckan.plugins
-        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view
-    - ckan.views.default_views
-        > ckan.views.default_views = image_view text_view recline_view webpage_view pdf_view
+    - ckan.plugins (เติม pdf_view ต่อจากที่มีอยู่แล้ว)
+        > ckan.plugins = ... pdf_view
+    - ckan.views.default_views (เติม pdf_view ต่อจากที่มีอยู่แล้ว)
+        > ckan.views.default_views = ... pdf_view
 ```
 ```sh
 #สำหรับ CKAN 2.9:
@@ -43,8 +43,8 @@ sudo vi /etc/ckan/default/ckan.ini
 sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
-    - ckan.plugins
-        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets
+    - ckan.plugins (เติม scheming_datasets ต่อจากที่มีอยู่แล้ว)
+        > ckan.plugins = ... scheming_datasets
 ```
 ```sh
 #สำหรับ CKAN 2.9:
@@ -71,8 +71,8 @@ sudo vi /etc/ckan/default/ckan.ini
 sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
-    - ckan.plugins
-        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets hierarchy_display hierarchy_form
+    - ckan.plugins (เติม hierarchy_display hierarchy_form ต่อจากที่มีอยู่แล้ว)
+        > ckan.plugins = ... hierarchy_display hierarchy_form
 ```
 ```sh
 #สำหรับ CKAN 2.9:
@@ -98,8 +98,8 @@ sudo vi /etc/ckan/default/ckan.ini
 sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
-    - ckan.plugins
-        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets hierarchy_display hierarchy_form dcat dcat_json_interface structured_data
+    - ckan.plugins (เติม dcat dcat_json_interface structured_data ต่อจากที่มีอยู่แล้ว)
+        > ckan.plugins = ... dcat dcat_json_interface structured_data
 ```
 ```sh
 #สำหรับ CKAN 2.9:
@@ -123,12 +123,8 @@ sudo vi /etc/ckan/default/ckan.ini
 sudo vi /etc/ckan/default/production.ini
 ```
 ```sh
-    - เพิ่มค่า config ถัดจาก [app:main] (มีอยู่แล้ว)
-        [app:main]
-        ...
-        scheming.dataset_schemas = ckanext.thai_gdc:ckan_dataset.json
-    - ckan.plugins
-        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view pdf_view scheming_datasets hierarchy_display hierarchy_form dcat dcat_json_interface structured_data thai_gdc
+    - ckan.plugins (เติม thai_gdc ไว้ท้ายสุด)
+        > ckan.plugins = ... thai_gdc
 ```
 ```sh
 #สำหรับ CKAN 2.9:
