@@ -103,7 +103,7 @@ vi .env
 ```sh
 docker-compose up -d --build
 
-# ตรวจการทำงานของ docker-compose ที่เรารัน
+# ตรวจการทำงานของ docker-compose ที่ทำการ run อยู่
 $ docker ps
 ```
 
