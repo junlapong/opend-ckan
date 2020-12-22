@@ -1,16 +1,5 @@
 # วิธีการติดตั้ง CKAN 2.9 จาก Package บน Ubuntu 18.04 และ 20.04
 
-การติดตั้ง CKAN 2.9 จาก Package จะมี Service และ Port ที่ต้องใช้ดังนี้
-
-| Service | Port | Used for |
-| ------- | ---- | -------- |
-| NGINX | 80 | Proxy |
-| uWSGI | 8080 | Web Server |
-| uWSGI | 8800 | DataPusher |
-| Solr/Jetty | 8983 | Search |
-| PostgreSQL | 5432 | Database |
-| Redis | 6379 | Search |
-
 ### 1. Update Package ของ Ubuntu:
 ```sh
 sudo apt-get update
