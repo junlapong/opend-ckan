@@ -141,12 +141,8 @@ sudo vi /etc/ckan/default/ckan.ini
         > ckan.views.default_views = image_view text_view recline_view webpage_view
     - เปิดการใช้งานและแก้ไข ckan.storage_path
         > ckan.storage_path = /var/lib/ckan/default
-    - เปิดการใช้งาน ckan.datapusher.formats
-        > ckan.datapusher.formats = csv ...(ต่อจากนั้นเหมือนเดิม)
     - เปิดการใช้งาน ckan.datapusher.url
         > ckan.datapusher.url = http://127.0.0.1:8800/
-    - เปิดการใช้งานและแก้ไข ckan.datapusher.assume_task_stale_after
-        > ckan.datapusher.assume_task_stale_after = 60
 
 
 ckan -c /etc/ckan/default/ckan.ini db init
