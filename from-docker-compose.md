@@ -109,7 +109,7 @@ $ docker ps
 
 ### 5. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://localhost:8881
 
-### การยกเลิกการทำงานของ CKAN docker และ clear ข้อมูล 
+#### การยกเลิกการทำงานของ CKAN docker และ clear ข้อมูล 
 ```sh
 $ docker-compose down
 $ docker volume prune
