@@ -146,6 +146,8 @@ sudo vi /etc/ckan/default/ckan.ini
     - เปิดการใช้งาน ckan.datapusher.url
         > ckan.datapusher.url = http://127.0.0.1:8800/
 
+sudo service solr restart
+
 ckan -c /etc/ckan/default/ckan.ini db init
 
 deactivate
