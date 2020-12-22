@@ -5,12 +5,12 @@
 sudo apt-get update
 ```
 
-### 2. ตั้งค่า PostgreSQL:
+### 2. ติดตั้งและตั้งค่า PostgreSQL:
 ```sh
 sudo apt-get install -y postgresql
 
 # สร้าง postgres user สำหรับเขียน ckan_default, datastore_default 
-# และใส่ ***{password1}***
+# ใส่ ***{password1}***
 sudo -u postgres createuser -S -D -R -P ckan_default
 
 # สร้างฐานข้อมูล ckan_default
@@ -20,7 +20,7 @@ sudo -u postgres createdb -O ckan_default ckan_default -E utf-8
 sudo -u postgres createdb -O ckan_default datastore_default -E utf-8
 
 # สร้าง postgres user สำหรับอ่าน datastore_default 
-# และใส่ ***{password2}***
+# ใส่ ***{password2}***
 sudo -u postgres createuser -S -D -R -P -l datastore_default
 
 #ตรวจสอบ database list ให้มี database ckan_default และ datastore_default
@@ -158,6 +158,7 @@ deactivate
 #เปลี่ยน {username}
 ckan -c /etc/ckan/default/ckan.ini sysadmin add {username}
 
+#กำหนดสิทธิ์ DataStore
 ckan -c /etc/ckan/default/ckan.ini datastore set-permissions | sudo -u postgres psql --set ON_ERROR_STOP=1
 
 ckan -c /etc/ckan/default/ckan.ini run
@@ -169,7 +170,7 @@ deactivate
 
 ### 11. วิธีการ set CKAN Production 
 
-#### 11.1 สร้าง wsgi server 
+#### 11.1 ติดตั้งและตั้งค่า uwsgi 
 ```sh
 . /usr/lib/ckan/default/bin/activate
 
@@ -274,7 +275,7 @@ sudo vi /etc/ckan/default/ckan.ini
         > ckan.site_url = http://{ip address}
 
 
-# รีสตาท Service
+# Restart Service
 sudo supervisorctl reload
 
 sudo service nginx restart
