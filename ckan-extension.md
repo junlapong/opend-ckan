@@ -102,3 +102,28 @@ sudo vi /etc/ckan/default/ckan.ini
 ```sh
 sudo supervisorctl reload
 ```
+### 6. ckanext-xloader:
+```sh
+source /usr/lib/ckan/default/bin/activate
+
+cd /usr/lib/ckan/default
+
+pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-xloader.git#egg=ckanext-xloader'
+
+pip install -r src/ckanext-xloader/requirements.txt
+
+pip install -U requests[security]
+```
+แก้ไขไฟล์ config ของ CKAN ดังนี้:
+```sh
+sudo vi /etc/ckan/default/ckan.ini
+```
+```sh
+    - ckan.plugins (เปลี่ยนจาก datapusher เป็น xloader)
+        > ckan.plugins = ... xloader ...
+    - ckanext.xloader.jobs_db.uri (เพิ่ม config นี้ ถัดจาก sqlalchemy.url และให้ค่าเหมือนกัน)
+        > ckanext.xloader.jobs_db.uri = postgresql://ckan_default:{password1}@localhost/ckan_default
+```
+```sh
+sudo supervisorctl reload
+```
