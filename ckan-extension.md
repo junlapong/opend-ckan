@@ -47,7 +47,7 @@ source /usr/lib/ckan/default/bin/activate
 
 cd /usr/lib/ckan/default
 
-pip install -e 'git+https://github.com/davidread/ckanext-hierarchy.git#egg=ckanext-hierarchy'
+pip install -e 'git+https://github.com/ckan/ckanext-hierarchy.git#egg=ckanext-hierarchy'
 
 pip install -r src/ckanext-hierarchy/requirements.txt
 ```
