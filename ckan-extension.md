@@ -121,7 +121,7 @@ sudo vi /etc/ckan/default/ckan.ini
 ```sh
     - ckan.plugins (เปลี่ยนจาก datapusher เป็น xloader)
         > ckan.plugins = ... xloader ...
-    - ckanext.xloader.jobs_db.uri (เพิ่ม config นี้ ถัดจาก sqlalchemy.url และให้ค่าเหมือนกัน)
+    - ckanext.xloader.jobs_db.uri (เพิ่ม config นี้ ถัดจาก sqlalchemy.url และให้มีค่าเหมือนกัน)
         > ckanext.xloader.jobs_db.uri = postgresql://ckan_default:{password1}@localhost/ckan_default
 ```
 ```sh
