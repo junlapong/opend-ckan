@@ -41,7 +41,7 @@ docker-compose -v
 ## การติดตั้ง CKAN Docker และ Extension
 ### 1. ดาวน์โหลด ckan-docker-thai-gdc
 ```sh
-git clone https://gitlab.nectec.or.th/opend/ckan-docker-thai-gdc.git ~/ckan-docker
+git clone https://gitlab.nectec.or.th/opend/ckan-docker-thai-gdc.git@xloader ~/ckan-docker
 ```
 
 ### 2. สร้างไฟล์ .env จากไฟล์ .env.template ที่เตรียมไว้ให้
@@ -85,8 +85,9 @@ vi .env
         > CKAN_SQLALCHEMY_URL=postgresql://ckan:{ckan_password}@db/ckan
     - การตั้งค่าเพื่อเขียนข้อมูลลง datastore สำหรับ plugin dataphser
         > CKAN_DATASTORE_WRITE_URL=postgresql://ckan:{ckan_password}@db/datastore
-    - การตั้งค่าเพื่ออ่านข้อมูลจาก datastore สำหรับ plugin dataphser
+    - การตั้งค่าเพื่ออ่านข้อมูลจาก datastore สำหรับ plugin xloader
         > CKAN_DATASTORE_READ_URL=postgresql://datastore_ro:{datastore_password}@db/datastore
+        > CKANEXT__XLOADER__JOBS_DB__URI=postgresql://ckan:{ckan_password}@db/ckan
     - url สำหรับเชื่อมต่อกับ solr
         > CKAN_SOLR_URL=http://solr:8983/solr/ckan
     - url สำหรับเชื่อมต่อกับ redis
@@ -94,7 +95,7 @@ vi .env
     - path สำหรับ storage ของ CKAN
         > CKAN__STORAGE_PATH=/var/lib/ckan
     - plugin ทั้งหมดที่เปิดใช้งาน
-        > CKAN__PLUGINS=envvars stats image_view text_view recline_view resource_proxy webpage_view datastore datapusher scheming_datasets pdf_view hierarchy_display hierarchy_form dcat dcat_json_interface structured_data thai_gdc
+        > CKAN__PLUGINS=envvars stats image_view text_view recline_view resource_proxy webpage_view datastore xloader scheming_datasets pdf_view hierarchy_display hierarchy_form dcat dcat_json_interface structured_data thai_gdc
     - defualt view
         > CKAN__VIEWS__DEFAULT_VIEWS=image_view text_view recline_view webpage_view pdf_view
 ```
@@ -111,7 +112,10 @@ $ docker ps
 
 #### การยกเลิกการทำงานของ CKAN docker และ clear ข้อมูล 
 ```sh
+# คำสั่งสำหรับหยุดการทำงานและลบ docker container ที่อยู่ใน docker compose
 $ docker-compose down
+# คำสั่งสำหรับลบ volume ทั้งหมดที่ไม่ได้ใช้งาน
 $ docker volume prune
+# คำสั่งสำหรับลบ docker image ที่ไม่ได้ใช้งาน
 $ docker system prune
 ```
