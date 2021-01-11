@@ -42,8 +42,6 @@ docker-compose -v
 ### 1. ดาวน์โหลด ckan-docker-thai-gdc
 ```sh
 git clone https://gitlab.nectec.or.th/opend/ckan-docker-thai-gdc.git ~/ckan-docker
-cd ~/ckan-docker
-git checkout xloader
 ```
 
 ### 2. สร้างไฟล์ .env จากไฟล์ .env.template ที่เตรียมไว้ให้
