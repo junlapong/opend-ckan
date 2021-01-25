@@ -66,7 +66,7 @@ vi .env
     - ตัวเลขกำกับ container (default)
         > PROJECT_NUMBER=1
     - กำหนด port สำหรับ Nginx
-        > NGINX_PORT=8881
+        > NGINX_PORT=80
     - กำหนด port สำหรับ Datapusher
         > DATAPUSHER_PORT=8800
     - กำหนด url สำหรับเว็บเป็น Domain/IP
@@ -74,7 +74,7 @@ vi .env
     - กำหนด CKAN Site ID (default)
         > CKAN_SITE_ID=default
     - กำหนด CKAN Site URL
-        > CKAN_SITE_URL=http://localhost:8881
+        > CKAN_SITE_URL=http://localhost
     - กำหนด CKAN Port
         > CKAN_PORT=5000
     - กำหนดรายละเอียด SysAdmin ของระบบ
