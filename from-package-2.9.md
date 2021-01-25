@@ -66,15 +66,19 @@ sudo service solr restart
 ### 4. ติดตั้ง Package ของ Ubuntu ที่ CKAN ต้องการ:
 - สำหรับ Ubuntu 20.04:
 ```sh
+sudo apt-get install -y libpq5 redis-server nginx supervisor libpython2.7 git
+
 sudo add-apt-repository universe
 
 sudo apt install python2
 
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 1
+
+sudo update-alternatives --config python
+
 curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
 
 sudo python2 get-pip.py
-
-sudo apt-get install -y libpq5 redis-server nginx supervisor libpython2.7 git
 ```
 - สำหรับ Ubuntu 18.04:
 ```sh
