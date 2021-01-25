@@ -64,6 +64,24 @@ sudo service solr restart
 ```
 
 ### 4. ติดตั้ง Package ของ Ubuntu ที่ CKAN ต้องการ:
+- สำหรับ Ubuntu 20.04:
+```sh
+sudo apt-get install python-dev libpq-dev redis-server python-virtualenv git
+
+sudo add-apt-repository universe
+
+sudo apt install python2
+
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 1
+
+sudo update-alternatives --config python
+
+curl https://bootstrap.pypa.io/2.7/get-pip.py --output get-pip.py
+
+sudo python2 get-pip.py
+```
+- สำหรับ Ubuntu 18.04:
+
 ```sh
 sudo apt-get install python-dev libpq-dev redis-server python-pip python-virtualenv git-core
 ```
