@@ -19,7 +19,7 @@ curl https://get.docker.com | sh
 ```
 ทำการให้สิทธิ์การใช้งานสำหรับ user
 ```sh
-sudo newgrp docker
+newgrp docker
 
 sudo usermod -aG docker `whoami`
 ```
