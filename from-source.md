@@ -81,8 +81,6 @@ curl https://bootstrap.pypa.io/2.7/get-pip.py --output get-pip.py
 sudo python2 get-pip.py
 
 sudo apt install virtualenv
-
-virtualenv --python=python2 env
 ```
 - สำหรับ Ubuntu 18.04:
 
@@ -116,7 +114,7 @@ sudo chown -R `whoami` /var/lib/ckan && sudo chmod -R 775 /var/lib/ckan
 
 ### 7. ติดตั้ง CKAN:
 ```sh
-virtualenv --no-site-packages /usr/lib/ckan/default
+virtualenv --python=python2 /usr/lib/ckan/default
 
 . /usr/lib/ckan/default/bin/activate
 
