@@ -1,4 +1,5 @@
 # วิธีการติดตั้ง CKAN ด้วย Docker Compose
+
 สำหรับการติดตั้ง CKAN ด้วย Docker Compose แนะนำให้ติดตั้ง docker และ docker-compose ก่อน โดยใช้เวอร์ชั่น ดังนี้ 
 - docker >= 19
 - docker-compose >= version 1.13
@@ -12,7 +13,6 @@ docker-compose -v
 #docker-compose version 1.26.2, build unknown
 ```
 ## [เตรียม] การติดตั้ง docker
-ติดตั้ง docker โดยใช้คำสั่ง
 ```sh
 sudo apt-get update
 
@@ -31,7 +31,6 @@ docker -v
 ```
 
 ## [เตรียม] การติดตั้ง docker-compose
-ติดตั้ง docker-compose โดยใช้คำสั่ง
 ```sh
 sudo apt install docker-compose
 ```
@@ -52,6 +51,7 @@ cd ~/ckan-docker
 
 cp .env.template .env
 ```
+
 ### 3. แก้ไขไฟล์ .env
 ```sh
 vi .env
@@ -63,20 +63,18 @@ vi .env
         > DATASTORE_READONLY_PASSWORD={datastore_password}
     - กำหนดชื่อ Host สำหรับ Database Postgres
         > POSTGRES_HOST=db
-    - กำหนด version ของ CKAN
+    - กำหนด version ของ CKAN (แก้ไขเป็น 2.9)
         > CKAN_VERSION=2.9
     - ตัวเลขกำกับ container (default)
         > PROJECT_NUMBER=1
-    - กำหนด port สำหรับ Nginx
+    - กำหนด port สำหรับ Nginx (แก้ไขเป็น 80)
         > NGINX_PORT=80
     - กำหนด port สำหรับ Datapusher
         > DATAPUSHER_PORT=8800
-    - กำหนด url สำหรับเว็บเป็น Domain/IP
-        > DEFAULT_URL=http://{Domain/IP}
+    - กำหนด url สำหรับเว็บ (แก้ไขเป็น IP หรือ Domain)
+        > DEFAULT_URL=http://{IP or Domain}
     - กำหนด CKAN Site ID (default)
         > CKAN_SITE_ID=default
-    - กำหนด CKAN Site URL
-        > CKAN_SITE_URL=http://localhost
     - กำหนด CKAN Port
         > CKAN_PORT=5000
     - กำหนดรายละเอียด SysAdmin ของระบบ
@@ -98,7 +96,7 @@ vi .env
         > CKAN__STORAGE_PATH=/var/lib/ckan
     - plugin ทั้งหมดที่เปิดใช้งาน
         > CKAN__PLUGINS=envvars stats image_view text_view recline_view resource_proxy webpage_view datastore xloader scheming_datasets pdf_view hierarchy_display hierarchy_form dcat dcat_json_interface structured_data thai_gdc
-    - defualt view
+    - default view
         > CKAN__VIEWS__DEFAULT_VIEWS=image_view text_view recline_view webpage_view pdf_view
 ```
 
@@ -106,13 +104,13 @@ vi .env
 ```sh
 docker-compose up -d --build
 
-# ตรวจการทำงานของ docker-compose ที่ทำการ run อยู่
+# ตรวจการทำงานของ docker-compose ที่ทำการ run อยู่ หลังจากนั้นรอประมาณ 15 วินาที
 docker ps
 ```
 
 ### 5. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{Domain/IP}
 
-#### การยกเลิกการทำงานของ CKAN docker และ clear ข้อมูล 
+### [เพิ่มเติม] การยกเลิกการทำงานของ CKAN docker และ clear ข้อมูล 
 ```sh
 # คำสั่งสำหรับหยุดการทำงานและลบ docker container ที่อยู่ใน docker compose
 docker-compose down
