@@ -14,12 +14,15 @@ docker-compose -v
 ## [เตรียม] การติดตั้ง docker
 ติดตั้ง docker โดยใช้คำสั่ง
 ```sh
+sudo apt-get update
+
 curl https://get.docker.com | sh
 #รอจนกว่าการติดตั้งเสร็จเรียบร้อย
 ```
 ทำการให้สิทธิ์การใช้งานสำหรับ user
 ```sh
 sudo usermod -aG docker `whoami`
+
 newgrp docker
 ```
 ตรวจสอบ version ของ docker
