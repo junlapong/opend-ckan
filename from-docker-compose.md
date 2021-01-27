@@ -19,9 +19,8 @@ curl https://get.docker.com | sh
 ```
 ทำการให้สิทธิ์การใช้งานสำหรับ user
 ```sh
-newgrp docker
-
 sudo usermod -aG docker `whoami`
+newgrp docker
 ```
 ตรวจสอบ version ของ docker
 ```sh
