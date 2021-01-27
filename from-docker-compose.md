@@ -110,7 +110,7 @@ docker ps
 
 ### 5. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{Domain/IP}
 
-### [เพิ่มเติม] การยกเลิกการทำงานของ CKAN docker และ clear ข้อมูล 
+## [เพิ่มเติม] การยกเลิกการทำงานของ CKAN docker และ clear ข้อมูล 
 ```sh
 # คำสั่งสำหรับหยุดการทำงานและลบ docker container ที่อยู่ใน docker compose
 docker-compose down
