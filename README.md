@@ -43,35 +43,7 @@ Requirements
 Installation
 ------------
 
-.. Add any additional install steps to the list below.
-   For example installing any non-Python dependencies or adding any required
-   config settings.
-
-To install ckanext-thai_gdc:
-
-1. Activate your CKAN virtual environment, for example::
-
-     . /usr/lib/ckan/default/bin/activate
-
-2. Install the ckanext-thai_gdc Python package, from your CKAN virtualenv, run the following from your CKAN base folder (/usr/lib/ckan/default)::
-
-     pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-thai_gdc.git#egg=ckanext-thai_gdc'
-
-3. Add ``thai_gdc`` to the ``ckan.plugins`` setting in your CKAN
-   config file (by default the config file is located at
-   ``/etc/ckan/default/production.ini`` or ``/etc/ckan/default/ckan.ini``).
-
-4. Restart CKAN. For example if you've deployed CKAN with Apache or Supervisor on Ubuntu::
-
-     sudo service apache2 reload
-
----------------
-Config Settings
----------------
-
-module-path:file for dataset schema
-
-     scheming.dataset_schemas = ckanext.thai_gdc:ckan_dataset.json
+- [การติดตั้ง ckanext-thai_gdc](ckan-extension.md#5-ckanext-thai_gdc)
 
 
 
