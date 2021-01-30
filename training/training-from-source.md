@@ -363,4 +363,4 @@ crontab -e
 
     @hourly /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini tracking update && /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini search-index rebuild -r
 
-### 15. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
+### 15. ติดตั้งและตั้งค่า [CKAN Extensions](training-extension.md)
