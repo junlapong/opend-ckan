@@ -1,4 +1,4 @@
-### Install dependencies, create a virtual environment, download, install & configure
+### Install pgAdmin4 dependencies, create a virtual environment, download, install & configure
 ```sh
 cd
 
