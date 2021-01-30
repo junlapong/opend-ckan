@@ -1,4 +1,4 @@
-# วิธีการติดตั้ง CKAN 2.9 จาก Package บน Ubuntu 18.04 (สำหรับการอบรม)
+# วิธีการติดตั้ง CKAN 2.9 จาก Package (สำหรับการอบรม)
 
 ### 1. Update Package ของ Ubuntu:
 ```sh
