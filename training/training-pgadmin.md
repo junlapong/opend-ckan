@@ -1,5 +1,7 @@
 ### Install pgAdmin4 dependencies, create a virtual environment, download, install & configure
 ```sh
+#sudo apt-get install virtualenv python-pip libpq-dev python-dev
+
 cd
 
 virtualenv pgadmin4
