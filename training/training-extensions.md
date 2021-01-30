@@ -31,6 +31,8 @@ pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-xloader.git#egg=ck
 pip install -r src/ckanext-xloader/requirements.txt
 
 pip install -U requests[security]
+
+deactivate
 ```
 
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
