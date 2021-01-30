@@ -25,7 +25,7 @@ source /usr/lib/ckan/default/bin/activate
 
 cd /usr/lib/ckan/default
 
-pip install -e 'git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming'
+pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-scheming.git#egg=ckanext-scheming'
 
 pip install -r src/ckanext-scheming/requirements.txt
 ```
