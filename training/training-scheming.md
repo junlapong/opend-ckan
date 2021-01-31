@@ -2,7 +2,6 @@
 ### 1.1 เพิ่มฟิลด์แบบ text ของ process และ subprocess
 เปิดไฟล์ /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/ckan_dataset.json แทรกโค้ดนี้
 ```sh
-,
       {
         "field_name": "process",
         "label": {
@@ -17,7 +16,7 @@
           "en": "Sub-Process",
           "th": "กระบวนการทำงานย่อย"
         }
-      }
+      },
 ```
 ### 1.2 ฟิลด์แบบ select ของ process และ subprocess
 เปิดไฟล์ /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/ckan_dataset.json แก้ไขฟิลด์ process และ subprocess ให้เป็นตามนี้
