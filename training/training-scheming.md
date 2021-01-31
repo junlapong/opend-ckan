@@ -76,7 +76,7 @@
             "label": "กระบวนการที่ 3-2: ทดสอบทางห้องปฏิบัติการ"
           }
         ],
-        "form_snippet": "process.html",
+        "form_snippet": "select.html",
         "display_snippet": "select.html"
       }
 ```
@@ -244,7 +244,7 @@ http://{ip}/api/3/action/datastore_search_sql?sql=SELECT subprocess from "{resou
           "en": "Sub-Process",
           "th": "กระบวนการทำงานย่อย"
         },
-        "form_snippet": "process.html",
+        "form_snippet": "select.html",
         "display_snippet": "select.html",
         "choices_helper": "scheming_datastore_choices",
         "datastore_choices_resource": "{resource_id2}",
