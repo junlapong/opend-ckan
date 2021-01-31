@@ -244,7 +244,8 @@ http://{ip}/api/3/action/datastore_search_sql?sql=SELECT subprocess from "{resou
           "en": "Sub-Process",
           "th": "กระบวนการทำงานย่อย"
         },
-        "preset": "select",
+        "form_snippet": "process.html",
+        "display_snippet": "select.html",
         "choices_helper": "scheming_datastore_choices",
         "datastore_choices_resource": "{resource_id2}",
         "datastore_choices_columns": {
