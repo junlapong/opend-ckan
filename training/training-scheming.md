@@ -76,7 +76,8 @@
             "label": "กระบวนการที่ 3-2: ทดสอบทางห้องปฏิบัติการ"
           }
         ],
-        "preset": "select"
+        "form_snippet": "process.html",
+        "display_snippet": "select.html"
       }
 ```
 ### 1.3 แก้ไข ฟิลด์ process ให้ทำงานตาม template html ที่กำหนด
