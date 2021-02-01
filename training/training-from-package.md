@@ -99,7 +99,7 @@ sudo chown -R www-data:www-data /var/lib/ckan && sudo chmod -R 775 /var/lib/ckan
 ```sh
 #wget http://packaging.ckan.org/python-ckan_2.9-bionic_amd64.deb
 
-sudo rm /var/
+sudo rm /var/lib/dpkg/lock*
 
 sudo dpkg -i python-ckan_2.9-bionic_amd64.deb
 ```
