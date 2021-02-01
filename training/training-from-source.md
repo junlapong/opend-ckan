@@ -124,6 +124,9 @@ sudo chown -R `whoami` /etc/ckan/
 
 ckan generate config /etc/ckan/default/ckan.ini
 
+#คำสั่ง install vim
+#sudo apt install vim
+
 sudo vi /etc/ckan/default/ckan.ini
     - แก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 4) ของ sqlalchemy.url
         > sqlalchemy.url = postgresql://ckan_default:{password1}@localhost/ckan_default
