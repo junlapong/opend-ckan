@@ -1,4 +1,4 @@
-# วิธีการติดตั้ง CKAN ด้วย Docker Compose
+# วิธีการติดตั้ง CKAN ด้วย Docker Compose (สำหรับการอบรม)
 
 สำหรับการติดตั้ง CKAN ด้วย Docker Compose แนะนำให้ติดตั้ง docker และ docker-compose ก่อน โดยใช้เวอร์ชั่น ดังนี้ 
 - docker >= 19
