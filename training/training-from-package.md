@@ -113,7 +113,7 @@ sudo ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
 ```
 #### 8.2 แก้ไขไฟล์ config และสร้างฐานข้อมูล CKAN ดังนี้:
 ```sh
-sudo vi /etc/ckan/default/ckan.ini
+sudo gedit /etc/ckan/default/ckan.ini
     - แก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 4) ของ sqlalchemy.url
         > sqlalchemy.url = postgresql://ckan_default:{password1}@localhost/ckan_default
     - เปิดการใช้งาน และแก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.write_url
@@ -140,13 +140,6 @@ sudo service solr restart
 sudo supervisorctl reload
 
 sudo ckan db init
-```
-
-#### 8.3 แก้ไข CKAN Datapusher ให้สามารถประมวลผลไฟล์ภาษาไทย:
-```sh
-sudo vi /usr/lib/ckan/datapusher/src/datapusher/datapusher/jobs.py
-    # Some headers might have been converted from strings to floats and such.
-    headers = [unicode(header) for header in headers]
 ```
 
 ### 9. ปรับแก้ไขสิทธิ์ที่จำเป็น:
