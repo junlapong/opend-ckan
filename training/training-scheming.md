@@ -1,6 +1,10 @@
 ## 1. การปรับแต่ง Metadata ของ ชุดข้อมูล (1)
 ### 1.1 เพิ่มฟิลด์แบบ text ของ process และ subprocess
-เปิดไฟล์ /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/ckan_dataset.json แทรกโค้ดนี้
+เปิดไฟล์ /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/ckan_dataset.json 
+```sh
+gedit /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/ckan_dataset.json
+```
+แทรกโค้ดนี้
 ```sh
       {
         "field_name": "process",
@@ -17,9 +21,24 @@
           "th": "กระบวนการทำงานย่อย"
         }
       },
+      {
+        "field_name": "process_description",
+        "label": {
+          "en": "Process Description",
+          "th": ""
+        },
+        "form_snippet": "markdown.html"
+      },
+```
+```sh
+sudo supervisorctl reload
 ```
 ### 1.2 ฟิลด์แบบ select ของ process และ subprocess
-เปิดไฟล์ /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/ckan_dataset.json แก้ไขฟิลด์ process และ subprocess ให้เป็นตามนี้
+เปิดไฟล์ /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/ckan_dataset.json 
+```sh
+gedit /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/ckan_dataset.json
+```
+แก้ไขฟิลด์ process และ subprocess ให้เป็นตามนี้
 ```sh
       {
         "field_name": "process",
@@ -78,12 +97,19 @@
         ],
         "form_snippet": "select.html",
         "display_snippet": "select.html"
-      }
+      },
+```
+```sh
+sudo supervisorctl reload
 ```
 ### 1.3 แก้ไข ฟิลด์ process ให้ทำงานตาม template html ที่กำหนด
-เปิดไฟล์ /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/ckan_dataset.json แก้ไขฟิลด์ process ให้เป็นตามนี้
+เปิดไฟล์ /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/ckan_dataset.json
 ```sh
-{
+gedit /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/ckan_dataset.json
+```
+แก้ไขฟิลด์ process ให้เป็นตามนี้
+```sh
+      {
         "field_name": "process",
         "label": {
           "en": "Process",
@@ -107,9 +133,12 @@
         "display_snippet": "select.html",
         "validators": "scheming_required",
         "required": true
-      }
+      },
 ```
 สร้างไฟล์ /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/templates/scheming/form_snippets/process.html
+```sh
+gedit /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/templates/scheming/form_snippets/process.html
+```
 ```sh
 {% import 'macros/form.html' as form %}
 
@@ -141,8 +170,15 @@
 %}
 {% endcall %}
 ```
+```sh
+sudo supervisorctl reload
+```
 ### 1.4 แก้ไข ฟิลด์ process ให้ทำงานแบบสัมพันธ์กับ field อื่น
-แก้ไขไฟล์ /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/templates/scheming/form_snippets/process.html เพิ่มส่วน javascript และการเรียกใช้
+แก้ไขไฟล์ /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/templates/scheming/form_snippets/process.html 
+```sh
+gedit /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/templates/scheming/form_snippets/process.html
+```
+เพิ่มส่วน javascript และการเรียกใช้
 ```sh
 {% import 'macros/form.html' as form %}
 <script type="text/javascript">
@@ -187,6 +223,9 @@
     )
 %}
 {% endcall %}
+```
+```sh
+sudo supervisorctl reload
 ```
 ## 2. การปรับแต่ง Metadata ของ ชุดข้อมูล (2)
 ### 2.1 สร้างชุดข้อมูลและจัดเตรียม lookup
