@@ -1,3 +1,4 @@
+```sh
 import requests
 from ckanapi import RemoteCKAN
 import io
@@ -35,3 +36,4 @@ pkg_meta = {'name': package_name,
             'private': True}
 package = portal.action.package_create(**pkg_meta)
 print(package)
+```
