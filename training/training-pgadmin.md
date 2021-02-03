@@ -1,3 +1,6 @@
+### CKAN ER-Diagram
+https://www.researchgate.net/profile/Cristina_Ribeiro8/publication/295106208/figure/fig2/AS:487074768920579@1493139082654/Tables-for-metadata-in-CKANs-relational-schema.png
+
 ### Install pgAdmin4 dependencies, create a virtual environment, download, install & configure
 ```sh
 #sudo apt-get install virtualenv python-pip libpq-dev python-dev
