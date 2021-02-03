@@ -3,7 +3,7 @@
 #### ไฟล์ที่เกี่ยวข้อง
 - /usr/lib/ckan/default/src/ckanext-scheming/ckanext/scheming/presets.json
 
-### 1.1 เพิ่มฟิลด์แบบ text ของ process และ subprocess
+### 1.1 เพิ่มฟิลด์แบบ text ของ process และ subprocess และ textarea ของ process_description
 เปิดไฟล์ /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/ckan_dataset.json 
 ```sh
 gedit /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/ckan_dataset.json
