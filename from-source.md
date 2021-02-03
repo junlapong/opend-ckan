@@ -145,11 +145,11 @@ sudo chown -R `whoami` /etc/ckan/
 ckan generate config /etc/ckan/default/ckan.ini
 
 sudo vi /etc/ckan/default/ckan.ini
-    - แก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 4) ของ sqlalchemy.url
+    - แก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 2) ของ sqlalchemy.url
         > sqlalchemy.url = postgresql://ckan_default:{password1}@localhost/ckan_default
-    - เปิดการใช้งาน และแก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.write_url
+    - เปิดการใช้งาน และแก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 2) ของ ckan.datastore.write_url
         > ckan.datastore.write_url = postgresql://ckan_default:{password1}@localhost/datastore_default
-    - เปิดการใช้งาน และแก้ไข {password2} (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.read_url
+    - เปิดการใช้งาน และแก้ไข {password2} (จากการตั้งค่าในขั้นตอนที่ 2) ของ ckan.datastore.read_url
         > ckan.datastore.read_url = postgresql://datastore_default:{password2}@localhost/datastore_default
     - กำหนด ckan.site_url
         > ckan.site_url = http://localhost:5000
