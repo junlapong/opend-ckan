@@ -128,25 +128,25 @@ sudo chown -R `whoami` /etc/ckan/
 ckan generate config /etc/ckan/default/ckan.ini
 
 sudo gedit /etc/ckan/default/ckan.ini
-    - **แก้ไข** password1 (จากการตั้งค่าในขั้นตอนที่ 4) ของ sqlalchemy.url
-        > sqlalchemy.url = postgresql://ckan_default:**password1**@localhost/ckan_default
-    - **เปิดการใช้งาน และแก้ไข** password1 (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.write_url
-        > ckan.datastore.write_url = postgresql://ckan_default:**password1**@localhost/datastore_default
-    - **เปิดการใช้งาน และแก้ไข** password2 (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.read_url
-        > ckan.datastore.read_url = postgresql://datastore_default:**password2**@localhost/datastore_default
-    - **กำหนด** ckan.site_url
+    - แก้ไข password1 (จากการตั้งค่าในขั้นตอนที่ 4) ของ sqlalchemy.url
+        > sqlalchemy.url = postgresql://ckan_default:password1@localhost/ckan_default
+    - เปิดการใช้งาน และแก้ไข password1 (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.write_url
+        > ckan.datastore.write_url = postgresql://ckan_default:password1@localhost/datastore_default
+    - เปิดการใช้งาน และแก้ไข password2 (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.read_url
+        > ckan.datastore.read_url = postgresql://datastore_default:password2@localhost/datastore_default
+    - กำหนด ckan.site_url
         > ckan.site_url = http://localhost:5000
-    - **เปิดการใช้งาน และแก้ไข** solr_url
+    - เปิดการใช้งาน และแก้ไข solr_url
         > solr_url = http://127.0.0.1:8983/solr/ckan
-    - **เปิดการใช้งาน** ckan.redis.url
+    - เปิดการใช้งาน ckan.redis.url
         > ckan.redis.url = redis://localhost:6379/0
-    - **แก้ไข** ckan.plugins (ให้เหมือนตามนี้)
+    - แก้ไข ckan.plugins (ให้เหมือนตามนี้)
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view
-    - **แก้ไข** ckan.views.default_views (ให้เหมือนตามนี้)
+    - แก้ไข ckan.views.default_views (ให้เหมือนตามนี้)
         > ckan.views.default_views = image_view text_view recline_view webpage_view
-    - **เปิดการใช้งานและแก้ไข** ckan.storage_path
+    - เปิดการใช้งานและแก้ไข ckan.storage_path
         > ckan.storage_path = /var/lib/ckan/default
-    - **เปิดการใช้งาน** ckan.datapusher.url
+    - เปิดการใช้งาน ckan.datapusher.url
         > ckan.datapusher.url = http://127.0.0.1:8800/
 
 sudo service solr restart
@@ -162,7 +162,7 @@ deactivate
 . /usr/lib/ckan/default/bin/activate
 
 #เปลี่ยน admin เป็น user sysadmin ที่ต้องการ
-ckan -c /etc/ckan/default/ckan.ini sysadmin add **ckan-admin**
+ckan -c /etc/ckan/default/ckan.ini sysadmin add ckan-admin
 
 #กำหนดสิทธิ์ DataStore
 ckan -c /etc/ckan/default/ckan.ini datastore set-permissions | sudo -u postgres psql --set ON_ERROR_STOP=1
@@ -276,8 +276,8 @@ sudo chown -R www-data /tmp/default/
 
 #แก้ไข CKAN config
 sudo gedit /etc/ckan/default/ckan.ini
-    - **กำหนด** ip ที่ ckan.site_url
-        > ckan.site_url = http://**ip address**
+    - กำหนด ip ที่ ckan.site_url
+        > ckan.site_url = http://ip address
 
 
 # Restart Service
