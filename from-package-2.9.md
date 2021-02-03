@@ -138,11 +138,11 @@ sudo ln -s /usr/lib/ckan/default/src/ckan/who.ini /etc/ckan/default/who.ini
 #### 8.2 แก้ไขไฟล์ config และสร้างฐานข้อมูล CKAN ดังนี้:
 ```sh
 sudo vi /etc/ckan/default/ckan.ini
-    - แก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 4) ของ sqlalchemy.url
+    - แก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 2) ของ sqlalchemy.url
         > sqlalchemy.url = postgresql://ckan_default:{password1}@localhost/ckan_default
-    - เปิดการใช้งาน และแก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.write_url
+    - เปิดการใช้งาน และแก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 2) ของ ckan.datastore.write_url
         > ckan.datastore.write_url = postgresql://ckan_default:{password1}@localhost/datastore_default
-    - เปิดการใช้งาน และแก้ไข {password2} (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.read_url
+    - เปิดการใช้งาน และแก้ไข {password2} (จากการตั้งค่าในขั้นตอนที่ 2) ของ ckan.datastore.read_url
         > ckan.datastore.read_url = postgresql://datastore_default:{password2}@localhost/datastore_default
     - กำหนด ip หรือ domain name ที่ ckan.site_url
         > ckan.site_url = http://{ip address}
