@@ -10,7 +10,7 @@
 #sudo apt-get install -y postgresql
 
 # สร้าง postgres user สำหรับเขียน ckan_default, datastore_default 
-# ใส่ ***{password1}***
+# ใส่ ***password1***
 sudo -u postgres createuser -S -D -R -P ckan_default
 
 # สร้างฐานข้อมูล ckan_default
@@ -20,7 +20,7 @@ sudo -u postgres createdb -O ckan_default ckan_default -E utf-8
 sudo -u postgres createdb -O ckan_default datastore_default -E utf-8
 
 # สร้าง postgres user สำหรับอ่าน datastore_default 
-# ใส่ ***{password2}***
+# ใส่ ***password2***
 sudo -u postgres createuser -S -D -R -P -l datastore_default
 
 #ตรวจสอบ database list ให้มี database ckan_default และ datastore_default
@@ -124,29 +124,26 @@ sudo chown -R `whoami` /etc/ckan/
 
 ckan generate config /etc/ckan/default/ckan.ini
 
-#คำสั่ง install vim
-#sudo apt install vim
-
-sudo vi /etc/ckan/default/ckan.ini
-    - แก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 4) ของ sqlalchemy.url
-        > sqlalchemy.url = postgresql://ckan_default:{password1}@localhost/ckan_default
-    - เปิดการใช้งาน และแก้ไข {password1} (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.write_url
-        > ckan.datastore.write_url = postgresql://ckan_default:{password1}@localhost/datastore_default
-    - เปิดการใช้งาน และแก้ไข {password2} (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.read_url
-        > ckan.datastore.read_url = postgresql://datastore_default:{password2}@localhost/datastore_default
-    - กำหนด ckan.site_url
+sudo gedit /etc/ckan/default/ckan.ini
+    - **แก้ไข** password1 (จากการตั้งค่าในขั้นตอนที่ 4) ของ sqlalchemy.url
+        > sqlalchemy.url = postgresql://ckan_default:**password1**@localhost/ckan_default
+    - **เปิดการใช้งาน และแก้ไข** password1 (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.write_url
+        > ckan.datastore.write_url = postgresql://ckan_default:**password1**@localhost/datastore_default
+    - **เปิดการใช้งาน และแก้ไข** password2 (จากการตั้งค่าในขั้นตอนที่ 4) ของ ckan.datastore.read_url
+        > ckan.datastore.read_url = postgresql://datastore_default:**password2**@localhost/datastore_default
+    - **กำหนด** ckan.site_url
         > ckan.site_url = http://localhost:5000
-    - เปิดการใช้งาน และแก้ไข solr_url
+    - **เปิดการใช้งาน และแก้ไข** solr_url
         > solr_url = http://127.0.0.1:8983/solr/ckan
-    - เปิดการใช้งาน ckan.redis.url
+    - **เปิดการใช้งาน** ckan.redis.url
         > ckan.redis.url = redis://localhost:6379/0
-    - แก้ไข ckan.plugins (ให้เหมือนตามนี้)
+    - **แก้ไข** ckan.plugins (ให้เหมือนตามนี้)
         > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view
-    - แก้ไข ckan.views.default_views (ให้เหมือนตามนี้)
+    - **แก้ไข** ckan.views.default_views (ให้เหมือนตามนี้)
         > ckan.views.default_views = image_view text_view recline_view webpage_view
-    - เปิดการใช้งานและแก้ไข ckan.storage_path
+    - **เปิดการใช้งานและแก้ไข** ckan.storage_path
         > ckan.storage_path = /var/lib/ckan/default
-    - เปิดการใช้งาน ckan.datapusher.url
+    - **เปิดการใช้งาน** ckan.datapusher.url
         > ckan.datapusher.url = http://127.0.0.1:8800/
 
 sudo service solr restart
@@ -161,12 +158,13 @@ deactivate
 ```sh
 . /usr/lib/ckan/default/bin/activate
 
-#เปลี่ยน {username}
-ckan -c /etc/ckan/default/ckan.ini sysadmin add {username}
+#เปลี่ยน admin เป็น user sysadmin ที่ต้องการ
+ckan -c /etc/ckan/default/ckan.ini sysadmin add **ckan-admin**
 
 #กำหนดสิทธิ์ DataStore
 ckan -c /etc/ckan/default/ckan.ini datastore set-permissions | sudo -u postgres psql --set ON_ERROR_STOP=1
 
+# run CKAN
 ckan -c /etc/ckan/default/ckan.ini run
 ```
 
@@ -194,7 +192,7 @@ sudo cp /usr/lib/ckan/default/src/ckan/wsgi.py /etc/ckan/default/
 sudo mkdir -p /var/log/ckan
 
 # สร้าง supervisor config สำหรับ ckan-uwsgi
-sudo vi /etc/supervisor/conf.d/ckan-uwsgi.conf
+sudo gedit /etc/supervisor/conf.d/ckan-uwsgi.conf
 ```
 เพิ่มคำสั่งต่อไปนี้
 ```sh
@@ -231,7 +229,7 @@ stopsignal=QUIT
 ```sh
 #sudo apt-get install nginx
 
-sudo vi /etc/nginx/sites-available/ckan
+sudo gedit /etc/nginx/sites-available/ckan
 ```
 เพิ่มคำสั่งต่อไปนี้
 ```sh
@@ -274,9 +272,9 @@ sudo chown -R www-data:www-data /usr/lib/ckan/default/src/ckan/ckan/public
 sudo chown -R www-data /tmp/default/
 
 #แก้ไข CKAN config
-sudo vi /etc/ckan/default/ckan.ini
-    - กำหนด ip ที่ ckan.site_url
-        > ckan.site_url = http://{ip address}
+sudo gedit /etc/ckan/default/ckan.ini
+    - **กำหนด** ip ที่ ckan.site_url
+        > ckan.site_url = http://**ip address**
 
 
 # Restart Service
@@ -285,7 +283,7 @@ sudo supervisorctl reload
 sudo service nginx restart
 ```
 
-### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{ip address}
+### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://ip address
 
 ### 13. ติดตั้งและตั้งค่า DataPusher
 ```sh
@@ -314,7 +312,7 @@ sudo chown `whoami` /etc/ckan/datapusher
 
 สร้างไฟล์ supervisor config สำหรับ datapusher 
 ```sh
-sudo vi /etc/supervisor/conf.d/ckan-datapusher.conf
+sudo gedit /etc/supervisor/conf.d/ckan-datapusher.conf
 ```
 เพิ่มคำสั่งต่อไปนี้
 ```sh
