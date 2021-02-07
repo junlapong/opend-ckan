@@ -182,7 +182,7 @@ sudo supervisorctl reload
 ```sh
 gedit /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/templates/scheming/form_snippets/process.html
 ```
-เพิ่มส่วน javascript และการเรียกใช้
+เปลี่ยนโค้ดทั้งหมดเป็นตามนี้
 ```sh
 {% import 'macros/form.html' as form %}
 <script type="text/javascript">
@@ -236,7 +236,7 @@ sudo supervisorctl reload
 ```sh
 gedit /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/plugin.py
 ```
-แทรกโค้ดนี้ถัดจากบรรทัด plugins.implements(plugins.IFacets)
+แทรกโค้ดนี้ถัดจากบรรทัด plugins.implements(plugins.IRoutes, inherit=True)
 ```sh
     plugins.implements(plugins.IFacets)
 
