@@ -304,66 +304,7 @@ sudo service nginx restart
 
 ### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{ip address}
 
-### 13. ติดตั้งและตั้งค่า DataPusher
-```sh
-sudo apt-get install python-dev python-virtualenv build-essential libxslt1-dev libxml2-dev git libffi-dev
-
-sudo virtualenv /usr/lib/ckan/datapusher
-
-sudo mkdir /usr/lib/ckan/datapusher/src
-
-cd /usr/lib/ckan/datapusher/src
-
-sudo git clone https://gitlab.nectec.or.th/opend/datapusher.git
-
-cd /usr/lib/ckan/datapusher/src/datapusher
-
-sudo /usr/lib/ckan/datapusher/bin/pip install --use-feature=2020-resolver -r requirements.txt
-
-sudo /usr/lib/ckan/datapusher/bin/python setup.py develop
-
-sudo /usr/lib/ckan/datapusher/bin/pip install uwsgi
-
-sudo cp -r /usr/lib/ckan/datapusher/src/datapusher/deployment /etc/ckan/datapusher
-
-sudo chown `whoami` /etc/ckan/datapusher
-```
-
-สร้างไฟล์ supervisor config สำหรับ datapusher 
-```sh
-sudo vi /etc/supervisor/conf.d/ckan-datapusher.conf
-```
-เพิ่มคำสั่งต่อไปนี้
-```sh
-[program:ckan-datapusher]
-
-command=/usr/lib/ckan/default/bin/uwsgi -i /etc/ckan/datapusher/datapusher-uwsgi.ini
-
-; Start just a single worker. Increase this number if you have many or
-; particularly long running background jobs.
-numprocs=1
-process_name=%(program_name)s-%(process_num)02d
-
-; Log files
-stdout_logfile=/var/log/ckan/ckan-datapusher.stdout.log
-stderr_logfile=/var/log/ckan/ckan-datapusher.stderr.log
-
-; Make sure that the worker is started on system start and automatically
-; restarted if it crashes unexpectedly.
-autostart=true
-autorestart=true
-
-; Number of seconds the process has to run before it is considered to have
-; started successfully.
-startsecs=10
-
-; Need to wait for currently executing tasks to finish at shutdown.
-; Increase this if you have very long running tasks.
-stopwaitsecs = 600
-
-; Required for uWSGI as it does not obey SIGTERM.
-stopsignal=QUIT
-```
+### 13. cronjob สำหรับ page view tracking:
 
 สร้าง background jobs config
 ```sh
@@ -375,7 +316,6 @@ sudo cp /usr/lib/ckan/default/src/ckan/ckan/config/supervisor-ckan-worker.conf /
 sudo supervisorctl reload
 ```
 
-### 14. cronjob สำหรับ page view tracking:
 ```sh
 crontab -e
 ```
@@ -383,7 +323,7 @@ crontab -e
 
     @hourly /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini tracking update && /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini search-index rebuild -r
 
-### 15. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
+### 14. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
 
 
 
