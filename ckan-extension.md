@@ -96,6 +96,8 @@ pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-thai_gdc.git#egg=c
 sudo vi /etc/ckan/default/ckan.ini
 ```
 ```sh
+    - เพิ่ม config ถัดจากบรรทัด [app:main]
+        > scheming.dataset_schemas = ckanext.thai_gdc:ckan_dataset.json
     - ckan.plugins (เติม thai_gdc ไว้ท้ายสุด)
         > ckan.plugins = ... thai_gdc
 ```
