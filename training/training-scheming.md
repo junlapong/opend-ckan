@@ -238,7 +238,7 @@ gedit /usr/lib/ckan/default/src/ckanext-thai-gdc/ckanext/thai_gdc/plugin.py
 ```
 แทรกโค้ดนี้ถัดจากบรรทัด plugins.implements(plugins.IRoutes, inherit=True)
 ```sh
-    plugins.implements(plugins.IFacets)
+    plugins.implements(plugins.IFacets, inherit=True)
 
     def dataset_facets(self, facets_dict, package_type):
 
