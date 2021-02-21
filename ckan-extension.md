@@ -121,6 +121,9 @@ pip install -U requests[security]
 sudo vi /etc/ckan/default/ckan.ini
 ```
 ```sh
+    - เพิ่ม config ถัดจากบรรทัด [app:main]
+        > ckanext.xloader.just_load_with_messytables = true
+        > ckanext.xloader.ssl_verify = false
     - ckan.plugins (เปลี่ยนจาก datapusher เป็น xloader)
         > ckan.plugins = ... xloader ...
     - ckanext.xloader.jobs_db.uri (เพิ่ม config นี้ ถัดจาก sqlalchemy.url และให้มีค่าเหมือนกัน)
