@@ -208,10 +208,12 @@ crontab -e
     @hourly /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini tracking update && /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini search-index rebuild -r
 
 ### 13. การแก้ไขปัญหาการ download file จาก DataStore
+```sh
 mv /usr/lib/ckan/default/src/ckan/ckanext/datastore/blueprint.py /usr/lib/ckan/default/src/ckan/ckanext/datastore/blueprint.py.bak
 
 wget https://gitlab.nectec.or.th/opend/installing-ckan/-/blob/master/config/datastore/blueprint.py /usr/lib/ckan/default/src/ckan/ckanext/datastore/
 
 sudo supervisorctl reload
+```
 
 ### 14. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
