@@ -156,21 +156,12 @@ sudo vi /etc/ckan/default/ckan.ini
         > ckan.views.default_views = image_view text_view recline_view webpage_view
     - เปิดการใช้งานและแก้ไข ckan.storage_path
         > ckan.storage_path = /var/lib/ckan/default
-    - เปิดการใช้งาน ckan.datapusher.url
-        > ckan.datapusher.url = http://127.0.0.1:8800/
 
 sudo service solr restart
 
 sudo supervisorctl reload
 
 sudo ckan db init
-```
-
-#### 8.3 แก้ไข CKAN Datapusher ให้สามารถประมวลผลไฟล์ภาษาไทย:
-```sh
-sudo vi /usr/lib/ckan/datapusher/src/datapusher/datapusher/jobs.py
-    # Some headers might have been converted from strings to floats and such.
-    headers = [unicode(header) for header in headers]
 ```
 
 ### 9. ปรับแก้ไขสิทธิ์ที่จำเป็น:
