@@ -211,7 +211,7 @@ crontab -e
 ```sh
 mv /usr/lib/ckan/default/src/ckan/ckanext/datastore/blueprint.py /usr/lib/ckan/default/src/ckan/ckanext/datastore/blueprint.py.bak
 
-wget https://gitlab.nectec.or.th/opend/installing-ckan/-/blob/master/config/datastore/blueprint.py /usr/lib/ckan/default/src/ckan/ckanext/datastore/
+wget https://gitlab.nectec.or.th/opend/installing-ckan/-/raw/master/config/datastore/blueprint.py /usr/lib/ckan/default/src/ckan/ckanext/datastore/
 
 sudo supervisorctl reload
 ```
