@@ -129,3 +129,11 @@ sudo vi /etc/ckan/default/ckan.ini
 ```sh
 sudo supervisorctl reload
 ```
+หากต้องการกำหนดให้ xloader submit all เข้า DataStore ทุกวัน ให้ set cronjob ดังนี้
+```sh
+crontab -e
+```
+เพิ่มคำสั่งต่อไปนี้
+
+    @daily /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini submit all
+
