@@ -153,8 +153,8 @@ pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-dga-stats.git#egg=
 sudo vi /etc/ckan/default/ckan.ini
 ```
 ```sh
-    - ckan.plugins (เติม pdf_view ต่อจากที่มีอยู่แล้ว)
-        > ckan.plugins = ... dga_stats
+    - ckan.plugins (เติม dga_stats ก่อนหน้า thai_gdc)
+        > ckan.plugins = ... dga_stats ...
 ```
 ```sh
 sudo supervisorctl reload
