@@ -140,3 +140,22 @@ crontab -e
 
     @daily /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini submit all
 
+### 7. ckanext-dga_stats:
+```sh
+source /usr/lib/ckan/default/bin/activate
+
+cd /usr/lib/ckan/default
+
+pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-dga-stats.git#egg=ckanext-dga-stats'
+```
+แก้ไขไฟล์ config ของ CKAN ดังนี้:
+```sh
+sudo vi /etc/ckan/default/ckan.ini
+```
+```sh
+    - ckan.plugins (เติม pdf_view ต่อจากที่มีอยู่แล้ว)
+        > ckan.plugins = ... dga_stats
+```
+```sh
+sudo supervisorctl reload
+```
