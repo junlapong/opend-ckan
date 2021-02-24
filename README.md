@@ -12,7 +12,7 @@ CKAN Extension ที่ใช้สำหรับการติดตั้�
    4. [ckanext-dcat](ckan-extension.md#4-ckanext-dcat)
    5. [ckanext-thai_gdc](ckan-extension.md#5-ckanext-thai_gdc)
    6. [ckanext-xloader](ckan-extension.md#6-ckanext-xloader)
-   7. [ckanext-dga-stats](ckan-extension.md#6-ckanext-dga-stats)
+   7. [ckanext-dga-stats](ckan-extension.md#7-ckanext-dga-stats)
 
 
 # การพัฒนา CKAN extension เพื่อสนับสนุนการจัดทำ Government Data Catalog (ckanext-thai_gdc)
