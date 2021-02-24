@@ -140,7 +140,7 @@ crontab -e
 
     @daily /usr/lib/ckan/default/bin/ckan -c /etc/ckan/default/ckan.ini submit all
 
-### 7. ckanext-dga_stats:
+### 7. ckanext-dga-stats:
 ```sh
 source /usr/lib/ckan/default/bin/activate
 
