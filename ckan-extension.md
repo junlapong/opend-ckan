@@ -104,6 +104,19 @@ sudo vi /etc/ckan/default/ckan.ini
 ```sh
 sudo supervisorctl reload
 ```
+
+#### การปรับปรุง extension
+```sh
+mv /usr/lib/ckan/default/src/ckanext-thai-gdc /usr/lib/ckan/default/src/ckanext-thai-gdc_bak 
+
+source /usr/lib/ckan/default/bin/activate
+
+cd /usr/lib/ckan/default
+
+pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-thai_gdc.git#egg=ckanext-thai_gdc'
+
+sudo supervisorctl reload
+```
 ### 6. ckanext-xloader:
 ```sh
 source /usr/lib/ckan/default/bin/activate
