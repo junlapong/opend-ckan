@@ -109,8 +109,10 @@ sudo supervisorctl reload
 
 #### การปรับปรุง extension
 ```sh
+#ทำการ backup folder extension ก่อน
 mv /usr/lib/ckan/default/src/ckanext-thai-gdc /usr/lib/ckan/default/src/ckanext-thai-gdc_bak 
 
+#ติดตั้งตามขั้นตอนปกติของ extension
 source /usr/lib/ckan/default/bin/activate
 
 cd /usr/lib/ckan/default
