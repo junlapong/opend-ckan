@@ -108,6 +108,8 @@ sudo supervisorctl reload
 ```
 
 #### การปรับปรุง extension
+ก่อนการปรับปรุงควรตรวจสอบการ update ของ extension ckanext-scheming และ ckanext-hierarchy ก่อน
+
 ```sh
 #ทำการ backup folder extension ก่อน
 mv /usr/lib/ckan/default/src/ckanext-thai-gdc /usr/lib/ckan/default/src/ckanext-thai-gdc_bak 
