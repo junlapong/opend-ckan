@@ -36,8 +36,8 @@ Requirements
 
 สามารถติดตั้งร่วมกับ CKAN 2.8 ขึ้นไป โดยจำเป็นต้องติดตั้ง Extensions เหล่านี้ก่อน 
 
-- https://github.com/ckan/ckanext-scheming
-- https://github.com/davidread/ckanext-hierarchy
+- https://gitlab.nectec.or.th/opend/ckanext-scheming
+- https://gitlab.nectec.or.th/opend/ckanext-hierarchy
 
 
 ------------
