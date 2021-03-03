@@ -6,13 +6,13 @@
    3. ติดตั้งจาก [Docker Compose][insDocker]
 
 CKAN Extension ที่ใช้สำหรับการติดตั้ง ระบบบัญชีข้อมูลหน่วยงาน (Agency Data Catalog)
-   1. [ckanext-pdfview](ckan-extension.md#1-ckanext-pdfview) last update: 07 Dec, 2020 [History](https://gitlab.nectec.or.th/opend/ckanext-pdfview/-/commits/master/)
-   2. [ckanext-scheming](ckan-extension.md#2-ckanext-scheming) last update: 03 Mar, 2021 [History](https://gitlab.nectec.or.th/opend/ckanext-scheming/-/commits/master/)
-   3. [ckanext-hierarchy](ckan-extension.md#3-ckanext-hierarchy) last update: 01 Mar, 2021 [History](https://gitlab.nectec.or.th/opend/ckanext-hierarchy/-/commits/master/)
+   1. [ckanext-pdfview](ckan-extension.md#1-ckanext-pdfview) last updated: 07 Dec, 2020 [History](https://gitlab.nectec.or.th/opend/ckanext-pdfview/-/commits/master/)
+   2. [ckanext-scheming](ckan-extension.md#2-ckanext-scheming) last updated: 03 Mar, 2021 [History](https://gitlab.nectec.or.th/opend/ckanext-scheming/-/commits/master/)
+   3. [ckanext-hierarchy](ckan-extension.md#3-ckanext-hierarchy) last updated: 01 Mar, 2021 [History](https://gitlab.nectec.or.th/opend/ckanext-hierarchy/-/commits/master/)
    4. [ckanext-dcat](ckan-extension.md#4-ckanext-dcat)
-   5. [ckanext-thai_gdc](ckan-extension.md#5-ckanext-thai_gdc) last update: 03 Mar, 2021 [History](https://gitlab.nectec.or.th/opend/ckanext-thai_gdc/-/commits/master/)
-   6. [ckanext-xloader](ckan-extension.md#6-ckanext-xloader) last update: 30 Dec, 2020 [History](https://gitlab.nectec.or.th/opend/ckanext-xloader/-/commits/master/)
-   7. [ckanext-dga-stats](ckan-extension.md#7-ckanext-dga-stats) last update: 27 Feb, 2021 [History](https://gitlab.nectec.or.th/opend/ckanext-dga-stats/-/commits/master/)
+   5. [ckanext-thai_gdc](ckan-extension.md#5-ckanext-thai_gdc) last updated: 03 Mar, 2021 [History](https://gitlab.nectec.or.th/opend/ckanext-thai_gdc/-/commits/master/)
+   6. [ckanext-xloader](ckan-extension.md#6-ckanext-xloader) last updated: 30 Dec, 2020 [History](https://gitlab.nectec.or.th/opend/ckanext-xloader/-/commits/master/)
+   7. [ckanext-dga-stats](ckan-extension.md#7-ckanext-dga-stats) last updated: 27 Feb, 2021 [History](https://gitlab.nectec.or.th/opend/ckanext-dga-stats/-/commits/master/)
 
 ตัวอย่างขั้นตอนการปรับปรุง extension
 - [การปรับปรุง extension Thai_gdc](https://gitlab.nectec.or.th/opend/installing-ckan/-/blob/master/ckan-extension.md#%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9B%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%9B%E0%B8%A3%E0%B8%B8%E0%B8%87-extension)
