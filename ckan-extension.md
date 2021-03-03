@@ -121,6 +121,8 @@ cd /usr/lib/ckan/default
 
 pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-thai_gdc.git#egg=ckanext-thai_gdc'
 
+pip install -r src/ckanext-thai-gdc/requirements.txt
+
 sudo supervisorctl reload
 ```
 ### 6. ckanext-xloader:
