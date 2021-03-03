@@ -91,7 +91,7 @@ cd /usr/lib/ckan/default
 
 pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-thai_gdc.git#egg=ckanext-thai_gdc'
 
-pip install -r src/ckanext-thai_gdc/requirements.txt
+pip install -r src/ckanext-thai-gdc/requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
