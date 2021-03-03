@@ -47,7 +47,7 @@ source /usr/lib/ckan/default/bin/activate
 
 cd /usr/lib/ckan/default
 
-pip install -e 'git+https://github.com/ckan/ckanext-hierarchy.git#egg=ckanext-hierarchy'
+pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-hierarchy.git#egg=ckanext-hierarchy'
 
 pip install -r src/ckanext-hierarchy/requirements.txt
 ```
@@ -90,6 +90,8 @@ source /usr/lib/ckan/default/bin/activate
 cd /usr/lib/ckan/default
 
 pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-thai_gdc.git#egg=ckanext-thai_gdc'
+
+pip install -r src/ckanext-thai_gdc/requirements.txt
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
