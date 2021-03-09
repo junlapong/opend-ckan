@@ -151,7 +151,7 @@ sudo vi /etc/ckan/default/ckan.ini
     - เปิดการใช้งาน ckan.redis.url
         > ckan.redis.url = redis://localhost:6379/0
     - แก้ไข ckan.plugins (ให้เหมือนตามนี้)
-        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore datapusher webpage_view
+        > ckan.plugins = stats text_view image_view recline_view resource_proxy datastore webpage_view
     - แก้ไข ckan.views.default_views (ให้เหมือนตามนี้)
         > ckan.views.default_views = image_view text_view recline_view webpage_view
     - เปิดการใช้งานและแก้ไข ckan.storage_path
