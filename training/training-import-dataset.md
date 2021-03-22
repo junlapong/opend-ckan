@@ -52,7 +52,7 @@ import jaydebeapi
 host = 'localhost'
 port = 31010
 uid = 'admin'
-pwd = '1015patipat'
+pwd = '***'
 driver = "dremio-jdbc-driver-4.0.2-201910020123580864-a98a0b9.jar"
 
 conn = jaydebeapi.connect("com.dremio.jdbc.Driver",
