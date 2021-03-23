@@ -1,4 +1,4 @@
-## Source code: import CKAN Package
+## Source code: Create CKAN Package
 ```sh
 import requests
 from ckanapi import RemoteCKAN
