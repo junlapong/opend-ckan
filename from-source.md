@@ -61,6 +61,15 @@ ln -s /usr/lib/ckan/default/src/ckan/ckan/config/solr/schema.xml schema.xml
 exit
 
 sudo service solr restart
+
+# เปิดการทำงานของ firewall ufw
+sudo ufw enable
+
+# กำหนด firewall อนุญาตให้เข้าได้เฉพาะ ssh http https
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+
 ```
 
 ### 4. ติดตั้ง Package ของ Ubuntu ที่ CKAN ต้องการ:
