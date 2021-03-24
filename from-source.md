@@ -63,6 +63,8 @@ exit
 sudo service solr restart
 
 # เปิดการทำงานของ firewall ufw
+## เพื่อแก้ปัญหาช่องโหว่ของ solr 
+### https://issues.apache.org/jira/browse/SOLR-13669
 sudo ufw enable
 
 # กำหนด firewall อนุญาตให้เข้าได้เฉพาะ ssh http https
