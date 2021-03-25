@@ -75,6 +75,10 @@ sudo ufw allow https
 ```
 
 ### 4. ติดตั้ง Package ของ Ubuntu ที่ CKAN ต้องการ:
+ตรวจสอบเวอร์ชั่นของ Ubuntu โดยใช้คำสั่ง 
+```sh
+cat /etc/os-release
+```
 - สำหรับ Ubuntu 20.04:
 ```sh
 sudo apt-get install -y libpq5 redis-server nginx supervisor libpython2.7 git
