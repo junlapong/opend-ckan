@@ -87,7 +87,7 @@ sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 1
 
 sudo update-alternatives --config python
 
-curl https://bootstrap.pypa.io/2.7/get-pip.py --output get-pip.py
+curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
 
 sudo python2 get-pip.py
 
