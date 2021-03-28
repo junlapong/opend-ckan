@@ -95,7 +95,7 @@ vi .env
     - path สำหรับ storage ของ CKAN
         > CKAN__STORAGE_PATH=/var/lib/ckan
     - plugin ทั้งหมดที่เปิดใช้งาน
-        > CKAN__PLUGINS=envvars stats image_view text_view recline_view resource_proxy webpage_view datastore xloader scheming_datasets pdf_view hierarchy_display hierarchy_form dcat dcat_json_interface structured_data thai_gdc
+        > CKAN__PLUGINS=envvars stats image_view text_view recline_view resource_proxy webpage_view datastore xloader scheming_datasets pdf_view hierarchy_display hierarchy_form dcat dcat_json_interface structured_data dga_stats thai_gdc
     - default view
         > CKAN__VIEWS__DEFAULT_VIEWS=image_view text_view recline_view webpage_view pdf_view
 ```
