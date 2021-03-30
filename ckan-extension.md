@@ -100,8 +100,8 @@ sudo vi /etc/ckan/default/ckan.ini
 ```sh
     - เพิ่ม config ถัดจากบรรทัด [app:main]
         > scheming.dataset_schemas = ckanext.thai_gdc:ckan_dataset.json
-    - ckan.plugins (เติม thai_gdc ไว้ท้ายสุด)
-        > ckan.plugins = ... thai_gdc
+    - ckan.plugins (เติม thai_gdc ไว้ก่อน scheming_datasets hierarchy_display hierarchy_form)
+        > ckan.plugins = ... thai_gdc scheming_datasets hierarchy_display hierarchy_form
 ```
 ```sh
 sudo supervisorctl reload
