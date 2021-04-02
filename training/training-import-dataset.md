@@ -132,8 +132,8 @@ from ckanapi import RemoteCKAN
 import requests, io, json, csv, datetime
 
 ckan_url = 'http://164.115.20.163' #CKAN URL
-api_key = '3a7d0a27-e4ad-4647-a9aa-9ff2da243887' #API-Key
-package_name = 'testrecord1' #Package name or id
+api_key = '' #API-Key
+package_name = '' #Package name or id
 
 resource_metadata = {
     'package_id'    : package_name,
