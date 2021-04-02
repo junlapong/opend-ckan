@@ -125,3 +125,29 @@ resource = portal.action.resource_update(**resource_metadata)
 session.close()
 resource
 ```
+## Source code: upload file to Package
+```sh
+
+from ckanapi import RemoteCKAN
+import requests, io, json, csv, datetime
+
+ckan_url = 'http://164.115.20.163' #CKAN URL
+api_key = '3a7d0a27-e4ad-4647-a9aa-9ff2da243887' #API-Key
+package_name = 'testrecord1' #Package name or id
+
+resource_metadata = {
+    'package_id'    : package_name,
+    'name'          : 'ชื่อทรัพยากร',
+    'description'   : 'รายละเอียดทรัพยากร',
+    'format'        : 'CSV',
+    'mimetype' : 'text/csv',
+    'created'       : datetime.datetime.now().isoformat(),
+    'last_modified' : datetime.datetime.now().isoformat()
+}
+
+response = requests.post(ckan_url+'/api/action/resource_create',
+              data=resource_metadata,
+              headers={"X-CKAN-API-Key": api_key},
+              files=[('upload', open('report_1.csv','r', encoding="utf-8"))])
+response
+```
