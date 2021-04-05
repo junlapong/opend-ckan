@@ -4,7 +4,7 @@ source /usr/lib/ckan/default/bin/activate
 
 cd /usr/lib/ckan/default
 
-pip install -e 'git+https://gitlab.nectec.or.th/opend/ckanext-pdfview.git#egg=ckanext-pdfview'
+pip install -e 'git+https://github.com/ckan/ckanext-pdfview.git#egg=ckanext-pdfview'
 ```
 แก้ไขไฟล์ config ของ CKAN ดังนี้:
 ```sh
