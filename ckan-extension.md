@@ -180,3 +180,20 @@ sudo vi /etc/ckan/default/ckan.ini
 ```sh
 sudo supervisorctl reload
 ```
+
+### 8. update thai gdc docker image:
+
+```
+# อัพเดท docker image 
+docker pull thepaeth/ckan-thai_gdc:ckan-2.9-xloader
+
+# cd ไปยัง directory ที่เรา git clone  thai gdc docker มา
+cd ~/ckan-docker
+
+# ตรวจสอบในแน่ใจว่ามีไฟล์ docker-compose.yml อยู่
+ls -la | grep docker-composer
+
+# รัน docker compose เพื่ออัพเดท image ของ container
+docker-compose up -d
+
+```
