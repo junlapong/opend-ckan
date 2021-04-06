@@ -48,11 +48,7 @@ cd /opt/solr/bin
 
 cd /var/solr/data/ckan/conf
 
-sed -i '/<config>/a <schemaFactory class="ClassicIndexSchemaFactory"/>' solrconfig.xml
-
-sed -i '/<initParams path="\/update\/\*\*">/,/<\/initParams>/ s/.*/<!--&-->/' solrconfig.xml
-
-sed -i '/<processor class="solr.AddSchemaFieldsUpdateProcessorFactory">/,/<\/processor>/ s/.*/<!--&-->/' solrconfig.xml
+wget https://raw.githubusercontent.com/ckan/ckan/master/contrib/docker/solr/solrconfig.xml
 
 rm managed-schema
 
