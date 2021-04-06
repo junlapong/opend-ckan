@@ -48,6 +48,8 @@ cd /opt/solr/bin
 
 cd /var/solr/data/ckan/conf
 
+mv solrconfig.xml solrconfig.xml.bak
+
 wget https://raw.githubusercontent.com/ckan/ckan/master/contrib/docker/solr/solrconfig.xml
 
 rm managed-schema
