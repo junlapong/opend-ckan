@@ -193,6 +193,9 @@ cd ~/ckan-docker
 # ตรวจสอบในแน่ใจว่ามีไฟล์ docker-compose.yml อยู่
 ls -la | grep docker-composer
 
+# แก้ไข CKAN__PLUGINS ในไฟล์ .env บรรทัดด้านล่าง
+CKAN__PLUGINS=envvars stats image_view text_view recline_view resource_proxy webpage_view datastore xloader thai_gdc scheming_datasets pdf_view hierarchy_display hierarchy_form dcat dcat_json_interface structured_data dga_stats
+
 # รัน docker compose เพื่ออัพเดท image ของ container
 docker-compose up -d
 
