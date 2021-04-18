@@ -229,5 +229,5 @@ wget https://gitlab.nectec.or.th/opend/installing-ckan/-/raw/master/config/datas
 
 sudo supervisorctl reload
 ```
-### 14. การติดตั้ง ssl สำหรับ Nginx [SSL Nginx](nginx-ssl.md)
-### 15. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
+### 14. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
+### 15. [หากต้องการติดตั้ง ssl ให้ทำดังนี้](nginx-ssl.md)
