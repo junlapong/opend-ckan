@@ -212,5 +212,6 @@ sudo service jetty8 restart
 
 ### 12. ทดสอบเรียกใช้เว็บไซต์ผ่าน http://{domain name} และ login ด้วย SysAdmin
 
-### 13. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
+### 13. การติดตั้ง ssl สำหรับ Nginx [SSL Nginx](nginx-ssl.md)
+### 14. ติดตั้งและตั้งค่า [CKAN Extensions](ckan-extension.md)
 
