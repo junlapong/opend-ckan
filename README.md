@@ -6,7 +6,7 @@
    3. ติดตั้งจาก [Docker Compose][insDocker]
 
 CKAN Extension ที่ใช้สำหรับการติดตั้ง ระบบบัญชีข้อมูลหน่วยงาน (Agency Data Catalog)
-   1. [ckanext-pdfview](ckan-extension.md#1-ckanext-pdfview)
+   1. [ckanext-pdfview](ckan-extension.md#1-ckanext-pdfview) last updated: 8 April, 2021
    2. [ckanext-scheming](ckan-extension.md#2-ckanext-scheming) last updated: 19 Mar, 2021 [History](https://gitlab.nectec.or.th/opend/ckanext-scheming/-/commits/master/)
    3. [ckanext-hierarchy](ckan-extension.md#3-ckanext-hierarchy) last updated: 19 Mar, 2021 [History](https://gitlab.nectec.or.th/opend/ckanext-hierarchy/-/commits/master/)
    4. [ckanext-dcat](ckan-extension.md#4-ckanext-dcat)
