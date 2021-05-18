@@ -107,7 +107,7 @@ sudo vi /etc/ckan/default/ckan.ini
 sudo supervisorctl reload
 ```
 
-#### การปรับปรุง extension
+#### Update ckanext-thai_gdc
 ก่อนการปรับปรุงควรตรวจสอบการ update ของ extension ckanext-scheming และ ckanext-hierarchy ก่อน
 
 ```sh
