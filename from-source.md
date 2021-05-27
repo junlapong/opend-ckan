@@ -137,7 +137,7 @@ pip install --upgrade pip
 
 pip install setuptools==44.1.0
 
-pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.9.1#egg=ckan[requirements-py2]'
+pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.9.2#egg=ckan[requirements-py2]'
 
 deactivate
 ```
