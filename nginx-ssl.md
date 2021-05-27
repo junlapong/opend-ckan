@@ -26,6 +26,7 @@ sudo cat your-domain-cert.crt RootCA-ca.crt >> cert_bundle.crt
 
 ### 4.ทำการแก้ไขไฟล์ config nginx ของ ckan
 ```
+### ตรวจสอบให้แน่ใจว่าไฟล์ nginx config สำหรับ ckan ติดตั้งไว้ที่ตำแหน่งใด
 # สำหรับติดตั้งแบบ source
 sudo nano /etc/nginx/sites-available/ckan
 # สำหรับติดตั้งแบบ package
