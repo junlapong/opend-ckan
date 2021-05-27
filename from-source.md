@@ -79,7 +79,7 @@ cat /etc/os-release
 ```
 - สำหรับ Ubuntu 20.04:
 ```sh
-sudo apt-get install python-dev libpq-dev redis-server git
+sudo apt-get install python-dev libpq-dev redis-server git build-essential
 
 sudo add-apt-repository universe
 
