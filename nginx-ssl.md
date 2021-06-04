@@ -58,12 +58,9 @@ server {
 }
 
 server {
-    if ($host = ##เปลี่ยนเป็น domain ของท่าน##) {
-        return 301 https://$host$request_uri;
-    } 
-    server_name ##เปลี่ยนเป็น domain ของท่าน##;
     listen 80;
-    return 404;
+    server_name ##เปลี่ยนเป็น domain ของท่าน##;
+    return 301 https://$host$request_uri;
 }
 ```
 ทำการบันทึกและทดสอบ config ของท่าน 
