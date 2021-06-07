@@ -181,7 +181,7 @@ sudo vi /etc/ckan/default/ckan.ini
 sudo supervisorctl reload
 ```
 
-### 8. update thai gdc docker image:
+### 8. update thai gdc docker image (เฉพาะหน่วยงานที่ติดตั้งแบบ docker  เท่านั้น):
 
 ```
 # อัพเดท docker image 
