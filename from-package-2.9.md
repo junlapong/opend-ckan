@@ -79,7 +79,7 @@ cat /etc/os-release
 ```
 - สำหรับ Ubuntu 20.04:
 ```sh
-sudo apt-get install -y libpq5 redis-server nginx supervisor libpython2.7 git
+sudo apt-get install -y libpq5 redis-server nginx supervisor libpython2.7 git curl
 
 sudo add-apt-repository universe
 
