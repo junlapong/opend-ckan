@@ -55,11 +55,9 @@ cp .env.template .env
 ### 3. แก้ไขไฟล์ .env
 ```sh
 vi .env
-    - กำหนด Username และ Password สำหรับ Database ของ CKAN
-        > POSTGRES_USER=ckan
+    - กำหนด Password สำหรับ Database ของ CKAN
         > POSTGRES_PASSWORD={ckan_password}
-    - กำหนด Username และ Password สำหรับ Datastore
-        > DATASTORE_READONLY_USER=datastore_ro
+    - กำหนด Password สำหรับ Datastore
         > DATASTORE_READONLY_PASSWORD={datastore_password}
     - กำหนดชื่อ Host สำหรับ Database Postgres
         > POSTGRES_HOST=db
@@ -81,13 +79,6 @@ vi .env
         > CKAN_SYSADMIN_NAME={admin_username}
         > CKAN_SYSADMIN_PASSWORD={admin_password}
         > CKAN_SYSADMIN_EMAIL={admin_email}
-    - การตั้งค่าเพื่อจัดการ database postgres สำหรับ CKAN
-        > CKAN_SQLALCHEMY_URL=postgresql://ckan:{ckan_password}@db/ckan
-    - การตั้งค่าเพื่อเขียนข้อมูลลง datastore สำหรับ plugin dataphser
-        > CKAN_DATASTORE_WRITE_URL=postgresql://ckan:{ckan_password}@db/datastore
-    - การตั้งค่าเพื่ออ่านข้อมูลจาก datastore สำหรับ plugin xloader
-        > CKAN_DATASTORE_READ_URL=postgresql://datastore_ro:{datastore_password}@db/datastore
-        > CKANEXT__XLOADER__JOBS_DB__URI=postgresql://ckan:{ckan_password}@db/ckan
     - url สำหรับเชื่อมต่อกับ solr
         > CKAN_SOLR_URL=http://solr:8983/solr/ckan
     - url สำหรับเชื่อมต่อกับ redis
